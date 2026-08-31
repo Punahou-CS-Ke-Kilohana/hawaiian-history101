@@ -19,7 +19,7 @@ extends CharacterBody3D
 ## How fast do we freefly?
 @export var freefly_speed : float = 25.0 ## do we want this?
 
-@export_group("Input Actions")
+@export_group("Movement Actions")
 ## Name of Input Action to move Left.
 @export var input_left : String = "ui_left"
 ## Name of Input Action to move Right.
@@ -34,6 +34,12 @@ extends CharacterBody3D
 @export var input_sprint : String = "sprint"
 ## Name of Input Action to toggle freefly mode.
 @export var input_freefly : String = "freefly"
+
+@export_group("General Actions") ##talk, attack,ect
+
+@export_group("inventory")
+@export var inventory : String = "inventory" ##make this call inventory script 
+
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
@@ -121,7 +127,6 @@ func rotate_look(rot_input : Vector2):
 	rotate_y(look_rotation.y)
 	head.transform.basis = Basis()
 	head.rotate_x(look_rotation.x)
-
 
 func enable_freefly():
 	collider.disabled = true

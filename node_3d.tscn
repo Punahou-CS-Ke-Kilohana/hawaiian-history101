@@ -1,26 +1,14 @@
 [gd_scene format=3 uid="uid://cubt32ki7h6bh"]
 
+[ext_resource type="Script" uid="uid://c0nyahvv5njd2" path="res://lighting.gd" id="1_noarx"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_noarx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
 radius = 1.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_3pots"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3pots"]
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_3pots"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3pots"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_5pks6"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_3pots"]
-radius = 0.01
-height = 0.01
-
-[sub_resource type="Gradient" id="Gradient_pip2g"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3pots"]
 
@@ -28,18 +16,6 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2064452305]
 shape = SubResource("SphereShape3D_3pots")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=263565698]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-mesh = SubResource("CapsuleMesh_3pots")
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="MeshInstance3D" unique_id=897215602]
-visible = false
-
-[node name="Collider" type="CollisionShape3D" parent="MeshInstance3D/CharacterBody3D" unique_id=846721735]
-visible = false
-shape = SubResource("CapsuleShape3D_3pots")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=177191347]
 transform = Transform3D(56.327213, 0, 0, 0, 1, 0, 0, 0, 53.38954, 0, -0.22799563, 0)
@@ -58,24 +34,9 @@ initial_velocity_max = 669.52
 linear_accel_max = 7.25
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2045898032]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=661175475]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3032618, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=806397523]
-shape = SubResource("SphereShape3D_5pks6")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="RigidBody3D" unique_id=2041961196]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0419302, 0.61274195, 1.6965001)
-amount = 1000
-mesh = SubResource("SphereMesh_3pots")
-emission_shape = 1
-emission_sphere_radius = 0.2
-gravity = Vector3(0, 5, 0)
-radial_accel_min = -0.57
-radial_accel_max = -0.57
-color_ramp = SubResource("Gradient_pip2g")
+transform = Transform3D(0.9939954, -0.041090805, 0.10141313, -0.09061803, -0.82860434, 0.552452, 0.061330657, -0.55832464, -0.8273525, 0, 11.2680645, 0)
+light_energy = 2.053
+script = ExtResource("1_noarx")
 
 [node name="floor" type="MeshInstance3D" parent="." unique_id=241651414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9596243, 1.9550514, -15.242327)
@@ -83,5 +44,4 @@ mesh = SubResource("BoxMesh_3pots")
 
 [node name="ProtoController" parent="." unique_id=101856760 instance=ExtResource("2_noarx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48688608, 0.044347823, 1.3716967)
-can_sprint = true
 base_speed = 4.0

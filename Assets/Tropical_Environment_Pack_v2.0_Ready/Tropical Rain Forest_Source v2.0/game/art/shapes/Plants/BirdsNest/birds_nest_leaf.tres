@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://du0po55b41es3"]
+
+[ext_resource type="Texture2D" uid="uid://dsfvv3m1bbrgb" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/Plants/BirdsNest/birdnest01.dds" id="1_tn74n"]
+[ext_resource type="Texture2D" uid="uid://dyq87ryhdv3gb" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/Plants/BirdsNest/birdnest01_SPEC.dds" id="2_bf7kl"]
+[ext_resource type="Texture2D" uid="uid://dwhd6letxv41k" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/Plants/BirdsNest/birdnest01_NRM.dds" id="3_aecyw"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_tn74n")
+metallic = 1.0
+metallic_texture = ExtResource("2_bf7kl")
+normal_enabled = true
+normal_texture = ExtResource("3_aecyw")

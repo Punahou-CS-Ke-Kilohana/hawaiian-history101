@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c5o2whgusc8k8"
+path="res://.godot/imported/StreamLoop1.ogg-afdd68638e0e5f964725d5b69a4aeef9.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/sound/environment/StreamLoop1.ogg"
+dest_files=["res://.godot/imported/StreamLoop1.ogg-afdd68638e0e5f964725d5b69a4aeef9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

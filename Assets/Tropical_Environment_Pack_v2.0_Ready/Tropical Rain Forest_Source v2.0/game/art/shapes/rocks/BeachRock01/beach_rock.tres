@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c34x77s4nu1rd"]
+
+[ext_resource type="Texture2D" uid="uid://op3twlt3pl54" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/3td_Granite_02_1024.jpg" id="1_3ur48"]
+[ext_resource type="Texture2D" uid="uid://cn0ok7b262i4x" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/3td_Granite_02_1024_NRM.png" id="2_310hj"]
+
+[resource]
+albedo_texture = ExtResource("1_3ur48")
+normal_enabled = true
+normal_texture = ExtResource("2_310hj")

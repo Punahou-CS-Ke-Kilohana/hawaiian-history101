@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dk0782udrr5w1"]
+
+[ext_resource type="Texture2D" uid="uid://c2kq8k0ttat7k" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Beach110.jpg" id="1_bimmp"]
+[ext_resource type="Texture2D" uid="uid://thslfeubh6b4" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Beach110_NRM.png" id="2_qgyya"]
+[ext_resource type="Texture2D" uid="uid://bm00vw6vr6qkq" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Beach110_Detail.jpg" id="3_3uegi"]
+
+[resource]
+albedo_texture = ExtResource("1_bimmp")
+roughness_texture = ExtResource("3_3uegi")
+normal_enabled = true
+normal_texture = ExtResource("2_qgyya")

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cnn2kk7r6ijfx"]
+
+[ext_resource type="Texture2D" uid="uid://7tpgojutui7a" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Streamedge.JPG" id="1_4rlvw"]
+[ext_resource type="Texture2D" uid="uid://y6w35jimpvtq" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Streamedge_NRM.png" id="2_jqir5"]
+
+[resource]
+albedo_texture = ExtResource("1_4rlvw")
+normal_enabled = true
+normal_texture = ExtResource("2_jqir5")

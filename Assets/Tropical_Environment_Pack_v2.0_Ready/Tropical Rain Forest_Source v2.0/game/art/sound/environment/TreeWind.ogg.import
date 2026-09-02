@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dy7ujxi4ivk4j"
+path="res://.godot/imported/TreeWind.ogg-9ce6540cd2d255454b09b8a4fb89c6d8.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/sound/environment/TreeWind.ogg"
+dest_files=["res://.godot/imported/TreeWind.ogg-9ce6540cd2d255454b09b8a4fb89c6d8.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

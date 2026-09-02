@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cjmjpt4kh0atd"]
+
+[ext_resource type="Texture2D" uid="uid://cxhhv1d7usung" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/Plants/TropicFern/fern_image2.dds" id="1_num04"]
+[ext_resource type="Texture2D" uid="uid://xfdhxllvf5s7" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/Plants/TropicFern/fern_image2_SPEC.dds" id="2_1fkng"]
+[ext_resource type="Texture2D" uid="uid://bmh31r6fdkcwu" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/Plants/TropicFern/fern_image2_NRM.dds" id="3_5seil"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_num04")
+metallic = 1.0
+metallic_texture = ExtResource("2_1fkng")
+normal_enabled = true
+normal_texture = ExtResource("3_5seil")

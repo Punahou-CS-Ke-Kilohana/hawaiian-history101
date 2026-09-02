@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ctkkudwt8nyx"]
+
+[ext_resource type="Texture2D" uid="uid://cxarsksds0nuh" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Grass110.jpg" id="1_rxqqy"]
+[ext_resource type="Texture2D" uid="uid://krjlu02ci3nj" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Grass110_NRM.png" id="2_d5olu"]
+
+[resource]
+albedo_texture = ExtResource("1_rxqqy")
+normal_enabled = true
+normal_texture = ExtResource("2_d5olu")

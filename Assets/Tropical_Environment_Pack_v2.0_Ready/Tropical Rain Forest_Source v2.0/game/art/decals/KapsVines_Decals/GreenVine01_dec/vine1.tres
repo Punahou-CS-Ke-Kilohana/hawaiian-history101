@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://8ob3do2m3bhc"]
+
+[ext_resource type="Texture2D" uid="uid://b3056385fkl0j" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/decals/KapsVines_Decals/GreenVine01_dec/GreenVine01.png" id="1_bmu7w"]
+[ext_resource type="Texture2D" uid="uid://bjoapsa1hu4k3" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/decals/KapsVines_Decals/GreenVine01_dec/GreenVine01_NRM.png" id="2_cyoy2"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_bmu7w")
+normal_enabled = true
+normal_texture = ExtResource("2_cyoy2")

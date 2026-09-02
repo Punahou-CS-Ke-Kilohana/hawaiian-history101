@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://iyfmbsharcen"]
+
+[ext_resource type="Texture2D" uid="uid://dp1c4jajo0sai" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/groundCover/BeachGrass_01/3td_BeachGrass_01.png" id="1_tnl55"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_tnl55")

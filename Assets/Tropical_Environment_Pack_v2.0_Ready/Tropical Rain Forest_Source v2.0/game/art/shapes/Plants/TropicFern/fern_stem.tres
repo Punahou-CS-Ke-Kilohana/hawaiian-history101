@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bx38bpnpcoh4d"]
+
+[ext_resource type="Texture2D" uid="uid://cllo27ylqvykm" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/Plants/TropicFern/ferntop.dds" id="1_7a783"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_7a783")

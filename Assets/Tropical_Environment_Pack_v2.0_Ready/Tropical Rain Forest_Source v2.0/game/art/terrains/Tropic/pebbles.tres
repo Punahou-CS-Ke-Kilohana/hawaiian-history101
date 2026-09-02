@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c10qmpfcneuwv"]
+
+[ext_resource type="Texture2D" uid="uid://drm88bceh1shq" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/pebbles1_NRM.png" id="1_g064w"]
+
+[resource]
+normal_enabled = true
+normal_texture = ExtResource("1_g064w")

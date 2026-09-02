@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cubt32ki7h6bh"]
 
+[ext_resource type="PackedScene" uid="uid://drg1fcx6gesox" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/GroupRocks01.DAE" id="2_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_noarx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
@@ -58,7 +59,7 @@ initial_velocity_max = 669.52
 linear_accel_max = 7.25
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2045898032]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+transform = Transform3D(0.9634943, 0, -0.26772892, 0.19597976, 0.6812959, 0.70528567, 0.18240261, -0.73200816, 0.6564247, -5, 0, 0)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=661175475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3032618, 0)
@@ -83,5 +84,7 @@ mesh = SubResource("BoxMesh_3pots")
 
 [node name="ProtoController" parent="." unique_id=101856760 instance=ExtResource("2_noarx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48688608, 0.044347823, 1.3716967)
-can_sprint = true
 base_speed = 4.0
+
+[node name="GroupRocks01" parent="." unique_id=159472190 instance=ExtResource("2_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.492096)

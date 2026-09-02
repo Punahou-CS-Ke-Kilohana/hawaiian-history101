@@ -1,0 +1,71 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://b3me1apbr2ndb"
+path="res://.godot/imported/QueensPalm01.DAE-18cb6a9b798880efa969b5983e74c0a5.scn"
+
+[deps]
+
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/QueensPalm/QueensPalm01.DAE"
+dest_files=["res://.godot/imported/QueensPalm01.DAE-18cb6a9b798880efa969b5983e74c0a5.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"ColorEffectR225G88B199-material": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/QueensPalm/queen_palm_trunk.tres",
+"use_external/path": "uid://d1whgsqnudysa"
+},
+"PalmMapped": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/QueensPalm/queen_palm_trunk.tres",
+"use_external/path": "uid://d1whgsqnudysa"
+},
+"QueensPalm": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/QueensPalm/queen_palm_leaf.tres",
+"use_external/path": "uid://rv7fetwcrr7p"
+}
+},
+"meshes": {
+"Collision": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 93.0,
+"save_to_file/enabled": false,
+"save_to_file/fallback_path": "",
+"save_to_file/path": ""
+}
+}
+}

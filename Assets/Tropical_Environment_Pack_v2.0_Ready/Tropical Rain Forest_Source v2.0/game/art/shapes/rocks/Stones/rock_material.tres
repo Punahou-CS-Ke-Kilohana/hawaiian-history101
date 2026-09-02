@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c4lhk1s6lstm1"]
+
+[ext_resource type="Texture2D" uid="uid://1ods68napjji" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/MossRock01.dds" id="1_vcaa8"]
+[ext_resource type="Texture2D" uid="uid://bqtdkxn075yhi" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/MossRock01_SPEC.dds" id="2_cjfx4"]
+[ext_resource type="Texture2D" uid="uid://qnolym7u34dm" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/MossRock01_NRM.dds" id="3_y4waa"]
+
+[resource]
+albedo_texture = ExtResource("1_vcaa8")
+metallic = 1.0
+metallic_texture = ExtResource("2_cjfx4")
+normal_enabled = true
+normal_texture = ExtResource("3_y4waa")

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d1whgsqnudysa"]
+
+[ext_resource type="Texture2D" uid="uid://ctw5wg7esa2d7" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/QueensPalm/PalmTrunkMap01.dds" id="1_xr7tx"]
+[ext_resource type="Texture2D" uid="uid://p3os0gnyhsmu" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/QueensPalm/PalmTrunkMap01_NRM.dds" id="2_pi8f6"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_xr7tx")
+normal_enabled = true
+normal_texture = ExtResource("2_pi8f6")

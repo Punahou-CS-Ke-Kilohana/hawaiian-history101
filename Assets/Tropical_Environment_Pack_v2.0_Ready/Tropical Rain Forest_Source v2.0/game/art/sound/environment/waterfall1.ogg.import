@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dkgal048v60vs"
+path="res://.godot/imported/waterfall1.ogg-49d377fde8bc2a7c73f9adc7cf8cceb1.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/sound/environment/waterfall1.ogg"
+dest_files=["res://.godot/imported/waterfall1.ogg-49d377fde8bc2a7c73f9adc7cf8cceb1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

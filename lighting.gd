@@ -5,14 +5,13 @@ extends DirectionalLight3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	## convert into sec
-	var sec = day_length_min * 60
+	var sec_in_day = day_length_min * 60
 	
 	## speed of day, TAU is godots built in constant for 2 * PI
-	rotation_speed= TAU / sec 
-	pass # Replace with function body.
+	rotation_speed = TAU / sec_in_day
+	# this is how fast its traveling per second
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	rotate_x(rotation_speed * delta)
-	pass

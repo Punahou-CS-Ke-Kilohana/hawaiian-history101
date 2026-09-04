@@ -12,7 +12,8 @@ radius = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3pots"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3pots"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_noarx"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5pks6"]
 
@@ -24,6 +25,8 @@ height = 0.01
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3pots"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
@@ -42,15 +45,14 @@ visible = false
 visible = false
 shape = SubResource("CapsuleShape3D_3pots")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=177191347]
-transform = Transform3D(56.327213, 0, 0, 0, 1, 0, 0, 0, 53.38954, 0, -0.22799563, 0)
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=177191347]
+transform = Transform3D(56.327213, 0, 0, 0, 1, 0, 0, 0, 53.38954, -0.020551682, -0.22799468, -0.03610325)
 mesh = SubResource("PlaneMesh_3pots")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=973353973]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor" unique_id=2093375552]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=1152485078]
-transform = Transform3D(0.09872072, 0, 0, 0, 1, 0, 0, 0, 0.101100914, 0, 0, 0)
-shape = SubResource("WorldBoundaryShape3D_3pots")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D2" unique_id=1351633537]
+shape = SubResource("ConcavePolygonShape3D_noarx")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1760973985]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
@@ -79,9 +81,14 @@ radial_accel_min = -0.57
 radial_accel_max = -0.57
 color_ramp = SubResource("Gradient_pip2g")
 
-[node name="floor" type="MeshInstance3D" parent="." unique_id=241651414]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9596243, 1.9550514, -15.242327)
+[node name="Block" type="MeshInstance3D" parent="." unique_id=241651414]
+transform = Transform3D(3.4336216, 0, 0, 0, 1.2800438, 0, 0, 0, 11.78473, -1.0458369, -0.1748898, -11.834046)
 mesh = SubResource("BoxMesh_3pots")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Block" unique_id=1723049145]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D" unique_id=1036704941]
+shape = SubResource("BoxShape3D_noarx")
 
 [node name="ProtoController" parent="." unique_id=101856760 instance=ExtResource("2_noarx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48688608, 0.044347823, 1.3716967)

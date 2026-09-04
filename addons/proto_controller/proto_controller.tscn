@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://c4fulywk8w6xh" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
+[ext_resource type="Script" uid="uid://c3luonrwitcqm" path="res://addons/proto_controller/Settings.gd" id="2_5hfox"]
+[ext_resource type="Texture2D" uid="uid://ls1iu1dsonao" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/UI/images-removebg-preview.png" id="2_wr06p"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
 radius = 0.4
@@ -13,7 +15,8 @@ height = 1.8
 [node name="ProtoController" type="CharacterBody3D" unique_id=709718729]
 script = ExtResource("1_ucva2")
 can_sprint = true
-base_speed = 2.0
+base_speed = 3.0
+jump_velocity = 4.0
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=1374279821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -28,3 +31,52 @@ shape = SubResource("CapsuleShape3D_iof21")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=573316825]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1163597862]
+
+[node name="Control" type="Control" parent="CanvasGroup" unique_id=683618206]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_5hfox")
+
+[node name="TextureButton" type="TextureButton" parent="CanvasGroup/Control" unique_id=1386014958]
+layout_mode = 0
+offset_left = 1075.0
+offset_top = 3.0
+offset_right = 1149.0
+offset_bottom = 77.0
+texture_normal = ExtResource("2_wr06p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MenuButton" type="MenuButton" parent="CanvasGroup/Control/TextureButton" unique_id=1323347456]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 72.0
+
+[node name="settings" type="Panel" parent="CanvasGroup/Control/TextureButton" unique_id=761780544]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasGroup/Control/TextureButton/settings" unique_id=1759576326]
+layout_mode = 0
+offset_left = -1079.0
+offset_right = 75.0
+offset_bottom = 648.0
+
+[node name="exit" type="Button" parent="CanvasGroup/Control/TextureButton/settings/VBoxContainer" unique_id=1303941280]
+layout_mode = 2

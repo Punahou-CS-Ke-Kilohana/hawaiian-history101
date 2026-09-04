@@ -49,6 +49,7 @@ mesh = SubResource("PlaneMesh_3pots")
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=973353973]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=1152485078]
+transform = Transform3D(0.09872072, 0, 0, 0, 1, 0, 0, 0, 0.101100914, 0, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_3pots")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1760973985]

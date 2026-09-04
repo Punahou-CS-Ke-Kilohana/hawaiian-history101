@@ -6,9 +6,22 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
 radius = 1.0
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3pots"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3pots"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_3pots"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3pots"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5pks6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_3pots"]
+radius = 0.01
+height = 0.01
+
+[sub_resource type="Gradient" id="Gradient_pip2g"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3pots"]
 
@@ -16,6 +29,18 @@ radius = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2064452305]
 shape = SubResource("SphereShape3D_3pots")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=263565698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_3pots")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="MeshInstance3D" unique_id=897215602]
+visible = false
+
+[node name="Collider" type="CollisionShape3D" parent="MeshInstance3D/CharacterBody3D" unique_id=846721735]
+visible = false
+shape = SubResource("CapsuleShape3D_3pots")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=177191347]
 transform = Transform3D(56.327213, 0, 0, 0, 1, 0, 0, 0, 53.38954, 0, -0.22799563, 0)

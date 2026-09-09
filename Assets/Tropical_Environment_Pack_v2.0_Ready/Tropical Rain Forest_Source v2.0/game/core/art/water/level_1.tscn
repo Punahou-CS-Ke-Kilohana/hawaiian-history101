@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://c6rkxql831gaq"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_w0ckv"]
+[ext_resource type="Material" uid="uid://btm6ptrnke1xj" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/water_shader.tres" id="2_f5lsm"]
+[ext_resource type="Material" uid="uid://dk0782udrr5w1" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/beach.tres" id="3_t67ce"]
+[ext_resource type="Script" uid="uid://bpaxcnc26s8j4" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/island.gd" id="4_f5lsm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wap5w"]
+subdivide_width = 30
+subdivide_depth = 30
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_w0ckv"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3pots"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_3pots"]
+map_width = 4
+map_depth = 4
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t67ce"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f5lsm"]
+load_path = "res://.godot/imported/Beach110.jpg-3441f109b7768270954d3eb5fda909bd.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t67ce"]
+load_path = "res://.godot/imported/Beach110_NRM.png-4e4187bd9226dc84716356e5722cf94c.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2dgek"]
+load_path = "res://.godot/imported/Beach110_Detail.jpg-d28985e8f5e62221251f7e54696ae248.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o17yh"]
+cull_mode = 1
+albedo_texture = SubResource("CompressedTexture2D_f5lsm")
+roughness_texture = SubResource("CompressedTexture2D_2dgek")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_t67ce")
+uv1_scale = Vector3(10, 10, 10)
+
+[node name="Level 1" type="Node3D" unique_id=214548992]
+
+[node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_w0ckv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39025116, 20.037374, 0)
+base_speed = 30.0
+
+[node name="Terrain" type="Node3D" parent="." unique_id=386657243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9611006, 0)
+
+[node name="Water" type="MeshInstance3D" parent="Terrain" unique_id=1081678288]
+transform = Transform3D(-500, 0, -7.5497905e-05, 0, 1, 0, 7.5497905e-05, 0, -500, 0, -3, 0)
+material_override = ExtResource("2_f5lsm")
+mesh = SubResource("PlaneMesh_wap5w")
+
+[node name="Sand" type="StaticBody3D" parent="Terrain" unique_id=1497787723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Sand" unique_id=106111969]
+transform = Transform3D(500, 0, 0, 0, 1, 0, 0, 0, 500, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_w0ckv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Sand" unique_id=765189451]
+transform = Transform3D(500, 0, 0, 0, 1, 0, 0, 0, 500, 0, 0, 0)
+material_override = ExtResource("3_t67ce")
+mesh = SubResource("PlaneMesh_3pots")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain" unique_id=1357167583]
+transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D" unique_id=1508002852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("HeightMapShape3D_3pots")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/StaticBody3D" unique_id=302425688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1, -1.5)
+mesh = SubResource("BoxMesh_t67ce")
+surface_material_override/0 = SubResource("StandardMaterial3D_o17yh")
+script = ExtResource("4_f5lsm")
+
+[node name="Node3D2" type="Node3D" parent="." unique_id=1241791702]
+
+[node name="Node3D3" type="Node3D" parent="." unique_id=2139464743]
+
+[node name="Node3D4" type="Node3D" parent="." unique_id=1093617994]

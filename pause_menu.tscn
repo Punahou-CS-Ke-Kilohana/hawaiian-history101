@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://bjaeq4chrthfa"]
+
+[ext_resource type="Shader" uid="uid://baqf5lqsankmp" path="res://pause_menu.gdshader" id="1_hdmo1"]
+[ext_resource type="Script" uid="uid://dm5xtochpyj75" path="res://pause_menu.gd" id="1_nwcfo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
+shader = ExtResource("1_hdmo1")
+shader_parameter/lod = 2.1090001001775
+
+[sub_resource type="Animation" id="Animation_05uyy"]
+resource_name = "blur"
+length = 0.3
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p81d2"]
+_data = {
+&"blur": SubResource("Animation_05uyy")
+}
+
+[node name="PauseMenu" type="Control" unique_id=1687713137]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_nwcfo")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1407003758]
+material = SubResource("ShaderMaterial_nwcfo")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1647562530]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.5
+offset_top = -95.5
+offset_right = 108.5
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1852076583]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer" unique_id=382741550]
+layout_mode = 2
+text = "Resume"
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1086077439]
+layout_mode = 2
+text = "Options"
+
+[node name="Button3" type="Button" parent="PanelContainer/VBoxContainer" unique_id=901010109]
+layout_mode = 2
+text = "quit
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1377427971]
+libraries/ = SubResource("AnimationLibrary_p81d2")

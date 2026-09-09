@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://c4fulywk8w6xh" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
-[ext_resource type="Script" uid="uid://c3luonrwitcqm" path="res://addons/proto_controller/Settings.gd" id="2_5hfox"]
+[ext_resource type="Script" uid="uid://c3luonrwitcqm" path="res://addons/proto_controller/settings.gd" id="2_5hfox"]
 [ext_resource type="Texture2D" uid="uid://ls1iu1dsonao" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/UI/images-removebg-preview.png" id="2_wr06p"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
@@ -35,6 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1163597862]
 
 [node name="Control" type="Control" parent="CanvasGroup" unique_id=683618206]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://btm6ptrnke1xj"]
+
+[ext_resource type="Shader" uid="uid://cqnyr0187vff3" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/water_shader.gdshader" id="1_ty4x5"]
+[ext_resource type="Texture2D" uid="uid://jaqkrjvy6wl" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/noise02.png" id="2_bv4ef"]
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_ty4x5")
+shader_parameter/water_noise = ExtResource("2_bv4ef")
+shader_parameter/frequency = 1.0
+shader_parameter/wave_height = 1.0

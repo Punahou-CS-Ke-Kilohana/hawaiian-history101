@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://drg1fcx6gesox" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/GroupRocks01.DAE" id="2_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_noarx"]
+[ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://pause_menu.tscn" id="4_jka67"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
 radius = 1.0
@@ -96,3 +97,10 @@ base_speed = 4.0
 
 [node name="GroupRocks01" parent="." unique_id=159472190 instance=ExtResource("2_a0tk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.492096)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=57379439]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Node3D" unique_id=1638173910]
+
+[node name="PauseMenu" parent="." unique_id=1687713137 instance=ExtResource("4_jka67")]
+visible = false

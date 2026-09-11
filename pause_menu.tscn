@@ -30,43 +30,51 @@ script = ExtResource("1_nwcfo")
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1407003758]
 material = SubResource("ShaderMaterial_nwcfo")
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1, 1.04)
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1647562530]
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect" unique_id=1647562530]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -108.5
-offset_top = -95.5
-offset_right = 108.5
-offset_bottom = 95.5
+offset_left = -163.25
+offset_top = -152.25
+offset_right = 163.25
+offset_bottom = 152.25
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1852076583]
+[node name="PauseMenuButtons" type="VBoxContainer" parent="ColorRect/PanelContainer" unique_id=1852076583]
 layout_mode = 2
 size_flags_vertical = 4
+size_flags_stretch_ratio = 6.15
 theme_override_constants/separation = 30
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer" unique_id=382741550]
+[node name="Resume" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=382741550]
 layout_mode = 2
 text = "Resume"
 
-[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1086077439]
+[node name="Options" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=1086077439]
 layout_mode = 2
 text = "Options"
 
-[node name="Button3" type="Button" parent="PanelContainer/VBoxContainer" unique_id=901010109]
+[node name="Quit" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=901010109]
 layout_mode = 2
-text = "quit
+text = "Quit
 "
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1377427971]
 libraries/ = SubResource("AnimationLibrary_p81d2")
+
+[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Quit" to="." method="_on_quit_pressed"]

@@ -1,7 +1,8 @@
 extends MeshInstance3D
 
 
-const depth = 4
+const depth := 4
+
 
 func _ready() -> void:
 	var vertices := PackedVector3Array()
@@ -29,7 +30,6 @@ func _ready() -> void:
 				float(z) / float(depth - 1)
 			))
 
-			# Start every normal at zero
 			normals.append(Vector3.ZERO)
 
 	# Create triangles
@@ -39,6 +39,9 @@ func _ready() -> void:
 			var top_right := top_left + 1
 			var bottom_left := (z + 1) * depth + x
 			var bottom_right := bottom_left + 1
+
+			# Winding order is important.
+			# These triangles face upward (+Y).
 
 			# Triangle 1
 			add_triangle(
@@ -60,6 +63,7 @@ func _ready() -> void:
 				indices
 			)
 
+
 	# Normalize all vertex normals
 	for i in range(normals.size()):
 		normals[i] = normals[i].normalized()
@@ -74,6 +78,7 @@ func _ready() -> void:
 	mesh_data[ArrayMesh.ARRAY_INDEX] = indices
 
 	var array_mesh := ArrayMesh.new()
+
 	array_mesh.add_surface_from_arrays(
 		Mesh.PRIMITIVE_TRIANGLES,
 		mesh_data
@@ -98,16 +103,12 @@ func add_triangle(
 	var edge_1 := vertices[b] - vertices[a]
 	var edge_2 := vertices[c] - vertices[a]
 
-	var normal := edge_1.cross(edge_2).normalized()
+	var normal := edge_2.cross(edge_1).normalized()
 
 	normals[a] += normal
 	normals[b] += normal
 	normals[c] += normal
 
 
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

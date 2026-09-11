@@ -2,8 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_w0ckv"]
 [ext_resource type="Material" uid="uid://btm6ptrnke1xj" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/water_shader.tres" id="2_f5lsm"]
+[ext_resource type="Script" uid="uid://bjn5bt65c2mnm" path="res://lighting.gd" id="2_f52vc"]
 [ext_resource type="Material" uid="uid://dk0782udrr5w1" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/beach.tres" id="3_t67ce"]
 [ext_resource type="Script" uid="uid://bpaxcnc26s8j4" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/island.gd" id="4_f5lsm"]
+[ext_resource type="Texture2D" uid="uid://cxarsksds0nuh" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Grass110.jpg" id="6_mv5uv"]
+[ext_resource type="Texture2D" uid="uid://krjlu02ci3nj" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Grass110_NRM.png" id="7_ei710"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wap5w"]
 subdivide_width = 30
@@ -34,7 +37,15 @@ cull_mode = 1
 albedo_texture = SubResource("CompressedTexture2D_f5lsm")
 roughness_texture = SubResource("CompressedTexture2D_2dgek")
 normal_enabled = true
+normal_scale = 0.57
 normal_texture = SubResource("CompressedTexture2D_t67ce")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pl3mh"]
+cull_mode = 1
+albedo_texture = ExtResource("6_mv5uv")
+normal_enabled = true
+normal_texture = ExtResource("7_ei710")
 uv1_scale = Vector3(10, 10, 10)
 
 [node name="Level 1" type="Node3D" unique_id=214548992]
@@ -45,6 +56,10 @@ base_speed = 30.0
 
 [node name="Terrain" type="Node3D" parent="." unique_id=386657243]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9611006, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Terrain" unique_id=401908673]
+transform = Transform3D(-0.0077033117, 0.92906004, -0.3698502, 0.06814952, 0.369489, 0.92673284, 0.9976453, -0.018066153, -0.06616113, -17.180954, 27.127518, 29.86558)
+script = ExtResource("2_f52vc")
 
 [node name="Water" type="MeshInstance3D" parent="Terrain" unique_id=1081678288]
 transform = Transform3D(-500, 0, -7.5497905e-05, 0, 1, 0, 7.5497905e-05, 0, -500, 0, -3, 0)
@@ -63,21 +78,34 @@ transform = Transform3D(500, 0, 0, 0, 1, 0, 0, 0, 500, 0, 0, 0)
 material_override = ExtResource("3_t67ce")
 mesh = SubResource("PlaneMesh_3pots")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain" unique_id=1357167583]
+[node name="Island Sand" type="StaticBody3D" parent="Terrain" unique_id=1357167583]
 transform = Transform3D(100, 0, 0, 0, 5, 0, 0, 0, 100, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D" unique_id=1508002852]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Island Sand" unique_id=1508002852]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("HeightMapShape3D_3pots")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/StaticBody3D" unique_id=302425688]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Island Sand" unique_id=302425688]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1, -1.5)
 mesh = SubResource("BoxMesh_t67ce")
 surface_material_override/0 = SubResource("StandardMaterial3D_o17yh")
 script = ExtResource("4_f5lsm")
 
+[node name="Island Sand2" type="StaticBody3D" parent="Terrain" unique_id=2103136445]
+transform = Transform3D(33, 0, 0, 0, 3, 0, 0, 0, 33, 0, 4, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Island Sand2" unique_id=1388893320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("HeightMapShape3D_3pots")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Island Sand2" unique_id=1730556256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -2, -1.5)
+mesh = SubResource("BoxMesh_t67ce")
+surface_material_override/0 = SubResource("StandardMaterial3D_pl3mh")
+script = ExtResource("4_f5lsm")
+
 [node name="Node3D2" type="Node3D" parent="." unique_id=1241791702]
 
-[node name="Node3D3" type="Node3D" parent="." unique_id=2139464743]
-
 [node name="Node3D4" type="Node3D" parent="." unique_id=1093617994]
+
+[node name="Node3D3" type="Node3D" parent="." unique_id=2139464743]

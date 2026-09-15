@@ -32,8 +32,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=573316825]
 
 [node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1163597862]
+visible = false
 position = Vector2(560, 297)
 
 [node name="PauseMenu" parent="CanvasGroup" unique_id=1687713137 instance=ExtResource("2_wr06p")]
+process_mode = 0
+visible = false
+script = null
 
 [node name="CanvasGroup2" type="CanvasGroup" parent="." unique_id=1910066689]
+visible = false

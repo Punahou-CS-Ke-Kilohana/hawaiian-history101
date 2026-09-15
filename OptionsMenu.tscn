@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://beonqa1i13ax3"]
 
+[ext_resource type="Script" uid="uid://i40jpwgru8vk" path="res://options_menu.gd" id="1_58l1r"]
+
 [node name="OptionsMenu" type="Control" unique_id=1056913999]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_58l1r")
 
 [node name="Panel" type="Panel" parent="." unique_id=1809378928]
 layout_mode = 1
@@ -34,3 +37,35 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
 text = "Options"
 horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=1755296772]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -219.5
+offset_top = -257.0
+offset_right = 219.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer" unique_id=584281181]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=2099875047]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=850280383]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Volume"
+
+[node name="HSlider" type="HSlider" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=455813368]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4

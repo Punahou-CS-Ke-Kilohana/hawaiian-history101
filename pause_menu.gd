@@ -1,5 +1,6 @@
 extends Control
-
+@onready var options = $"../OptionsMenu"
+@onready var pausemenu = $"..PauseMenu"
 func pause():
 	get_tree().paused = true
 	show()
@@ -11,13 +12,15 @@ func resume():
 func testEsc():
 	if Input.is_action_just_pressed("esc") and get_tree().paused == false:
 		pause()
-	elif Input.is_action_just_pressed("esc") and get_tree().paused:
+	elif Input.is_action_just_pressed("esc") and get_tree().paused == true:
 		resume()
 		
 func _on_resume_pressed() -> void:
 	resume()
 
 func _on_options_pressed() -> void:
+	hide()
+	options.show()
 	pass
 
 func _on_quit_pressed() -> void:

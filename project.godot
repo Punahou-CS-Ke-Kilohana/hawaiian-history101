@@ -21,6 +21,7 @@ DialogueManager="*uid://c3rodes2l3gxb"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

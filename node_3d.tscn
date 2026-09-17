@@ -84,7 +84,7 @@ radial_accel_max = -0.57
 color_ramp = SubResource("Gradient_pip2g")
 
 [node name="Block" type="MeshInstance3D" parent="." unique_id=241651414]
-transform = Transform3D(3.4336216, 0, 0, 0, 1.2800438, 0, 0, 0, 11.78473, -1.0458369, -0.1748898, -11.834046)
+transform = Transform3D(3.4336216, 0, 0, 0, 1.2800438, 0, 0, 0, 11.78473, 0.07470417, 0.9069154, -11.359979)
 mesh = SubResource("BoxMesh_3pots")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Block" unique_id=1723049145]

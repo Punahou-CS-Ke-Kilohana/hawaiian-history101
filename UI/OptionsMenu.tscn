@@ -70,16 +70,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=285578727]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=1792580541]
 layout_mode = 2
 
-[node name="Sensitivity" type="Label" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1496418013]
+[node name="Sensitivity" type="Label" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=458470020]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
-text = "Sensitivity"
+text = "Volume"
 
-[node name="Sensitivity2" type="HSlider" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1793133933]
+[node name="Sensitivity2" type="HSlider" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=592372889]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -87,16 +87,22 @@ size_flags_vertical = 4
 [node name="HBoxContainer3" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=2059040877]
 layout_mode = 2
 
-[node name="Sensitivity" type="Label" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=385621102]
+[node name="Screen Mode" type="Label" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=385621102]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
-text = "Full Screen"
+text = "Screen Mode"
 
-[node name="FullSreen" type="CheckButton" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=1150221102]
+[node name="ScreenMode" type="OptionButton" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=611004793]
 layout_mode = 2
 size_flags_horizontal = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Full Screen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
 
 [connection signal="changed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer/Volume2" to="." method="_on_volume_2_changed"]
-[connection signal="changed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity2" to="." method="_on_sensitivity_2_changed"]
-[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer3/FullSreen" to="." method="_on_full_sreen_pressed"]
+[connection signal="changed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity2" to="." method="_on_volume_2_changed"]
+[connection signal="item_selected" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer3/ScreenMode" to="." method="_on_screen_mode_item_selected"]

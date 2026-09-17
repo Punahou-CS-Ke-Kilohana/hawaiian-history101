@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://drg1fcx6gesox" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/GroupRocks01.DAE" id="2_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_noarx"]
+[ext_resource type="PackedScene" uid="uid://vvfy8aomh8rm" path="res://UI/actionable.tscn" id="3_jka67"]
 [ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="4_r3fl7"]
 
@@ -29,6 +30,9 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_3pots"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pip2g"]
+radius = 10.381184
 
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
@@ -98,6 +102,12 @@ base_speed = 4.0
 
 [node name="GroupRocks01" parent="." unique_id=159472190 instance=ExtResource("2_a0tk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.492096)
+
+[node name="Actionable" parent="GroupRocks01" unique_id=376220098 instance=ExtResource("3_jka67")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroupRocks01/Actionable" unique_id=1464418373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.082924, 0, 0)
+shape = SubResource("SphereShape3D_pip2g")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=57379439]
 

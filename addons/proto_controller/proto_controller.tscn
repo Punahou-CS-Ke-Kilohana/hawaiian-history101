@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://c4fulywk8w6xh" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
-[ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="2_wr06p"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
 radius = 0.4
@@ -10,6 +9,9 @@ height = 1.8
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
 radius = 0.4
 height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
+radius = 1.2144786
 
 [node name="ProtoController" type="CharacterBody3D" unique_id=709718729]
 script = ExtResource("1_ucva2")
@@ -31,14 +33,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=573316825]
 
-[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1163597862]
-visible = false
-position = Vector2(560, 297)
+[node name="Direction" type="Marker3D" parent="." unique_id=1832066736]
 
-[node name="PauseMenu" parent="CanvasGroup" unique_id=1687713137 instance=ExtResource("2_wr06p")]
-process_mode = 0
-visible = false
-script = null
+[node name="ActionableFinder" type="Area3D" parent="Direction" unique_id=1823920686]
+collision_layer = 0
+collision_mask = 16
 
-[node name="CanvasGroup2" type="CanvasGroup" parent="." unique_id=1910066689]
-visible = false
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Direction/ActionableFinder" unique_id=1347919532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8576559, 0)
+shape = SubResource("SphereShape3D_3pots")

@@ -35,6 +35,7 @@ extends CharacterBody3D
 ## Name of Input Action to toggle freefly mode.
 @export var input_freefly : String = "freefly"
 @export var input_talk : String = "dialogue"
+@export var input_close_talk: String = "ui_close_dialog"
 
 @export_group("General Actions") ##talk, attack,ect
 
@@ -50,6 +51,7 @@ var freeflying : bool = false
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
+@onready var actionable_finder: Area3D = $Direction/ActionableFinder
 
 func _ready() -> void:
 	check_input_mappings()
@@ -58,8 +60,14 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dialogue"):
-		DialogueManager.show_example_dialogue_balloon(load("res://Dialogue/main.dialogue"), "start")
-		return
+		var actionables = actionable_finder.get_overlapping_areas()
+		if actionables.size() > 0:
+			actionables[0].action()
+			return
+	elif Input.is_action_just_pressed("ui_close_dialog"):
+		var actionables = actionable_finder.get_overlapping_areas()
+		actionables.queue_free()
+		
 	# Mouse capturing
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		capture_mouse()

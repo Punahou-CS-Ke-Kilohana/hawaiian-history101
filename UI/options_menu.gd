@@ -14,3 +14,14 @@ func testEsc():
 		
 func _process(delta):
 	testEsc()
+
+func _on_volume_2_changed(value):
+	AudioServer.set_bus_volume_db(0,value/5)
+
+func _on_sensitivity_2_changed() -> void:
+	pass # Replace with function body.
+
+
+func _on_full_sreen_pressed() -> void:
+	
+	pass # Replace with function body.

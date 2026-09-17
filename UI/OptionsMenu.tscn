@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://beonqa1i13ax3"]
 
-[ext_resource type="Script" uid="uid://i40jpwgru8vk" path="res://options_menu.gd" id="1_58l1r"]
+[ext_resource type="Script" uid="uid://i40jpwgru8vk" path="res://UI/options_menu.gd" id="1_58l1r"]
 
 [node name="OptionsMenu" type="Control" unique_id=1056913999]
 layout_mode = 3
@@ -65,7 +65,38 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Volume"
 
-[node name="HSlider" type="HSlider" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=455813368]
+[node name="Volume2" type="HSlider" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=455813368]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=285578727]
+layout_mode = 2
+
+[node name="Sensitivity" type="Label" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1496418013]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Sensitivity"
+
+[node name="Sensitivity2" type="HSlider" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1793133933]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/ScrollContainer/VBoxContainer" unique_id=2059040877]
+layout_mode = 2
+
+[node name="Sensitivity" type="Label" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=385621102]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Full Screen"
+
+[node name="FullSreen" type="CheckButton" parent="Panel/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=1150221102]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[connection signal="changed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer/Volume2" to="." method="_on_volume_2_changed"]
+[connection signal="changed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity2" to="." method="_on_sensitivity_2_changed"]
+[connection signal="pressed" from="Panel/ScrollContainer/VBoxContainer/HBoxContainer3/FullSreen" to="." method="_on_full_sreen_pressed"]

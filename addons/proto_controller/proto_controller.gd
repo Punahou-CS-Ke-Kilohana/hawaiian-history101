@@ -9,7 +9,7 @@ extends CharacterBody3D
 
 @export_group("Speeds")
 ## Look around rotation speed.
-@export var look_speed : float = 0.002
+##var GlobalSettings.mouse_sensitivity
 ## Normal speed.
 @export var base_speed : float = 7.0
 ## Speed of jump.
@@ -124,9 +124,9 @@ func _physics_process(delta: float) -> void:
 ## Base of controller rotates around y (left/right). Head rotates around x (up/down).
 ## Modifies look_rotation based on rot_input, then resets basis and rotates by look_rotation.
 func rotate_look(rot_input : Vector2):
-	look_rotation.x -= rot_input.y * look_speed
+	look_rotation.x -= rot_input.y * GlobalSettings.sensitivity
 	look_rotation.x = clamp(look_rotation.x, deg_to_rad(-85), deg_to_rad(85))
-	look_rotation.y -= rot_input.x * look_speed
+	look_rotation.y -= rot_input.x * GlobalSettings.sensitivity
 	transform.basis = Basis()
 	rotate_y(look_rotation.y)
 	head.transform.basis = Basis()

@@ -34,6 +34,7 @@ extends CharacterBody3D
 @export var input_sprint : String = "sprint"
 ## Name of Input Action to toggle freefly mode.
 @export var input_freefly : String = "freefly"
+@export var input_talk : String = "dialogue"
 
 @export_group("General Actions") ##talk, attack,ect
 
@@ -56,6 +57,9 @@ func _ready() -> void:
 	look_rotation.x = head.rotation.x
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("dialogue"):
+		DialogueManager.show_example_dialogue_balloon(load("res://Dialogue/main.dialogue"), "start")
+		return
 	# Mouse capturing
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		capture_mouse()

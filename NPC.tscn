@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://ftf8kt51x4l1"]
+
+[ext_resource type="Script" uid="uid://cf3op3waatofo" path="res://NPC.gd" id="1_twre2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ll5ud"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u1jv5"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tciug"]
+radius = 1.2144786
+
+[node name="Npc" type="CharacterBody3D" unique_id=407646401]
+script = ExtResource("1_twre2")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2005599670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_ll5ud")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=145329550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_u1jv5")
+
+[node name="Head" type="Node3D" parent="." unique_id=293247580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Direction" type="Marker3D" parent="." unique_id=324629413]
+
+[node name="ActionableFinder" type="Area3D" parent="Direction" unique_id=185848448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10087025, 0, -0.1250385)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Direction/ActionableFinder" unique_id=900779415]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8576559, 0)
+shape = SubResource("SphereShape3D_tciug")

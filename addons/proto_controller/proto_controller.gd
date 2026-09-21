@@ -57,11 +57,17 @@ func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
+	
+	DialogueManager.dialogue_started.connect(_on_dialogue_started)
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dialogue"):
 		var actionables = actionable_finder.get_overlapping_areas()
 		if actionables.size() > 0:
+			can_move = false
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			actionables[0].action()
 			return
 	elif Input.is_action_just_pressed("ui_close_dialog"):
@@ -122,7 +128,7 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, move_speed)
 	else:
 		velocity.x = 0
-		velocity.y = 0
+		velocity.z = 0
 	
 	# Use velocity to actually move
 	move_and_slide()
@@ -184,3 +190,12 @@ func check_input_mappings():
 	if can_freefly and not InputMap.has_action(input_freefly):
 		push_error("Freefly disabled. No InputAction found for input_freefly: " + input_freefly)
 		can_freefly = false
+
+
+func _on_dialogue_started(_resource: DialogueResource) -> void:
+	can_move = false
+	velocity = Vector3.ZERO
+
+
+func _on_dialogue_ended(_resource: DialogueResource) -> void:
+	can_move = true

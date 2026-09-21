@@ -13,7 +13,7 @@ height = 1.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
 radius = 1.2144786
 
-[node name="ProtoController" type="CharacterBody3D" unique_id=709718729]
+[node name="Player" type="CharacterBody3D" unique_id=709718729]
 script = ExtResource("1_ucva2")
 can_sprint = true
 base_speed = 3.0

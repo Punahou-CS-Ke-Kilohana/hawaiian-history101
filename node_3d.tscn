@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cubt32ki7h6bh"]
 
+[ext_resource type="PackedScene" uid="uid://ftf8kt51x4l1" path="res://NPC.tscn" id="1_i5arm"]
 [ext_resource type="PackedScene" uid="uid://drg1fcx6gesox" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/GroupRocks01.DAE" id="2_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_noarx"]
 [ext_resource type="PackedScene" uid="uid://vvfy8aomh8rm" path="res://UI/actionable.tscn" id="3_jka67"]
@@ -31,8 +32,8 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_pip2g"]
-radius = 10.381184
+[sub_resource type="SphereShape3D" id="SphereShape3D_twre2"]
+radius = 1.0
 
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
@@ -96,18 +97,20 @@ mesh = SubResource("BoxMesh_3pots")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D" unique_id=1036704941]
 shape = SubResource("BoxShape3D_noarx")
 
-[node name="ProtoController" parent="." unique_id=101856760 instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48688608, 0.044347823, 1.3716967)
-base_speed = 4.0
+[node name="Npc" parent="." unique_id=407646401 instance=ExtResource("1_i5arm")]
+
+[node name="Actionable" parent="Npc" unique_id=376220098 instance=ExtResource("3_jka67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6799984, 1.5688682, 3.8948584)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Npc/Actionable" unique_id=1464418373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
+shape = SubResource("SphereShape3D_twre2")
+
+[node name="ProtoController" parent="." unique_id=101856760 groups=["Player"] instance=ExtResource("2_noarx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.044, 1.372)
 
 [node name="GroupRocks01" parent="." unique_id=159472190 instance=ExtResource("2_a0tk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.492096)
-
-[node name="Actionable" parent="GroupRocks01" unique_id=376220098 instance=ExtResource("3_jka67")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GroupRocks01/Actionable" unique_id=1464418373]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.082924, 0, 0)
-shape = SubResource("SphereShape3D_pip2g")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=57379439]
 

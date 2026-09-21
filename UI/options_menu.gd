@@ -1,8 +1,9 @@
 extends Control
 
 @onready var pauseMenu = $"../PauseMenu"
-@onready var sensitivity_label : Label = $Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity3
-@onready var sensitivity_slider: HSlider = $Panel/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity2
+@onready var mainMenu = $"../../CanvasLayer/MainMenu"
+@onready var sensitivity_label : Label = $Panel2/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity3
+@onready var sensitivity_slider: HSlider = $Panel2/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sensitivity_slider.value = GlobalSettings.sensitivity
@@ -11,10 +12,17 @@ func _ready() -> void:
 
 func back() -> void:
 	hide()
+	
+func backToMainMenu() -> void:
+	hide()	
+	mainMenu.show()
+	
 
 func testEsc():
-	if Input.is_action_just_pressed("esc"):
+	if Input.is_action_just_pressed("esc") and GlobalSettings.main_menu == false:
 		back()
+	if Input.is_action_just_pressed("esc") and GlobalSettings.main_menu == true:
+		backToMainMenu()	
 		
 func _process(delta):
 	testEsc()

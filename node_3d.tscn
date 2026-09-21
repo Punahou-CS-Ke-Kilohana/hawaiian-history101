@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://vvfy8aomh8rm" path="res://UI/actionable.tscn" id="3_jka67"]
 [ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="4_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://pwj3edcnl0u2" path="res://UI/MainMenu.tscn" id="6_i5arm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
 radius = 1.0
@@ -115,17 +116,22 @@ shape = SubResource("SphereShape3D_pip2g")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1174284191]
 
-[node name="PauseMenu" parent="CanvasGroup" unique_id=1687713137 instance=ExtResource("4_jka67")]
-visible = false
-offset_left = 570.0
-offset_top = 321.0
-offset_right = 570.0
-offset_bottom = 321.0
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1674547502]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="OptionsMenu" parent="CanvasGroup" unique_id=1056913999 instance=ExtResource("4_r3fl7")]
+[node name="PauseMenu" parent="CenterContainer" unique_id=1687713137 instance=ExtResource("4_jka67")]
+visible = false
+layout_mode = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=552131087]
+
+[node name="MainMenu" parent="CanvasLayer" unique_id=1033792535 instance=ExtResource("6_i5arm")]
+process_mode = 3
+
+[node name="OptionsMenu" parent="CanvasLayer" unique_id=1056913999 instance=ExtResource("4_r3fl7")]
 process_mode = 3
 visible = false
-offset_left = 579.0
-offset_top = 316.0
-offset_right = 579.0
-offset_bottom = 316.0

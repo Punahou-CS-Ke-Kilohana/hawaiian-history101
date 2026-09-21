@@ -10,9 +10,9 @@ func resume():
 	hide()
 
 func testEsc():
-	if Input.is_action_just_pressed("esc") and get_tree().paused == false:
+	if Input.is_action_just_pressed("esc") and get_tree().paused == false and GlobalSettings.main_menu == false:
 		pause()
-	elif Input.is_action_just_pressed("esc") and get_tree().paused == true:
+	elif Input.is_action_just_pressed("esc") and get_tree().paused == true and GlobalSettings.main_menu == false:
 		resume()
 		
 func _on_resume_pressed() -> void:

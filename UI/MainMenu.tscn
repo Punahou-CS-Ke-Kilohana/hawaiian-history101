@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://pwj3edcnl0u2"]
+
+[ext_resource type="Script" uid="uid://bv815krq7ufcj" path="res://UI/main_menu.gd" id="1_b37jj"]
+[ext_resource type="Shader" uid="uid://baqf5lqsankmp" path="res://UI/pause_menu.gdshader" id="2_8aown"]
+[ext_resource type="Texture2D" uid="uid://bnfx22nitf03g" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/UI/unnamed.png" id="3_8aown"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t6syg"]
+shader = ExtResource("2_8aown")
+shader_parameter/lod = 2.1090001001775
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b37jj"]
+texture = ExtResource("3_8aown")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otjfi"]
+content_margin_left = 270.0
+content_margin_top = 40.0
+content_margin_right = 270.0
+content_margin_bottom = 40.0
+bg_color = Color(0.6, 0.6, 0.6, 0.54901963)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obtq6"]
+content_margin_left = 270.0
+content_margin_top = 40.0
+content_margin_right = 270.0
+content_margin_bottom = 40.0
+bg_color = Color(0.6, 0.6, 0.6, 0.54901963)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4ff4"]
+content_margin_left = 270.0
+content_margin_top = 40.0
+content_margin_right = 270.0
+content_margin_bottom = 40.0
+bg_color = Color(0.6, 0.6, 0.6, 0.54901963)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="MainMenu" type="Control" unique_id=1033792535]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b37jj")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1348987068]
+material = SubResource("ShaderMaterial_t6syg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.04)
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect" unique_id=1096855174]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9985139, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_b37jj")
+
+[node name="PauseMenuButtons" type="VBoxContainer" parent="ColorRect/PanelContainer" unique_id=1239769160]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 6.15
+offset_transform_enabled = true
+theme_override_constants/separation = 30
+
+[node name="Start" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=153290332]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_otjfi")
+text = "Start"
+
+[node name="Options" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=821360329]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_obtq6")
+text = "Options"
+
+[node name="Quit" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=1316149609]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_t4ff4")
+text = "Quit
+"
+
+[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Quit" to="." method="_on_quit_pressed"]

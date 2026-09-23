@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dmrscuw47dtkv"
+path="res://.godot/imported/Title Screen.dialogue-b43e3eb9cfd5a5436c6d20882a184f9a.tres"
+
+[deps]
+
+source_file="res://Dialogue/Balloons/Title Screen.dialogue"
+dest_files=["res://.godot/imported/Title Screen.dialogue-b43e3eb9cfd5a5436c6d20882a184f9a.tres"]
+
+[params]
+
+defaults=true

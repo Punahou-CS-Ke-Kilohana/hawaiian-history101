@@ -1,0 +1,18 @@
+~ start
+
+King Kamehameha: Hello traveler, who are you?
+- My name is John => meet_KK
+- Who are YOU? => END
+
+	
+	
+	
+~ meet_KK
+King Kamehameha: John, you say? I have never heard of you...Are you from this island? 
+- No => KK_response
+
+~ KK_response
+King Kamehameha: Okay. Well, follow me!
+	
+	
+=> END

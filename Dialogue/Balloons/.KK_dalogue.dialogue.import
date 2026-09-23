@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://by71uk22gsro2"
+path="res://.godot/imported/.KK_dalogue.dialogue-9135cfc217cb5711915bca0032cad60b.tres"
+
+[deps]
+
+source_file="res://Dialogue/Balloons/.KK_dalogue.dialogue"
+dest_files=["res://.godot/imported/.KK_dalogue.dialogue-9135cfc217cb5711915bca0032cad60b.tres"]
+
+[params]
+
+defaults=true

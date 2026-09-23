@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://w2ywgngujydb"]
+[gd_scene format=3 uid="uid://cpb8px75dpsxn"]
 
-[ext_resource type="Script" uid="uid://c88nqptiollst" path="res://Dialogue/balloon.gd" id="1_36de5"]
+[ext_resource type="Script" uid="uid://d2ve2jorgpqfc" path="res://Dialogue/Balloons/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/nodes/dialogue_label/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="Resource" uid="uid://by71uk22gsro2" path="res://Dialogue/Balloons/.KK_dalogue.dialogue" id="2_trlhe"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/nodes/responses_menu/dialogue_responses_menu.gd" id="3_72ixx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
@@ -111,9 +112,11 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="RockDialogue" type="CanvasLayer" unique_id=38036521]
+[node name="ExampleBalloon" type="CanvasLayer" unique_id=38036521]
 layer = 100
 script = ExtResource("1_36de5")
+dialogue_resource = ExtResource("2_trlhe")
+start_from_cue = "start"
 
 [node name="Balloon" type="Control" parent="." unique_id=154399927]
 unique_name_in_owner = true
@@ -131,10 +134,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -10.0
-offset_top = -105.0
-offset_right = -10.0
-offset_bottom = 21.0
+offset_top = -219.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -159,7 +159,7 @@ modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
 bbcode_enabled = true
-text = "Rock"
+text = "Character"
 fit_content = true
 scroll_active = false
 
@@ -167,7 +167,7 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-text = "I'm a rock."
+text = "fml"
 
 [node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=418507161]
 custom_minimum_size = Vector2(20, 10)
@@ -187,7 +187,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -281.0
 grow_horizontal = 2
 grow_vertical = 2
 

@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://drg1fcx6gesox" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/GroupRocks01.DAE" id="2_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_noarx"]
 [ext_resource type="PackedScene" uid="uid://vvfy8aomh8rm" path="res://UI/actionable.tscn" id="3_jka67"]
+[ext_resource type="Resource" uid="uid://by71uk22gsro2" path="res://Dialogue/Balloons/.KK_dalogue.dialogue" id="3_jsk3o"]
+[ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="3_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="4_r3fl7"]
 [ext_resource type="PackedScene" uid="uid://pwj3edcnl0u2" path="res://UI/MainMenu.tscn" id="6_i5arm"]
@@ -123,6 +125,8 @@ shape = SubResource("BoxShape3D_noarx")
 
 [node name="Actionable" parent="Npc" unique_id=376220098 instance=ExtResource("3_jka67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6799984, 1.5688682, 3.8948584)
+dialogue_resource = ExtResource("3_jsk3o")
+balloon_scene = ExtResource("3_wc5p8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Npc/Actionable" unique_id=1464418373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)

@@ -11,6 +11,8 @@ shader_parameter/lod = 2.1090001001775
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b37jj"]
 texture = ExtResource("3_8aown")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3pots"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otjfi"]
 content_margin_left = 270.0
 content_margin_top = 40.0
@@ -60,48 +62,70 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1, 1.04)
+scale = Vector2(1.0026551, 1.041501)
 
 [node name="PanelContainer" type="PanelContainer" parent="ColorRect" unique_id=1096855174]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_right = 1.0
+anchors_preset = -1
+anchor_left = 0.00086805556
+anchor_top = -0.0074192784
+anchor_right = 0.9993819
+anchor_bottom = 0.9925808
+offset_right = 1.7120361
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.9985139, 1)
 theme_override_styles/panel = SubResource("StyleBoxTexture_b37jj")
+metadata/_edit_use_anchors_ = true
 
-[node name="PauseMenuButtons" type="VBoxContainer" parent="ColorRect/PanelContainer" unique_id=1239769160]
+[node name="PanelContainer2" type="PanelContainer" parent="ColorRect" unique_id=142128414]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -620.0
+offset_top = -316.26923
+offset_right = -18.0
+offset_bottom = 52.730774
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.90313995, 0.79399943)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3pots")
+
+[node name="PauseMenuButtons" type="VBoxContainer" parent="ColorRect/PanelContainer2" unique_id=642885602]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 size_flags_stretch_ratio = 6.15
 offset_transform_enabled = true
-theme_override_constants/separation = 30
+theme_override_constants/separation = 10
 
-[node name="Start" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=153290332]
+[node name="Start" type="Button" parent="ColorRect/PanelContainer2/PauseMenuButtons" unique_id=1510148024]
 layout_mode = 2
-theme_override_constants/line_spacing = 12
+theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_otjfi")
 text = "Start"
 
-[node name="Options" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=821360329]
+[node name="Options" type="Button" parent="ColorRect/PanelContainer2/PauseMenuButtons" unique_id=176814967]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_obtq6")
 text = "Options"
 
-[node name="Quit" type="Button" parent="ColorRect/PanelContainer/PauseMenuButtons" unique_id=1316149609]
+[node name="Quit" type="Button" parent="ColorRect/PanelContainer2/PauseMenuButtons" unique_id=967395228]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = SubResource("StyleBoxFlat_t4ff4")
 text = "Quit
 "
 
-[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="ColorRect/PanelContainer/PauseMenuButtons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer2/PauseMenuButtons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer2/PauseMenuButtons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer2/PauseMenuButtons/Quit" to="." method="_on_quit_pressed"]

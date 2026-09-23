@@ -70,9 +70,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			actionables[0].action()
 			return
-	elif Input.is_action_just_pressed("ui_close_dialog"):
-		var actionables = actionable_finder.get_overlapping_areas()
-		actionables.queue_free()
+	#elif Input.is_action_just_pressed("ui_close_dialog"):
+		#var actionables = actionable_finder.get_overlapping_areas()
+		#actionables.queue_free()
 		
 	# Mouse capturing
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):

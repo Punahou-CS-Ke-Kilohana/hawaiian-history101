@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="4_r3fl7"]
 [ext_resource type="PackedScene" uid="uid://pwj3edcnl0u2" path="res://UI/MainMenu.tscn" id="6_i5arm"]
+[ext_resource type="Shader" uid="uid://o5om710t8a5b" path="res://SkyShader.gdshader" id="8_jsk3o"]
+[ext_resource type="Texture2D" uid="uid://h1bexy7viw6e" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/Shaders/kloofendal_48d_partly_cloudy_puresky_4k.exr" id="9_4arys"]
+[ext_resource type="Script" uid="uid://cpucv2et4pgxk" path="res://Sky.gd" id="10_6iypd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
 radius = 1.0
@@ -35,6 +38,24 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_twre2"]
 radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wap5w"]
+shader = ExtResource("8_jsk3o")
+shader_parameter/skyColor = Color(0, 0.28627452, 0.44705883, 1)
+shader_parameter/horizonColor = Color(0, 0, 0, 1)
+shader_parameter/skyTexture = ExtResource("9_4arys")
+
+[sub_resource type="Sky" id="Sky_cs3hf"]
+sky_material = SubResource("ShaderMaterial_wap5w")
+radiance_size = 6
+
+[sub_resource type="Environment" id="Environment_5pks6"]
+background_mode = 2
+background_energy_multiplier = 0.89
+sky = SubResource("Sky_cs3hf")
+ambient_light_source = 3
+ambient_light_color = Color(0, 0.22745098, 0.5882353, 1)
+reflected_light_source = 2
 
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
@@ -138,3 +159,9 @@ process_mode = 3
 [node name="OptionsMenu" parent="CanvasLayer" unique_id=1056913999 instance=ExtResource("4_r3fl7")]
 process_mode = 3
 visible = false
+
+[node name="GodotSky" type="Node3D" parent="." unique_id=445540994]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GodotSky" unique_id=468075181]
+environment = SubResource("Environment_5pks6")
+script = ExtResource("10_6iypd")

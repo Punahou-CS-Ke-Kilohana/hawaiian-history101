@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bv815krq7ufcj" path="res://UI/main_menu.gd" id="1_b37jj"]
 [ext_resource type="Shader" uid="uid://baqf5lqsankmp" path="res://UI/pause_menu.gdshader" id="2_8aown"]
+[ext_resource type="Resource" uid="uid://dmrscuw47dtkv" path="res://Dialogue/Balloons/Title Screen.dialogue" id="2_y6s48"]
 [ext_resource type="Texture2D" uid="uid://bnfx22nitf03g" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/UI/unnamed.png" id="3_8aown"]
+[ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="3_otjfi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t6syg"]
 shader = ExtResource("2_8aown")
@@ -53,6 +55,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b37jj")
+dialogue_resource = ExtResource("2_y6s48")
+balloon_scene = ExtResource("3_otjfi")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1348987068]
 material = SubResource("ShaderMaterial_t6syg")

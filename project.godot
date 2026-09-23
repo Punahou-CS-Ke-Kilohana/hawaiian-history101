@@ -22,7 +22,7 @@ GlobalSettings="*uid://cakepw2j34tn5"
 
 [dialogue_manager]
 
-runtime/balloon_path="res://Dialogue/balloon.tscn"
+runtime/balloon_path="res://Dialogue/Balloons/balloon.tscn"
 
 [display]
 
@@ -130,7 +130,7 @@ dialogue={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogue/main.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogue/main.dialogue", "res://Dialogue/Balloons/.KK_dalogue.dialogue")
 
 [layer_names]
 

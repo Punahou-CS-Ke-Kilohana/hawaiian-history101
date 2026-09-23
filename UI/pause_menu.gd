@@ -1,6 +1,6 @@
 extends Control
-@onready var options = $"../OptionsMenu"
-@onready var pausemenu = $"..PauseMenu"
+@onready var options = $"../../CanvasLayer/OptionsMenu"
+@onready var pausemenu = $"."
 func pause():
 	get_tree().paused = true
 	show()

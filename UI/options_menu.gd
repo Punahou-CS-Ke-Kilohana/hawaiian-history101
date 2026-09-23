@@ -1,7 +1,7 @@
 extends Control
 
-@onready var pauseMenu = $"../PauseMenu"
-@onready var mainMenu = $"../../CanvasLayer/MainMenu"
+@onready var pauseMenu = $"../../CenterContainer/PauseMenu"
+@onready var mainMenu = $"../MainMenu"
 @onready var sensitivity_label : Label = $Panel2/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity3
 @onready var sensitivity_slider: HSlider = $Panel2/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity2
 # Called when the node enters the scene tree for the first time.

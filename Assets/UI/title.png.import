@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnfx22nitf03g"
-path="res://.godot/imported/unnamed.png-a6ba8677780f9d86c32444a94e84c4f8.ctex"
+path="res://.godot/imported/title.png-66d2e4d021fe8a1b35704b4439b3d03c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/UI/unnamed.png"
-dest_files=["res://.godot/imported/unnamed.png-a6ba8677780f9d86c32444a94e84c4f8.ctex"]
+source_file="res://Assets/UI/title.png"
+dest_files=["res://.godot/imported/title.png-66d2e4d021fe8a1b35704b4439b3d03c.ctex"]
 
 [params]
 

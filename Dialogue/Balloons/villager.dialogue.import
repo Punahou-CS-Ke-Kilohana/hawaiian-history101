@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://p5xv1tqynsgp"
+path="res://.godot/imported/villager.dialogue-8d49c5e237962025b5a89c273ba6429b.tres"
+
+[deps]
+
+source_file="res://Dialogue/Balloons/villager.dialogue"
+dest_files=["res://.godot/imported/villager.dialogue-8d49c5e237962025b5a89c273ba6429b.tres"]
+
+[params]
+
+defaults=true

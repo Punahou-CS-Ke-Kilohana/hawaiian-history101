@@ -1,0 +1,15 @@
+~ start
+
+Villager: Wow, you slept for a while...are you okay?
+- Yes
+- No
+Villager: That is good to hear!
+- Who are you? => meet_villager
+
+	
+	
+	
+~ meet_villager
+Villager: I'm your worst nightmare, jk
+
+=> END

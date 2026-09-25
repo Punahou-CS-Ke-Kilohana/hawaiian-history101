@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="3_wc5p8"]
 [ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_jka67"]
 [ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="4_r3fl7"]
+[ext_resource type="Resource" uid="uid://p5xv1tqynsgp" path="res://Dialogue/Balloons/villager.dialogue" id="5_imku0"]
 [ext_resource type="PackedScene" uid="uid://pwj3edcnl0u2" path="res://UI/MainMenu.tscn" id="6_i5arm"]
 [ext_resource type="PackedScene" uid="uid://br70rkcktxt1e" path="res://Day-Night-Cycle.tscn" id="10_6iypd"]
 
@@ -98,14 +99,27 @@ mesh = SubResource("BoxMesh_3pots")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D" unique_id=1036704941]
 shape = SubResource("BoxShape3D_noarx")
 
-[node name="Npc" parent="." unique_id=407646401 instance=ExtResource("1_i5arm")]
+[node name="King Kameha" parent="." unique_id=407646401 instance=ExtResource("1_i5arm")]
 
-[node name="Actionable" parent="Npc" unique_id=376220098 instance=ExtResource("3_jka67")]
+[node name="Actionable" parent="King Kameha" unique_id=376220098 instance=ExtResource("3_jka67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6799984, 1.5688682, 3.8948584)
 dialogue_resource = ExtResource("3_jsk3o")
 balloon_scene = ExtResource("3_wc5p8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Npc/Actionable" unique_id=1464418373]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="King Kameha/Actionable" unique_id=1464418373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
+shape = SubResource("SphereShape3D_twre2")
+
+[node name="King Kameha2" parent="." unique_id=662854273 instance=ExtResource("1_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522862, 0, 0)
+up_direction = Vector3(0.9950372, 0.099503726, 0)
+
+[node name="Actionable" parent="King Kameha2" unique_id=1799998906 instance=ExtResource("3_jka67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6799984, 1.5688682, 3.8948584)
+dialogue_resource = ExtResource("5_imku0")
+balloon_scene = ExtResource("3_wc5p8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="King Kameha2/Actionable" unique_id=1136717083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
 shape = SubResource("SphereShape3D_twre2")
 

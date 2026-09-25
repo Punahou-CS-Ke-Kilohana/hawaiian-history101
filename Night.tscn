@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://ovw5w7fws8g8"]
+
+[ext_resource type="Shader" uid="uid://o5om710t8a5b" path="res://SkyShader.gdshader" id="1_cxmo2"]
+[ext_resource type="Texture2D" uid="uid://bklxr1fwclxmo" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/Sky/Moon-removebg-preview (3).png" id="2_qb0qd"]
+[ext_resource type="Script" uid="uid://cpucv2et4pgxk" path="res://Sky.gd" id="3_1iaux"]
+[ext_resource type="Script" uid="uid://bjn5bt65c2mnm" path="res://lighting.gd" id="4_qlr4p"]
+
+[sub_resource type="Curve" id="Curve_avep6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13644525, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8191781), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cxmo2"]
+curve = SubResource("Curve_avep6")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qqc3i"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qb0qd"]
+noise = SubResource("FastNoiseLite_qqc3i")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j71ko"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1iaux"]
+noise = SubResource("FastNoiseLite_j71ko")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3o5rm"]
+shader = ExtResource("1_cxmo2")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_1iaux")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_qb0qd")
+shader_parameter/cloud_curves = SubResource("CurveTexture_cxmo2")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.30000000447036
+shader_parameter/clouds_scale = 1.10000000894072
+shader_parameter/clouds_smoothness = 0.049999998882400004
+shader_parameter/clouds_light_color = Color(0.22745098, 0.44705883, 1, 1)
+shader_parameter/clouds_shadow_intensity = 8.0000001192096
+shader_parameter/high_clouds_density = 0.20000000298024
+shader_parameter/top_color = Color(0.02745098, 0.101960786, 0.2509804, 1)
+shader_parameter/bottom_color = Color(0.02745098, 0.101960786, 0.2509804, 1)
+shader_parameter/sun_scatter = Color(0.1254902, 0.08627451, 0.37254903, 1)
+shader_parameter/astro_tint = Color(1, 1, 1, 1)
+shader_parameter/astro_sampler = ExtResource("2_qb0qd")
+shader_parameter/astro_scale = 4.70000007003564
+shader_parameter/astro_intensity = 1.0
+shader_parameter/stars_intensity = 5.0
+shader_parameter/shooting_stars_intensity = 0.0
+shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_qlr4p"]
+sky_material = SubResource("ShaderMaterial_3o5rm")
+
+[sub_resource type="Environment" id="Environment_fgyk3"]
+background_mode = 2
+sky = SubResource("Sky_qlr4p")
+adjustment_enabled = true
+adjustment_contrast = 1.5
+
+[node name="Node3D" type="Node3D" unique_id=1632474282]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=152213073]
+environment = SubResource("Environment_fgyk3")
+script = ExtResource("3_1iaux")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1806811132]
+transform = Transform3D(-0.8660254, -0.43301275, 0.25, 0.2820344, -0.010187656, 0.95935017, -0.41286394, 0.90133023, 0.13094747, 0, 0, 0)
+shadow_enabled = true
+script = ExtResource("4_qlr4p")

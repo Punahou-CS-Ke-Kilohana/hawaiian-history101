@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://c4fulywk8w6xh" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
+[ext_resource type="Texture2D" uid="uid://bsrb6lisws7ru" path="res://Assets/UI/RightUIButton.png" id="2_0rk7u"]
+[ext_resource type="Texture2D" uid="uid://delftbmg4qumb" path="res://Assets/UI/LeftUiButton.png" id="3_h60nn"]
+[ext_resource type="Texture2D" uid="uid://cigihp4srruwt" path="res://Assets/UI/UpUIButton.png" id="4_ujot4"]
+[ext_resource type="Texture2D" uid="uid://cdaimq1sh42h7" path="res://Assets/UI/DownUIButton.png" id="5_1tksx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
 radius = 0.4
@@ -43,3 +47,33 @@ collision_mask = 16
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Direction/ActionableFinder" unique_id=1347919532]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8576559, 0)
 shape = SubResource("SphereShape3D_3pots")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=89245896]
+
+[node name="TouchScreenButtonRight" type="TouchScreenButton" parent="CanvasLayer" unique_id=621366134]
+position = Vector2(242, 410)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("2_0rk7u")
+passby_press = true
+action = "ui_right"
+
+[node name="TouchScreenButtonLeft" type="TouchScreenButton" parent="CanvasLayer" unique_id=1316223894]
+position = Vector2(16, 413.00003)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_h60nn")
+passby_press = true
+action = "ui_left"
+
+[node name="TouchScreenButtonUp" type="TouchScreenButton" parent="CanvasLayer" unique_id=2108994234]
+position = Vector2(125, 321)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("4_ujot4")
+passby_press = true
+action = "ui_up"
+
+[node name="TouchScreenButtonDown" type="TouchScreenButton" parent="CanvasLayer" unique_id=1461597687]
+position = Vector2(131, 506)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("5_1tksx")
+passby_press = true
+action = "ui_down"

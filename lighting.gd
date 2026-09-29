@@ -1,7 +1,7 @@
 extends DirectionalLight3D
 
 @export var rotation_speed: float
-@export var day_length_min: float = 20.0 ## change to how long a day is 
+@export var day_length_min: float = 24.0 ## change to how long a day is 
 #@export var max_day_energy: float = 1.2
 #@export var min_night_energy: float = 0.05
 #

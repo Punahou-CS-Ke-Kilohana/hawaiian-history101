@@ -147,6 +147,7 @@ func get_next_dialogue_line(resource: DialogueResource, key: String = "", extra_
 	if line == null:
 		# End the conversation
 		dialogue_ended.emit(resource)
+		GlobalSettings.can_pause = true
 	return line
 
 
@@ -632,6 +633,7 @@ func show_dialogue_balloon(resource: DialogueResource, cue: String = "", extra_g
 
 ## Show a given balloon scene
 func show_dialogue_balloon_scene(balloon_scene: Variant, resource: DialogueResource, cue: String = "", extra_game_states: Array = []) -> Node:
+	GlobalSettings.can_pause = false
 	if balloon_scene is String:
 		balloon_scene = load(balloon_scene)
 	if balloon_scene is PackedScene:
@@ -708,6 +710,7 @@ func _bridge_get_next_dialogue_line(call_id: int, resource: DialogueResource, ke
 	if line == null:
 		# End the conversation
 		dialogue_ended.emit(resource)
+		GlobalSettings.can_pause = true
 
 
 func _bridge_get_line(call_id: int, resource: DialogueResource, key: String, extra_game_states: Array = []) -> void:

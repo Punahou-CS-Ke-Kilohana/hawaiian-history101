@@ -9,20 +9,14 @@ func _ready() -> void:
 	sensitivity_slider.value = GlobalSettings.sensitivity
 	update_sensitivity_label(GlobalSettings.sensitivity)
 	pass # Replace with function body.
-
-func back() -> void:
-	hide()
-	
-func backToMainMenu() -> void:
-	hide()	
-	mainMenu.show()
 	
 
 func testEsc():
 	if Input.is_action_just_pressed("esc") and GlobalSettings.main_menu == false:
-		back()
+		hide()
 	if Input.is_action_just_pressed("esc") and GlobalSettings.main_menu == true:
-		backToMainMenu()	
+		hide()	
+		mainMenu.show()	
 		
 func _process(delta):
 	testEsc()

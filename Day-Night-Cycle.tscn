@@ -33,7 +33,7 @@ shader_parameter/clouds_samples = 32
 shader_parameter/shadow_sample = 4
 shader_parameter/clouds_density = 0.40000000596048
 shader_parameter/clouds_scale = 0.90000000596048
-shader_parameter/clouds_smoothness = 0.029999999329440002
+shader_parameter/clouds_smoothness = 0.02999999932944
 shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
 shader_parameter/clouds_shadow_intensity = 1.0000000149012
 shader_parameter/high_clouds_density = 0.40000000596048
@@ -191,7 +191,7 @@ tracks/2/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_p
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(4.5333333, 720, 1400),
+"times": PackedFloat32Array(0, 720, 1400),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0, 0.32941177, 0.96862745, 1), Color(0.02745098, 0.101960786, 0.2509804, 1), Color(0, 0.32941177, 0.96862745, 1)]
@@ -210,7 +210,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/astro_tint")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -246,7 +246,7 @@ tracks/6/keys = {
 }
 tracks/7/type = "value"
 tracks/7/imported = false
-tracks/7/enabled = true
+tracks/7/enabled = false
 tracks/7/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/astro_intensity")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
@@ -258,7 +258,7 @@ tracks/7/keys = {
 }
 tracks/8/type = "value"
 tracks/8/imported = false
-tracks/8/enabled = true
+tracks/8/enabled = false
 tracks/8/path = NodePath("WorldEnvironment:environment:sky:sky_material:shader_parameter/astro_scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
@@ -281,12 +281,18 @@ _data = {
 environment = SubResource("Environment_gyaab")
 script = ExtResource("3_873yo")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2089217472]
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=2089217472]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 0.28234145, 0.959314, 0, -0.959314, 0.28234145, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0)
+shadow_enabled = true
+script = ExtResource("3_hnbtr")
+
+[node name="Moon" type="DirectionalLight3D" parent="." unique_id=2041529050]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0)
 shadow_enabled = true
 script = ExtResource("3_hnbtr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=974708896]
 libraries/ = SubResource("AnimationLibrary_dhf0h")
-autoplay = &"Cycle"
+autoplay = &"RESET"

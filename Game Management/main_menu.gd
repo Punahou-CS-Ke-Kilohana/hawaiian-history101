@@ -27,3 +27,4 @@ func _on_start_pressed() -> void:
 		dialogue_resource,
 		dialogue_start
 	)
+	get_node("/root/GameManager").change_to_story()

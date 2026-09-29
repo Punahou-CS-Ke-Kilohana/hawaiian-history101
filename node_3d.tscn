@@ -6,10 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vvfy8aomh8rm" path="res://UI/actionable.tscn" id="3_jka67"]
 [ext_resource type="Resource" uid="uid://by71uk22gsro2" path="res://Dialogue/Balloons/.KK_dalogue.dialogue" id="3_jsk3o"]
 [ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="3_wc5p8"]
-[ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_jka67"]
-[ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="4_r3fl7"]
 [ext_resource type="Resource" uid="uid://p5xv1tqynsgp" path="res://Dialogue/Balloons/villager.dialogue" id="5_imku0"]
-[ext_resource type="PackedScene" uid="uid://pwj3edcnl0u2" path="res://UI/MainMenu.tscn" id="6_i5arm"]
 [ext_resource type="PackedScene" uid="uid://br70rkcktxt1e" path="res://Day-Night-Cycle.tscn" id="10_6iypd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
@@ -134,26 +131,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.49209
 [node name="CanvasLayer" type="CanvasLayer" parent="Node3D" unique_id=1638173910]
 
 [node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1174284191]
-
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1674547502]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PauseMenu" parent="CenterContainer" unique_id=1687713137 instance=ExtResource("4_jka67")]
-visible = false
-layout_mode = 2
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=552131087]
-
-[node name="MainMenu" parent="CanvasLayer" unique_id=1033792535 instance=ExtResource("6_i5arm")]
-process_mode = 3
-
-[node name="OptionsMenu" parent="CanvasLayer" unique_id=1056913999 instance=ExtResource("4_r3fl7")]
-process_mode = 3
-visible = false
 
 [node name="GodotSky" type="Node3D" parent="." unique_id=445540994]
 

@@ -20,7 +20,7 @@ var current_scene: Node = null
 
 func _ready() -> void:
 	# Start at the home screen.
-	change_to_story()
+	change_to_home()
 
 
 # ============================================================

@@ -1,5 +1,5 @@
 extends Control
-@onready var options = $"../../CanvasLayer/OptionsMenu"
+@onready var options = $"../../OptionsMenu"
 @onready var pausemenu = $"."
 func pause():
 	get_tree().paused = true
@@ -21,7 +21,7 @@ func _on_resume_pressed() -> void:
 func _on_options_pressed() -> void:
 	hide()
 	options.show()
-	pass
+	options.get_node("Panel2").show()
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

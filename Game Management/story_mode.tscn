@@ -2,13 +2,29 @@
 
 [ext_resource type="Script" uid="uid://4ny5825pgr8a" path="res://Game Management/story_mode.gd" id="1_jumcm"]
 [ext_resource type="Script" uid="uid://c33q484typh5b" path="res://level_manager.gd" id="2_ae65c"]
-[ext_resource type="PackedScene" uid="uid://c6rkxql831gaq" path="res://Story Levels/level_1.tscn" id="3_ne1qx"]
+[ext_resource type="PackedScene" uid="uid://cubt32ki7h6bh" path="res://node_3d.tscn" id="3_jumcm"]
+[ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_ae65c"]
+[ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="5_ne1qx"]
 
 [node name="StoryMode" type="Node3D" unique_id=215758469]
 script = ExtResource("1_jumcm")
 
 [node name="LevelManager" type="Node3D" parent="." unique_id=601060984]
 script = ExtResource("2_ae65c")
-levels = Array[PackedScene]([ExtResource("3_ne1qx")])
+levels = Array[PackedScene]([ExtResource("3_jumcm")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1350475435]
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=756373311]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" parent="CenterContainer" unique_id=1687713137 instance=ExtResource("4_ae65c")]
+visible = false
+layout_mode = 2
+
+[node name="OptionsMenu" parent="." unique_id=1056913999 instance=ExtResource("5_ne1qx")]
+visible = false

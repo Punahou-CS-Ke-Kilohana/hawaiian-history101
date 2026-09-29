@@ -66,10 +66,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("dialogue"):
 		var actionables = actionable_finder.get_overlapping_areas()
 		if actionables.size() > 0:
-			can_move = false
-			can_jump = false
-			can_sprint = false
-			can_freefly = false
 			velocity = Vector3.ZERO
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			actionables[0].action()
@@ -198,8 +194,14 @@ func check_input_mappings():
 
 func _on_dialogue_started(_resource: DialogueResource) -> void:
 	can_move = false
+	can_jump = false
+	can_sprint = false
+	can_freefly = false
 	velocity = Vector3.ZERO
 
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	can_move = true
+	can_jump = true
+	can_sprint = true
+	can_freefly = true

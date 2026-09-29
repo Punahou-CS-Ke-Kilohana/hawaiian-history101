@@ -198,6 +198,7 @@ func _on_dialogue_started(_resource: DialogueResource) -> void:
 	can_sprint = false
 	can_freefly = false
 	velocity = Vector3.ZERO
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
@@ -205,3 +206,4 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	can_jump = true
 	can_sprint = true
 	can_freefly = true
+	capture_mouse()

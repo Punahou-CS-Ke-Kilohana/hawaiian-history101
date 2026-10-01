@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://beonqa1i13ax3"]
 
 [ext_resource type="Script" uid="uid://i40jpwgru8vk" path="res://UI/options_menu.gd" id="1_58l1r"]
+[ext_resource type="Texture2D" uid="uid://ul3uyv3fceis" path="res://Assets/UI/CloseSettingsButton.png" id="2_ow7tr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5arm"]
 bg_color = Color(0.18793346, 0.18793346, 0.18793346, 1)
@@ -102,13 +103,21 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -107.0
+offset_top = 40.0
 offset_right = 107.0
-offset_bottom = 65.5
+offset_bottom = 105.5
 grow_horizontal = 2
 scale = Vector2(1, 0.9185355)
 theme_override_font_sizes/font_size = 30
 text = "Options"
 horizontal_alignment = 1
+
+[node name="TouchScreenButtonSettings" type="TouchScreenButton" parent="." unique_id=774079698]
+position = Vector2(17, 10.999998)
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("2_ow7tr")
+passby_press = true
+action = "esc"
 
 [connection signal="changed" from="Panel2/ScrollContainer/VBoxContainer/HBoxContainer/Volume2" to="." method="_on_volume_2_changed"]
 [connection signal="value_changed" from="Panel2/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity2" to="." method="_on_sensitivity_2_value_changed"]

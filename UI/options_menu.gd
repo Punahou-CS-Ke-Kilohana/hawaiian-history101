@@ -6,10 +6,10 @@ extends Control
 @onready var sensitivity_slider: HSlider = $Panel2/ScrollContainer/VBoxContainer/HBoxContainer2/Sensitivity2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	sensitivity_slider.value = GlobalSettings.sensitivity
 	update_sensitivity_label(GlobalSettings.sensitivity)
-	pass # Replace with function body.
-	
+
 
 func testEsc():
 	if Input.is_action_just_pressed("esc") and GlobalSettings.main_menu == false:

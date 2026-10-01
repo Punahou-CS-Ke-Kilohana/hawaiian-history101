@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ceu1a80jl5xv7"]
 
 [ext_resource type="Script" uid="uid://4ny5825pgr8a" path="res://Game Management/story_mode.gd" id="1_jumcm"]
-[ext_resource type="Script" uid="uid://c33q484typh5b" path="res://level_manager.gd" id="2_ae65c"]
+[ext_resource type="Script" uid="uid://c33q484typh5b" path="res://Game Management/level_manager.gd" id="2_ae65c"]
 [ext_resource type="PackedScene" uid="uid://cubt32ki7h6bh" path="res://node_3d.tscn" id="3_jumcm"]
 [ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_ae65c"]
 [ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="5_ne1qx"]

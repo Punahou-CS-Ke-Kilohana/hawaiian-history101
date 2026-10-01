@@ -60,6 +60,9 @@ func _ready() -> void:
 	
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+	
+	# For loading the touch control buttons in menus
+	GlobalSettings.show_ui_buttons_changed.connect(_on_show_ui_buttons_changed)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -207,3 +210,12 @@ func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	can_sprint = true
 	can_freefly = true
 	capture_mouse()
+
+
+# For hiding the touch control buttons in menus
+func _on_show_ui_buttons_changed(new_value: bool):
+	$CanvasLayer.visible = new_value
+	if !new_value:
+		$CanvasLayer.offset.x = 1150
+	else:
+		$CanvasLayer.offset.x = 0

@@ -39,6 +39,9 @@ radius = 1.0
 
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
+[node name="ProtoController" parent="." unique_id=101856760 groups=["Player"] instance=ExtResource("2_noarx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.044, 1.372)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2064452305]
 shape = SubResource("SphereShape3D_3pots")
 
@@ -119,9 +122,6 @@ balloon_scene = ExtResource("3_wc5p8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="King Kameha2/Actionable" unique_id=1136717083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
 shape = SubResource("SphereShape3D_twre2")
-
-[node name="ProtoController" parent="." unique_id=101856760 groups=["Player"] instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.044, 1.372)
 
 [node name="GroupRocks01" parent="." unique_id=159472190 instance=ExtResource("2_a0tk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.492096)

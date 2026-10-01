@@ -52,6 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8576559, 0)
 shape = SubResource("SphereShape3D_3pots")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=89245896]
+visible = false
 
 [node name="TouchScreenButtonRight" type="TouchScreenButton" parent="CanvasLayer" unique_id=621366134]
 position = Vector2(150.00006, 510.00003)

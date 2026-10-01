@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://o5om710t8a5b" path="res://SkyShader.gdshader" id="1_v4ehd"]
 [ext_resource type="Texture2D" uid="uid://cqh0fttvphutk" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/Sky/Sun.png" id="2_fdid2"]
 [ext_resource type="Script" uid="uid://cpucv2et4pgxk" path="res://Sky.gd" id="3_lqptk"]
-[ext_resource type="Script" uid="uid://bjn5bt65c2mnm" path="res://lighting.gd" id="4_7gchi"]
+[ext_resource type="Script" uid="uid://bjn5bt65c2mnm" path="res://Sun.gd" id="4_7gchi"]
 
 [sub_resource type="Curve" id="Curve_kbc73"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13644525, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8191781), 0.0, 0.0, 0, 0]
@@ -20,6 +20,12 @@ seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ewl2x"]
 shader = ExtResource("1_v4ehd")
+shader_parameter/moon_color = Color(0.9, 0.9, 1, 1)
+shader_parameter/moon_size = 0.02
+shader_parameter/moon_glow = 0.15
+shader_parameter/moon_glow_size = 0.12
+shader_parameter/moon_intensity = 1.0
+shader_parameter/moon_light_intensity = 0.08
 shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_fe8xe")
 shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_fe8xe")
 shader_parameter/cloud_curves = SubResource("CurveTexture_8msho")
@@ -27,7 +33,7 @@ shader_parameter/clouds_samples = 32
 shader_parameter/shadow_sample = 4
 shader_parameter/clouds_density = 0.40000000596048
 shader_parameter/clouds_scale = 1.0
-shader_parameter/clouds_smoothness = 0.029999999329440002
+shader_parameter/clouds_smoothness = 0.02999999932944
 shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
 shader_parameter/clouds_shadow_intensity = 1.0
 shader_parameter/high_clouds_density = 0.20000000298024

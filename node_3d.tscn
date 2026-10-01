@@ -133,5 +133,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.49209
 [node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1174284191]
 
 [node name="GodotSky" type="Node3D" parent="." unique_id=445540994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.425307, 0)
 
 [node name="Day-night" parent="GodotSky" unique_id=1939943858 instance=ExtResource("10_6iypd")]
+transform = Transform3D(0.99985874, -0.0029930335, -0.016537845, -0.0040383744, -0.99797136, -0.06354168, -0.016314123, 0.06359944, -0.9978429, 0, 0, 0)

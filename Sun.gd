@@ -8,10 +8,13 @@ func _ready() -> void:
 	sec_in_day = day_length_min * 60.0
 	rotation_speed = TAU / sec_in_day
 
+
 func _process(delta: float) -> void:
 	rotate_x(rotation_speed * delta)
 
-	if rotation_degrees.x >= 0.0 and rotation_degrees.x < 180.0:
+	var angle := wrapf(rotation_degrees.x, 0.0, 360.0)
+
+	if angle < 180.0:
 		show()
 	else:
 		hide()

@@ -9,7 +9,7 @@ func _ready() -> void:
 	rotation_speed = TAU / sec_in_day
 
 func _process(delta: float) -> void:
-	rotate_x(rotation_speed * delta)
+	rotate_x(-rotation_speed * delta)
 
 	if rotation_degrees.x >= 0.0 and rotation_degrees.x < 180.0:
 		show()

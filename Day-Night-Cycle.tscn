@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://br70rkcktxt1e"]
 
 [ext_resource type="Shader" uid="uid://o5om710t8a5b" path="res://SkyShader.gdshader" id="1_hnbtr"]
+[ext_resource type="Script" uid="uid://7poixcjoqe8" path="res://day-night-controller.gd" id="1_j2ii4"]
 [ext_resource type="Texture2D" uid="uid://cqh0fttvphutk" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/Sky/Sun.png" id="2_j2ii4"]
 [ext_resource type="Script" uid="uid://cpucv2et4pgxk" path="res://Sky.gd" id="3_873yo"]
-[ext_resource type="Script" uid="uid://bjn5bt65c2mnm" path="res://lighting.gd" id="3_hnbtr"]
 
 [sub_resource type="Curve" id="Curve_uwm4v"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13644525, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8191781), 0.0, 0.0, 0, 0]
@@ -26,6 +26,12 @@ seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ejee"]
 shader = ExtResource("1_hnbtr")
+shader_parameter/moon_color = Color(0.9, 0.9, 1, 1)
+shader_parameter/moon_size = 0.0050000002375
+shader_parameter/moon_glow = 0.18999999575312
+shader_parameter/moon_glow_size = 0.01999999955296
+shader_parameter/moon_intensity = 0.80000001192096
+shader_parameter/moon_light_intensity = 0.08
 shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_qxjff")
 shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_in04h")
 shader_parameter/cloud_curves = SubResource("CurveTexture_43oq6")
@@ -275,7 +281,12 @@ _data = {
 &"RESET": SubResource("Animation_3wp06")
 }
 
-[node name="Node3D" type="Node3D" unique_id=1939943858]
+[node name="Node3D" type="Node3D" unique_id=1939943858 node_paths=PackedStringArray("sun", "moon")]
+transform = Transform3D(1, 0, 0, 0, -0.6040719, 0.7969298, 0, -0.7969298, -0.6040719, 0, 0, 0)
+script = ExtResource("1_j2ii4")
+sun = NodePath("Sun")
+moon = NodePath("Moon")
+day_length_min = 24.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2104000654]
 environment = SubResource("Environment_gyaab")
@@ -283,15 +294,14 @@ script = ExtResource("3_873yo")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=2089217472]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.7681471, 0.64027375, 0, -0.64027375, -0.7681471, 0, 0, 0)
 shadow_enabled = true
-script = ExtResource("3_hnbtr")
 
 [node name="Moon" type="DirectionalLight3D" parent="." unique_id=2041529050]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.89395326, -0.4481603, 0, 0.4481603, -0.89395326, 0, 0, 0)
+visible = false
 shadow_enabled = true
-script = ExtResource("3_hnbtr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=974708896]
 libraries/ = SubResource("AnimationLibrary_dhf0h")

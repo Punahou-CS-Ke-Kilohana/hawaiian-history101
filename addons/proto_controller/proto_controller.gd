@@ -62,7 +62,11 @@ func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
 	# For loading the touch control buttons in menus
-	GlobalSettings.show_ui_buttons_changed.connect(_on_show_ui_buttons_changed)
+	if DisplayServer.is_touchscreen_available():
+		GlobalSettings.show_ui_buttons_changed.connect(_on_show_ui_buttons_changed)
+	else:
+		$CanvasLayer.visible = false
+		$CanvasLayer.offset.x = 1150
 
 
 func _unhandled_input(event: InputEvent) -> void:

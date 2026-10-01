@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dkhwjj0mh045a"
+path="res://.godot/imported/ChantArea.dialogue-d75788b28ecd8c18e3f5c7fabb5d199c.tres"
+
+[deps]
+
+source_file="res://Dialogue/Balloons/ChantArea.dialogue"
+dest_files=["res://.godot/imported/ChantArea.dialogue-d75788b28ecd8c18e3f5c7fabb5d199c.tres"]
+
+[params]
+
+defaults=true

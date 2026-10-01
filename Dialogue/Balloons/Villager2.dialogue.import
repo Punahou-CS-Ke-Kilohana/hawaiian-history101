@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://bnrvkur61pypi"
+path="res://.godot/imported/Villager2.dialogue-977b730203f5595567b3f41661be3eb2.tres"
+
+[deps]
+
+source_file="res://Dialogue/Balloons/Villager2.dialogue"
+dest_files=["res://.godot/imported/Villager2.dialogue-977b730203f5595567b3f41661be3eb2.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dufafm7e12klt"
+path="res://.godot/imported/RandomArea.dialogue-5d56191b9b33a24fed1519a1e26f3d79.tres"
+
+[deps]
+
+source_file="res://Dialogue/Balloons/RandomArea.dialogue"
+dest_files=["res://.godot/imported/RandomArea.dialogue-5d56191b9b33a24fed1519a1e26f3d79.tres"]
+
+[params]
+
+defaults=true

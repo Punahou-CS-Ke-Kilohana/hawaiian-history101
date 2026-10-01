@@ -13,7 +13,7 @@ func action() -> void:
 	# If this character's dialogue is one-time and has already happened, do nothing
 	if one_time_dialogue and dialogue_finished:
 		return
-
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	# Listen for the dialogue ending
 	if one_time_dialogue:
 		DialogueManager.dialogue_ended.connect(_on_dialogue_ended, CONNECT_ONE_SHOT)

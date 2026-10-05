@@ -8,12 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="3_wc5p8"]
 [ext_resource type="Resource" uid="uid://p5xv1tqynsgp" path="res://Dialogue/Balloons/villager.dialogue" id="5_imku0"]
 [ext_resource type="PackedScene" uid="uid://br70rkcktxt1e" path="res://Day-Night-Cycle.tscn" id="10_6iypd"]
-[ext_resource type="Resource" uid="uid://dkhwjj0mh045a" path="res://Dialogue/Balloons/ChantArea.dialogue" id="10_tereu"]
-[ext_resource type="Script" uid="uid://bvlk28qvmcu5y" path="res://area.gd" id="11_cdqbm"]
-[ext_resource type="Resource" uid="uid://dufafm7e12klt" path="res://Dialogue/Balloons/RandomArea.dialogue" id="11_tereu"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
-radius = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3pots"]
 
@@ -40,19 +34,10 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_twre2"]
 radius = 1.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3pots"]
-size = Vector3(1, 1, 2.3515625)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_s6s2d"]
-size = Vector3(7.5200195, 3.9350586, 7.5080566)
-
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
 [node name="ProtoController" parent="." unique_id=101856760 groups=["Player"] instance=ExtResource("2_noarx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.044, 1.372)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2064452305]
-shape = SubResource("SphereShape3D_3pots")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=263565698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -74,13 +59,6 @@ mesh = SubResource("PlaneMesh_3pots")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D2" unique_id=1351633537]
 shape = SubResource("ConcavePolygonShape3D_noarx")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1760973985]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-amount = 1000
-initial_velocity_min = 475.78
-initial_velocity_max = 669.52
-linear_accel_max = 7.25
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=661175475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3032618, 0)
@@ -108,7 +86,6 @@ mesh = SubResource("BoxMesh_3pots")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D" unique_id=1036704941]
 shape = SubResource("BoxShape3D_noarx")
 
-<<<<<<< Updated upstream
 [node name="King Kameha" parent="." unique_id=407646401 instance=ExtResource("1_i5arm")]
 
 [node name="Actionable" parent="King Kameha" unique_id=376220098 instance=ExtResource("3_jka67")]
@@ -132,75 +109,10 @@ balloon_scene = ExtResource("3_wc5p8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="King Kameha2/Actionable" unique_id=1136717083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
 shape = SubResource("SphereShape3D_twre2")
-=======
-[node name="ProtoController" parent="." unique_id=101856760 groups=["Player"] instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.044, 1.372)
->>>>>>> Stashed changes
 
 [node name="GroupRocks01" parent="." unique_id=159472190 instance=ExtResource("2_a0tk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.492096)
 
-[node name="Node3D" type="Node3D" parent="." unique_id=57379439]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Node3D" unique_id=1638173910]
-
-[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=1174284191]
-
 [node name="GodotSky" type="Node3D" parent="." unique_id=445540994]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.425307, 0)
 
 [node name="Day-night" parent="GodotSky" unique_id=1939943858 instance=ExtResource("10_6iypd")]
-<<<<<<< Updated upstream
-transform = Transform3D(0.99985874, -0.0029930335, -0.016537845, -0.0040383744, -0.99797136, -0.06354168, -0.016314123, 0.06359944, -0.9978429, 0, 0, 0)
-=======
-
-[node name="NPCS" type="Node3D" parent="." unique_id=535418616]
-
-[node name="Villager" parent="NPCS" unique_id=1624494068 instance=ExtResource("1_i5arm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.580716)
-
-[node name="Actionable" parent="NPCS/Villager" unique_id=1063842242 instance=ExtResource("3_jka67")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6799984, 1.5688682, 3.8948584)
-dialogue_resource = ExtResource("5_imku0")
-balloon_scene = ExtResource("3_wc5p8")
-one_time_dialogue = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NPCS/Villager/Actionable" unique_id=1069645515]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
-shape = SubResource("SphereShape3D_twre2")
-
-[node name="King Kameha" parent="NPCS" unique_id=407646401 instance=ExtResource("1_i5arm")]
-
-[node name="Actionable" parent="NPCS/King Kameha" unique_id=376220098 instance=ExtResource("3_jka67")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6799984, 1.5688682, 3.8948584)
-dialogue_resource = ExtResource("3_jsk3o")
-balloon_scene = ExtResource("3_wc5p8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NPCS/King Kameha/Actionable" unique_id=1464418373]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
-shape = SubResource("SphereShape3D_twre2")
-
-[node name="AreasInitiateDialogue" type="Node3D" parent="." unique_id=1696936663]
-
-[node name="ChantArea" type="Area3D" parent="AreasInitiateDialogue" unique_id=1535895185]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31741, 0, 3.3126802)
-script = ExtResource("11_cdqbm")
-dialogue_resource = ExtResource("10_tereu")
-balloon_scene = ExtResource("3_wc5p8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AreasInitiateDialogue/ChantArea" unique_id=2084199832]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 8.1503315, 0, -3.0516844)
-shape = SubResource("BoxShape3D_3pots")
-
-[node name="RandomArea" type="Area3D" parent="AreasInitiateDialogue" unique_id=727020164]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.260208)
-script = ExtResource("11_cdqbm")
-dialogue_resource = ExtResource("11_tereu")
-balloon_scene = ExtResource("3_wc5p8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AreasInitiateDialogue/RandomArea" unique_id=757965981]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4959841, 1.5664735, 3.4402332)
-shape = SubResource("BoxShape3D_s6s2d")
-
-[connection signal="body_entered" from="AreasInitiateDialogue/ChantArea" to="AreasInitiateDialogue/ChantArea" method="_on_body_entered"]
->>>>>>> Stashed changes

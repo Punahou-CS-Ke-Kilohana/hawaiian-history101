@@ -3,7 +3,6 @@
 [ext_resource type="Shader" uid="uid://o5om710t8a5b" path="res://SkyShader.gdshader" id="1_hnbtr"]
 [ext_resource type="Script" uid="uid://7poixcjoqe8" path="res://day-night-controller.gd" id="1_j2ii4"]
 [ext_resource type="Texture2D" uid="uid://cqh0fttvphutk" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/Sky/Sun.png" id="2_j2ii4"]
-[ext_resource type="Script" uid="uid://cpucv2et4pgxk" path="res://Sky.gd" id="3_873yo"]
 
 [sub_resource type="Curve" id="Curve_uwm4v"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.13644525, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8191781), 0.0, 0.0, 0, 0]
@@ -27,7 +26,7 @@ seamless = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ejee"]
 shader = ExtResource("1_hnbtr")
 shader_parameter/moon_color = Color(0.9, 0.9, 1, 1)
-shader_parameter/moon_size = 0.0050000002375
+shader_parameter/moon_size = 0.0030000001425
 shader_parameter/moon_glow = 0.18999999575312
 shader_parameter/moon_glow_size = 0.01999999955296
 shader_parameter/moon_intensity = 0.80000001192096
@@ -46,10 +45,10 @@ shader_parameter/high_clouds_density = 0.40000000596048
 shader_parameter/top_color = Color(0.34901962, 0.5882353, 1, 1)
 shader_parameter/bottom_color = Color(0, 0.32941177, 0.96862745, 1)
 shader_parameter/sun_scatter = Color(0.29803923, 0.29803923, 0.29803923, 1)
-shader_parameter/astro_tint = Color(0.90588236, 0.7882353, 0.627451, 1)
+shader_parameter/astro_tint = Color(0.9245545, 0.83024776, 0.7013618, 1)
 shader_parameter/astro_sampler = ExtResource("2_j2ii4")
 shader_parameter/astro_scale = 2.0000000298024
-shader_parameter/astro_intensity = 3.0
+shader_parameter/astro_intensity = 2.603216
 shader_parameter/stars_intensity = 0.0
 shader_parameter/shooting_stars_intensity = 0.0
 shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
@@ -174,7 +173,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 720, 1400),
-"transitions": PackedFloat32Array(1, 1, 1),
+"transitions": PackedFloat32Array(15, 5, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.22745098, 0.44705883, 1, 1), Color(1, 1, 1, 1)]
 }
@@ -186,7 +185,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 720, 1400),
-"transitions": PackedFloat32Array(1, 1, 1),
+"transitions": PackedFloat32Array(15, 5, 1),
 "update": 0,
 "values": [Color(0.34901962, 0.5882353, 1, 1), Color(0.02745098, 0.101960786, 0.2509804, 1), Color(0.34901962, 0.5882353, 1, 1)]
 }
@@ -198,7 +197,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 720, 1400),
-"transitions": PackedFloat32Array(1, 1, 1),
+"transitions": PackedFloat32Array(15, 5, 1),
 "update": 0,
 "values": [Color(0, 0.32941177, 0.96862745, 1), Color(0.02745098, 0.101960786, 0.2509804, 1), Color(0, 0.32941177, 0.96862745, 1)]
 }
@@ -210,7 +209,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 720, 1400),
-"transitions": PackedFloat32Array(1, 1, 1),
+"transitions": PackedFloat32Array(0.045971844, 1, 1),
 "update": 0,
 "values": [Color(0.29803923, 0.29803923, 0.29803923, 1), Color(0.1254902, 0.08627451, 0.37254903, 1), Color(0.29803923, 0.29803923, 0.29803923, 1)]
 }
@@ -234,7 +233,7 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 720, 1400),
-"transitions": PackedFloat32Array(1, 1, 1),
+"transitions": PackedFloat32Array(5.8563156, 0.21763979, 1),
 "update": 0,
 "values": [0.0, 5.0, 0.0]
 }
@@ -281,28 +280,20 @@ _data = {
 &"RESET": SubResource("Animation_3wp06")
 }
 
-[node name="Node3D" type="Node3D" unique_id=1939943858 node_paths=PackedStringArray("sun", "moon")]
-transform = Transform3D(1, 0, 0, 0, -0.6040719, 0.7969298, 0, -0.7969298, -0.6040719, 0, 0, 0)
+[node name="Node3D" type="Node3D" unique_id=1939943858]
+transform = Transform3D(1, 0, 0, 0, 0.99699396, 0.077478945, 0, -0.077478945, 0.99699396, 0, 0, 0)
 script = ExtResource("1_j2ii4")
-sun = NodePath("Sun")
-moon = NodePath("Moon")
-day_length_min = 24.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2104000654]
 environment = SubResource("Environment_gyaab")
-script = ExtResource("3_873yo")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=2089217472]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, -0.7681471, 0.64027375, 0, -0.64027375, -0.7681471, 0, 0, 0)
-shadow_enabled = true
-
-[node name="Moon" type="DirectionalLight3D" parent="." unique_id=2041529050]
-process_mode = 3
-transform = Transform3D(1, 0, 0, 0, -0.89395326, -0.4481603, 0, 0.4481603, -0.89395326, 0, 0, 0)
-visible = false
 shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=974708896]
 libraries/ = SubResource("AnimationLibrary_dhf0h")
 autoplay = &"RESET"
+
+[node name="moon" type="DirectionalLight3D" parent="." unique_id=1815343086]
+transform = Transform3D(1, 0, 0, 0, 0.14635924, 0.9892316, 0, -0.9892316, 0.14635924, 0, 0, 0)

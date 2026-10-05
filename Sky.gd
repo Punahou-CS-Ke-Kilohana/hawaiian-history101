@@ -1,7 +1,7 @@
 extends DirectionalLight3D
 
 @export var rotation_speed: float
-@export var day_length_min: float = 2.0
+@export var day_length_min: float = 24.0
 @export var sec_in_day: float
 
 func _ready() -> void:
@@ -10,8 +10,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	rotate_x(rotation_speed * delta)
+#
+	var light_direction := -global_transform.basis.z
 
-	if rotation_degrees.x >= 0.0 and rotation_degrees.x < 180.0:
-		show()
+	if light_direction.y < 0.0 && light_direction.y > -180:
+		light_energy = 1.0
 	else:
-		hide()
+		light_energy = 0.0

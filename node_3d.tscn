@@ -116,3 +116,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.49209
 [node name="GodotSky" type="Node3D" parent="." unique_id=445540994]
 
 [node name="Day-night" parent="GodotSky" unique_id=1939943858 instance=ExtResource("10_6iypd")]
+transform = Transform3D(1, 0, 0, 0, -0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0.057867765, -0.027626038, 0)

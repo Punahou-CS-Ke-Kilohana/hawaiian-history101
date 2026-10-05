@@ -18,7 +18,7 @@ func testEsc():
 		hide()	
 		mainMenu.show()	
 		
-func _process(delta):
+func _process(_delta):
 	testEsc()
 
 func _on_volume_2_changed(value):

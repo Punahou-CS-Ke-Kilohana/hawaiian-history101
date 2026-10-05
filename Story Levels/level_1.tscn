@@ -7,6 +7,10 @@
 [ext_resource type="Script" uid="uid://bpaxcnc26s8j4" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/island.gd" id="4_f5lsm"]
 [ext_resource type="Texture2D" uid="uid://cxarsksds0nuh" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Grass110.jpg" id="6_mv5uv"]
 [ext_resource type="Texture2D" uid="uid://krjlu02ci3nj" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Grass110_NRM.png" id="7_ei710"]
+[ext_resource type="Script" uid="uid://cqwwaesm7ypji" path="res://Terrain/IslandTerrain.gd" id="8_ei710"]
+[ext_resource type="Texture2D" uid="uid://c2kq8k0ttat7k" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Beach110.jpg" id="9_ksg7w"]
+[ext_resource type="Texture2D" uid="uid://baj703c7y65n6" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/grassland.png" id="10_806wk"]
+[ext_resource type="Texture2D" uid="uid://p47ld05b5xm0" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Rock_Grass.jpg" id="11_v1jij"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wap5w"]
 subdivide_width = 30
@@ -51,11 +55,12 @@ uv1_scale = Vector3(10, 10, 10)
 [node name="Level 1" type="Node3D" unique_id=214548992]
 
 [node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_w0ckv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39025116, 20.037374, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39025116, 209.705, 0)
 base_speed = 30.0
 
 [node name="Terrain" type="Node3D" parent="." unique_id=386657243]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9611006, 0)
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Terrain" unique_id=401908673]
 transform = Transform3D(-0.0077033117, 0.92906004, -0.3698502, 0.06814952, 0.369489, 0.92673284, 0.9976453, -0.018066153, -0.06616113, -17.180954, 27.127518, 29.86558)
@@ -104,8 +109,21 @@ mesh = SubResource("BoxMesh_t67ce")
 surface_material_override/0 = SubResource("StandardMaterial3D_pl3mh")
 script = ExtResource("4_f5lsm")
 
-[node name="Node3D2" type="Node3D" parent="." unique_id=1241791702]
+[node name="Terrain2" type="MeshInstance3D" parent="." unique_id=592711030]
+script = ExtResource("8_ei710")
+world_size = 800.0
+maximum_height = 35.0
+terrain_frequency = 0.01
+terrain_octaves = 4
+terrain_detail_strength = 0.15
+detail_frequency = 0.025
+mountain_radius = 70.0
+mountain_strength = 0.45
+sand_texture = ExtResource("9_ksg7w")
+dirt_texture = ExtResource("10_806wk")
+grass_texture = ExtResource("6_mv5uv")
+rock_texture = ExtResource("11_v1jij")
 
-[node name="Node3D4" type="Node3D" parent="." unique_id=1093617994]
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain2" unique_id=509844040]
 
-[node name="Node3D3" type="Node3D" parent="." unique_id=2139464743]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain2/StaticBody3D" unique_id=1640106447]

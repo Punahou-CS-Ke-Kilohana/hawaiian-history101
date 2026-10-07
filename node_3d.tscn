@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://by71uk22gsro2" path="res://Dialogue/Balloons/.KK_dalogue.dialogue" id="3_jsk3o"]
 [ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="3_wc5p8"]
 [ext_resource type="Resource" uid="uid://p5xv1tqynsgp" path="res://Dialogue/Balloons/villager.dialogue" id="5_imku0"]
+[ext_resource type="PackedScene" uid="uid://brjbkvxu6afyy" path="res://items/Spear.tscn" id="9_4arys"]
 [ext_resource type="PackedScene" uid="uid://br70rkcktxt1e" path="res://Day-Night-Cycle.tscn" id="10_6iypd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3pots"]
@@ -117,3 +118,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.49209
 
 [node name="Day-night" parent="GodotSky" unique_id=1939943858 instance=ExtResource("10_6iypd")]
 transform = Transform3D(1, 0, 0, 0, -0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0.057867765, -0.027626038, 0)
+
+[node name="Spear" parent="." unique_id=871536686 instance=ExtResource("9_4arys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.882621, 0.27200508, 15.782445)

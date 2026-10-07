@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://brjbkvxu6afyy"]
+
+[ext_resource type="Script" uid="uid://b8xy285reoxix" path="res://items/Spear.gd" id="1_1uy7c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5pks6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wap5w"]
+size = Vector3(1.1, 1.1, 13.3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jwhm7"]
+radius = 9.482
+
+[node name="Spear" type="RigidBody3D" unique_id=871536686]
+script = ExtResource("1_1uy7c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1337477361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 13.210691, 0, 0, 0)
+mesh = SubResource("BoxMesh_5pks6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2064644895]
+shape = SubResource("BoxShape3D_wap5w")
+
+[node name="Pickuparea" type="Area3D" parent="." unique_id=2059012252]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickuparea" unique_id=1713155716]
+shape = SubResource("SphereShape3D_jwhm7")
+
+[connection signal="body_entered" from="Pickuparea" to="." method="_on_pickuparea_body_entered"]
+[connection signal="body_exited" from="Pickuparea" to="." method="_on_pickuparea_body_exited"]

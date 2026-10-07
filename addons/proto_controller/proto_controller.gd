@@ -42,6 +42,7 @@ extends CharacterBody3D
 @export_group("inventory")
 @export var inventory : String = "inventory" ##make this call inventory script 
 
+var equipped_item: Item = null
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
@@ -207,7 +208,6 @@ func _on_dialogue_started(_resource: DialogueResource) -> void:
 	velocity = Vector3.ZERO
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	can_move = true
 	can_jump = true
@@ -223,3 +223,28 @@ func _on_show_ui_buttons_changed(new_value: bool):
 		$CanvasLayer.offset.x = 1150
 	else:
 		$CanvasLayer.offset.x = 0
+		
+#item
+func _input(event):
+	if event.is_action_pressed("pickup"):
+		pickup_item()
+		
+func equip_item(item: Item):
+	equipped_item = item
+	print("Picked up: ", item.name)
+	
+var nearby_items: Array[Item] = []
+
+func add_nearby_item(item: Item):
+	if not nearby_items.has(item):
+		nearby_items.append(item)
+
+func pickup_item():
+	if nearby_items.is_empty():
+		return
+
+	var item = nearby_items[0]
+	item.pickup(self)
+	
+func remove_nearby_item(item: Item):
+	nearby_items.erase(item)

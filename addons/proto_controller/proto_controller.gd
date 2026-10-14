@@ -42,7 +42,7 @@ extends CharacterBody3D
 @export_group("inventory")
 @export var inventory : String = "inventory" ##make this call inventory script 
 
-var equipped_item: Item = null
+@export var item_hold_point: Node3D
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
@@ -225,26 +225,52 @@ func _on_show_ui_buttons_changed(new_value: bool):
 		$CanvasLayer.offset.x = 0
 		
 #item
-func _input(event):
+var equipped_item: Item
+var nearby_items: Array[Item] = []
+
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pickup"):
 		pickup_item()
 		
-func equip_item(item: Item):
-	equipped_item = item
-	print("Picked up: ", item.name)
-	
-var nearby_items: Array[Item] = []
+	if event.is_action_pressed("throw"):
+		throw_equipped_item()
 
-func add_nearby_item(item: Item):
+func equip_item(item: Item) -> void:
+	print("A. equip_item started")
+
+	if item_hold_point == null:
+		print("ERROR: item_hold_point is NULL!")
+		return
+
+	print("B. Hand point: ", item_hold_point.get_path())
+
+	equipped_item = item
+
+	print("C. Calling equip_to")
+	item.equip_to(item_hold_point)
+	print("D. equip_to finished")
+	print("E. Item parent: ", item.get_parent().get_path())
+
+func add_nearby_item(item: Item) -> void:
 	if not nearby_items.has(item):
 		nearby_items.append(item)
 
-func pickup_item():
+func pickup_item() -> void:
 	if nearby_items.is_empty():
+		print("No nearby items!")
 		return
 
-	var item = nearby_items[0]
+	var item: Item = nearby_items[0]
 	item.pickup(self)
-	
-func remove_nearby_item(item: Item):
+
+func remove_nearby_item(item: Item) -> void:
 	nearby_items.erase(item)
+	
+func throw_equipped_item() -> void:
+	if equipped_item == null:
+		return
+
+	if equipped_item.has_method("throw"):
+		var direction := -get_viewport().get_camera_3d().global_transform.basis.z
+		equipped_item.throw(direction)
+		equipped_item = null

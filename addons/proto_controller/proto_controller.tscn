@@ -20,11 +20,12 @@ height = 1.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_3pots"]
 radius = 1.2144786
 
-[node name="Player" type="CharacterBody3D" unique_id=709718729 groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=709718729 node_paths=PackedStringArray("item_hold_point") groups=["Player"]]
 script = ExtResource("1_ucva2")
 can_sprint = true
 base_speed = 3.0
 jump_velocity = 4.0
+item_hold_point = NodePath("hand")
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=1374279821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -105,4 +106,4 @@ passby_press = true
 action = "jump"
 
 [node name="hand" type="Marker3D" parent="." unique_id=1739026649]
-transform = Transform3D(1.1492633, 0, 0, 0, 1, 0, 0, 0, 1, 0.42308664, 0.8800768, -0.0018421412)
+transform = Transform3D(1.1492633, 0, 0, 0, 1, 0, 0, 0, 1, 0.42308664, 1.0728984, -0.0018421412)

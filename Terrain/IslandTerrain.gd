@@ -583,7 +583,57 @@ var mountain_dip_width_multiplier: float = 1.75:
 
 		sand_blend = max(value, 0.01)
 		_update_material_parameters()
+		
+# =====================================================================
+# BEACH GEOMETRY / OCEAN FLOOR
+# =====================================================================
 
+@export_category("Beach Geometry & Ocean Floor")
+
+## Width of the relatively flat beach in world units.
+@export_range(2.0, 100.0, 1.0)
+var beach_area_width: float = 24.0:
+	set(value):
+		beach_area_width = max(value, 2.0)
+		_request_generate()
+
+## Vertical drop across the beach itself.
+## Smaller values create a flatter beach.
+@export_range(0.0, 5.0, 0.05)
+var beach_area_slope: float = 0.35:
+	set(value):
+		beach_area_slope = max(value, 0.0)
+		_request_generate()
+
+## Maximum height variation on the beach, in world units.
+## Keep this low for a smooth beach.
+@export_range(0.0, 2.0, 0.01)
+var beach_roughness: float = 0.08:
+	set(value):
+		beach_roughness = max(value, 0.0)
+		_request_generate()
+
+## Width of the underwater ramp beyond the shoreline.
+@export_range(10.0, 300.0, 1.0)
+var ocean_ramp_width: float = 100.0:
+	set(value):
+		ocean_ramp_width = max(value, 10.0)
+		_request_generate()
+
+## Depth of the ocean floor below the water surface.
+@export_range(1.0, 100.0, 1.0)
+var ocean_floor_depth: float = 20.0:
+	set(value):
+		ocean_floor_depth = max(value, 1.0)
+		_request_generate()
+
+## Smallest allowed height for the inland terrain,
+## measured above the highest point of the beach.
+@export_range(0.0, 20.0, 0.5)
+var inland_minimum_clearance: float = 0.5:
+	set(value):
+		inland_minimum_clearance = max(value, 0.0)
+		_request_generate()
 
 # =====================================================================
 # SHORELINE / FOAM
@@ -671,6 +721,25 @@ var shoreline_foam_noise_strength: float = 0.25:
 	set(value):
 
 		rock_texture = value
+		_update_material_parameters()
+		## Texture for the highest mountain summits.
+		
+@export var summit_rock_texture: Texture2D:
+	set(value):
+		summit_rock_texture = value
+		_update_material_parameters()
+
+## Lowest terrain height at which summit rock begins.
+@export var summit_rock_height: float = 40.0:
+	set(value):
+		summit_rock_height = value
+		_update_material_parameters()
+
+## Vertical blending range for summit rock.
+@export_range(0.1, 20.0, 0.1)
+var summit_rock_blend: float = 3.0:
+	set(value):
+		summit_rock_blend = max(value, 0.1)
 		_update_material_parameters()
 
 
@@ -1021,32 +1090,92 @@ func _prepare_coordinate_cache() -> void:
 # =====================================================================
 
 func _generate_heightmap() -> void:
-
 	var total := resolution * resolution
-
 	heights.resize(total)
 
 	for z in range(resolution):
-
 		var world_z := world_z_values[z]
 
 		for x in range(resolution):
-
 			var world_x := world_x_values[x]
-
-			var index := (
-				z * resolution +
-				x
-			)
+			var index := z * resolution + x
 
 			heights[index] = _calculate_height(
 				world_x,
 				world_z
 			)
 
-
 	_smooth_heightmap()
+	_enforce_height_zones()
 
+
+func _enforce_height_zones() -> void:
+	# Restore the exact ocean and beach profile after smoothing.
+	# Do not clamp the inland terrain to a fixed minimum height:
+	# that clamp creates the abrupt wall above the beach.
+
+	var half_size: float = world_size * 0.5
+	var half_x: float = max(half_size * island_width, 0.001)
+	var half_z: float = max(half_size * island_length, 0.001)
+	var distance_scale: float = min(half_x, half_z)
+
+	var beach_width_normalized: float = (
+		beach_area_width / distance_scale
+	)
+
+	for z in range(resolution):
+		var world_z: float = world_z_values[z]
+
+		for x in range(resolution):
+			var world_x: float = world_x_values[x]
+
+			var distance: float = Vector2(
+				world_x / half_x,
+				world_z / half_z
+			).length()
+
+			var coast_radius: float = _get_coast_radius(
+				world_x,
+				world_z
+			)
+
+			var beach_inner_radius: float = max(
+				coast_radius - beach_width_normalized,
+				0.0
+			)
+
+			# Recalculate the beach and underwater ramp.
+			# Leave the smoothed inland transition intact.
+			if distance >= beach_inner_radius:
+				var index: int = z * resolution + x
+
+				heights[index] = _calculate_height(
+					world_x,
+					world_z
+				)
+
+
+func _get_coast_radius(
+	world_x: float,
+	world_z: float
+) -> float:
+	var coast_noise: float = coastline_noise.get_noise_2d(
+		world_x,
+		world_z
+	)
+
+	# Keep the irregular coastline inside the terrain mesh.
+	# This is especially important when island_width is close to 1.
+	var max_radius: float = min(
+		1.0 / max(island_width, 0.001),
+		1.0 / max(island_length, 0.001)
+	) * 0.995
+
+	return clamp(
+		1.0 + coast_noise * coastline_strength,
+		0.1,
+		max_radius
+	)
 
 # =====================================================================
 # HEIGHTMAP CACHE
@@ -1249,12 +1378,6 @@ func _smooth_heightmap() -> void:
 				)
 
 
-				heights[index] = max(
-					heights[index],
-					water_level
-				)
-
-
 # =====================================================================
 # HEIGHT CALCULATION
 # =====================================================================
@@ -1264,192 +1387,231 @@ func _calculate_height(
 	world_z: float
 ) -> float:
 
-	var normalized_x := (
-		world_x /
-		(world_size * 0.5 * island_width)
+	var half_size: float = world_size * 0.5
+
+	var half_x: float = max(
+		half_size * island_width,
+		0.001
 	)
 
-	var normalized_z := (
-		world_z /
-		(world_size * 0.5 * island_length)
+	var half_z: float = max(
+		half_size * island_length,
+		0.001
 	)
 
+	var normalized_x: float = world_x / half_x
+	var normalized_z: float = world_z / half_z
 
-	var island_distance := Vector2(
+	var distance: float = Vector2(
 		normalized_x,
 		normalized_z
 	).length()
 
-
-	# ---------------------------------------------------------------
-	# Coastline
-	# ---------------------------------------------------------------
-
-	var coastline_value := coastline_noise.get_noise_2d(
+	var coast_radius: float = _get_coast_radius(
 		world_x,
 		world_z
 	)
 
+	# Convert normalized radial distance into an approximate
+	# world-space distance for beach and transition calculations.
+	var distance_scale: float = min(half_x, half_z)
 
-	var coastline_radius := (
-		1.0 +
-		coastline_value *
-		coastline_strength
+	var beach_width_normalized: float = (
+		beach_area_width / distance_scale
 	)
 
-
-	var island_mask := 1.0 - smoothstep(
-		coastline_start * coastline_radius,
-		coastline_radius,
-		island_distance
+	var ramp_width_normalized: float = (
+		ocean_ramp_width / distance_scale
 	)
 
-
-	island_mask = clamp(
-		island_mask,
-		0.0,
-		1.0
+	var beach_inner_radius: float = max(
+		coast_radius - beach_width_normalized,
+		0.0
 	)
 
+	var beach_top_height: float = (
+		water_level
+		+ beach_area_slope * beach_area_width
+	)
 
-	# ---------------------------------------------------------------
-	# Base terrain
-	# ---------------------------------------------------------------
+	# -------------------------------------------------------------
+	# OCEAN FLOOR AND UNDERWATER RAMP
+	# -------------------------------------------------------------
 
-	var large_noise := (
-		terrain_noise.get_noise_2d(
+	if distance >= coast_radius:
+		var ramp_t: float = clamp(
+			(distance - coast_radius)
+			/ max(ramp_width_normalized, 0.0001),
+			0.0,
+			1.0
+		)
+
+		var ramp_curve: float = smoothstep(
+			0.0,
+			1.0,
+			ramp_t
+		)
+
+		return (
+			water_level
+			- ocean_floor_depth * ramp_curve
+		)
+
+	# -------------------------------------------------------------
+	# BEACH
+	# -------------------------------------------------------------
+
+	if distance >= beach_inner_radius:
+		var beach_t: float = clamp(
+			(coast_radius - distance)
+			/ max(beach_width_normalized, 0.0001),
+			0.0,
+			1.0
+		)
+
+		var beach_height: float = lerp(
+			water_level,
+			beach_top_height,
+			beach_t
+		)
+
+		var beach_noise: float = detail_noise.get_noise_2d(
 			world_x,
 			world_z
-		) * 0.5 +
-		0.5
+		)
+
+		# Suppress noise at the waterline and inland beach edge.
+		beach_height += (
+			beach_noise
+			* beach_roughness
+			* sin(PI * beach_t)
+		)
+
+		return beach_height
+
+	# -------------------------------------------------------------
+	# INTERIOR BASE TERRAIN
+	# -------------------------------------------------------------
+
+	var large_noise: float = (
+		terrain_noise.get_noise_2d(world_x, world_z)
+		* 0.5 + 0.5
 	)
 
+	large_noise = pow(large_noise, 1.65)
 
-	large_noise = pow(
-		large_noise,
-		1.65
+	var detail: float = (
+		detail_noise.get_noise_2d(world_x, world_z)
+		* 0.5 + 0.5
 	)
 
-
-	var detail := (
-		detail_noise.get_noise_2d(
-			world_x,
-			world_z
-		) * 0.5 +
-		0.5
-	)
-
-
-	var terrain_value = lerp(
+	var terrain_value: float = lerp(
 		large_noise,
 		detail,
 		terrain_detail_strength
 	)
 
-
-	# ---------------------------------------------------------------
-	# Erosion
-	# ---------------------------------------------------------------
+	# -------------------------------------------------------------
+	# EROSION
+	# -------------------------------------------------------------
 
 	if erosion_enabled:
-
-		var erosion_value := (
-			erosion_noise.get_noise_2d(
-				world_x,
-				world_z
-			) * 0.5 +
-			0.5
+		var erosion_value: float = (
+			erosion_noise.get_noise_2d(world_x, world_z)
+			* 0.5 + 0.5
 		)
 
+		var valleys: float = 1.0 - erosion_value
 
-		var valleys := 1.0 - erosion_value
-
-		var valley_carve := (
-			valleys *
-			valleys *
-			erosion_valley_strength
+		var valley_carve: float = (
+			valleys * valleys * erosion_valley_strength
 		)
 
-
-		var erosion_result = clamp(
-			erosion_value -
-			valley_carve,
+		var erosion_result: float = clamp(
+			erosion_value - valley_carve,
 			0.0,
 			1.0
 		)
 
-
 		terrain_value = lerp(
 			terrain_value,
-			terrain_value * 0.55 +
-			erosion_result * 0.45,
+			terrain_value * 0.55 + erosion_result * 0.45,
 			erosion_strength
 		)
 
+	# -------------------------------------------------------------
+	# MOUNTAINS AND FOOTHILLS
+	# -------------------------------------------------------------
 
-	# ===============================================================
-	# HAWAIIAN MOUNTAIN RANGE
-	# ===============================================================
+	# Keep the mountain system away from the shoreline.
+	# Its influence grows gradually toward the island interior.
+	var transition_width_world: float = max(
+		beach_area_width * 2.0,
+		12.0
+	)
+
+	var transition_width_normalized: float = (
+		transition_width_world / distance_scale
+	)
+
+	var inland_mask: float = 1.0 - smoothstep(
+		max(
+			beach_inner_radius - transition_width_normalized,
+			0.0
+		),
+		max(beach_inner_radius, 0.001),
+		distance
+	)
 
 	if mountains_enabled:
-
-		var mountain_height := _calculate_mountain_height(
+		var mountain_height: float = _calculate_mountain_height(
 			world_x,
 			world_z,
-			island_mask
+			1.0
 		)
-
 
 		terrain_value = lerp(
 			terrain_value,
-			max(
-				terrain_value,
-				mountain_height
-			),
-			smoothstep(
-				0.03,
-				0.22,
-				island_mask
-			)
+			max(terrain_value, mountain_height),
+			inland_mask
 		)
 
+	# -------------------------------------------------------------
+	# INTERIOR HEIGHT
+	# -------------------------------------------------------------
 
-	# ---------------------------------------------------------------
-	# Final height
-	# ---------------------------------------------------------------
-
-	var terrain_height = (
-		terrain_value *
-		maximum_height
+	# This is the natural inland height, not a forced height clamp.
+	var minimum_inland_height: float = (
+		beach_top_height
+		+ inland_minimum_clearance
 	)
 
-
-	# ---------------------------------------------------------------
-	# Coast flattening
-	# ---------------------------------------------------------------
-
-	var beach_mask := smoothstep(
-		0.0,
-		0.20,
-		island_mask
+	var interior_height: float = (
+		minimum_inland_height
+		+ terrain_value * maximum_height
 	)
 
+	# -------------------------------------------------------------
+	# BEACH-TO-INLAND TRANSITION
+	# -------------------------------------------------------------
 
-	terrain_height *= beach_mask
-
-
-	# ---------------------------------------------------------------
-	# Island falloff
-	# ---------------------------------------------------------------
-
-	terrain_height *= pow(
-		island_mask,
-		1.35
+	# Blend from the beach elevation into the interior over a broad
+	# zone. At the beach edge the weight is zero, so there is no
+	# sudden vertical jump. Farther inland the terrain is unchanged.
+	var inland_blend: float = 1.0 - smoothstep(
+		max(
+			beach_inner_radius - transition_width_normalized,
+			0.0
+		),
+		max(beach_inner_radius, 0.001),
+		distance
 	)
 
-
-	return water_level + terrain_height
-
+	return lerp(
+		beach_top_height,
+		interior_height,
+		inland_blend
+	)
 
 # =====================================================================
 # MOUNTAIN HEIGHT
@@ -1815,22 +1977,19 @@ func _calculate_mountain_height(
 
 
 	# ---------------------------------------------------------------
-	# Stronger transition into surrounding terrain.
+	# Smooth mountain presence
 	# ---------------------------------------------------------------
 
-	var mountain_presence := smoothstep(
+	var mountain_presence: float = smoothstep(
 		0.0,
 		0.18,
 		island_mask
 	)
 
-
 	mountain *= mountain_presence
 
-
 	return clamp(
-		mountain *
-		mountain_strength,
+		mountain * mountain_strength,
 		0.0,
 		1.0
 	)
@@ -2473,6 +2632,22 @@ func _update_material_parameters() -> void:
 		"height_blend",
 		height_blend
 	)
+	
+	terrain_material.set_shader_parameter(
+	"summit_rock_height",
+	summit_rock_height
+)
+
+	terrain_material.set_shader_parameter(
+		"summit_rock_blend",
+		summit_rock_blend
+	)
+
+	if summit_rock_texture != null:
+		terrain_material.set_shader_parameter(
+			"summit_rock_texture",
+			summit_rock_texture
+		)
 
 
 	terrain_material.set_shader_parameter(

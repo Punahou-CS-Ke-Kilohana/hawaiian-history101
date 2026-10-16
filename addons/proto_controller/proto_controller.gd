@@ -48,6 +48,7 @@ var mouse_captured : bool = false
 var look_rotation : Vector2
 var move_speed : float = 0.0
 var freeflying : bool = false
+var dialogue_lock: bool = true
 
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
@@ -97,6 +98,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			disable_freefly()
 
 func _physics_process(delta: float) -> void:
+	print("Dialogue lock: ", dialogue_lock)
+	if dialogue_lock:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+	
 	# Gravity
 	if has_gravity:
 		if not is_on_floor():
@@ -201,6 +208,7 @@ func check_input_mappings():
 
 
 func _on_dialogue_started(_resource: DialogueResource) -> void:
+	dialogue_lock = true
 	can_move = false
 	can_jump = false
 	can_sprint = false
@@ -209,6 +217,7 @@ func _on_dialogue_started(_resource: DialogueResource) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
+	dialogue_lock = false
 	can_move = true
 	can_jump = true
 	can_sprint = true

@@ -32,7 +32,7 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_twre2"]
-radius = 1.0
+radius = 1.6163279
 
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
@@ -99,17 +99,16 @@ balloon_scene = ExtResource("3_wc5p8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
 shape = SubResource("SphereShape3D_twre2")
 
-[node name="King Kameha2" parent="." unique_id=662854273 instance=ExtResource("1_i5arm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522862, 0, 0)
-up_direction = Vector3(0.9950372, 0.099503726, 0)
+[node name="Villager" parent="." unique_id=662854273 instance=ExtResource("1_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.522862, 0.5997839, 0)
 
-[node name="Actionable" parent="King Kameha2" unique_id=1799998906 instance=ExtResource("3_jka67")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6799984, 1.5688682, 3.8948584)
+[node name="Actionable" parent="Villager" unique_id=1799998906 instance=ExtResource("3_jka67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88982964, 1.5688682, 0.54001343)
 dialogue_resource = ExtResource("5_imku0")
 balloon_scene = ExtResource("3_wc5p8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="King Kameha2/Actionable" unique_id=1136717083]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.66187)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Villager/Actionable" unique_id=1136717083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7621422, -0.84059966, -1.0625048)
 shape = SubResource("SphereShape3D_twre2")
 
 [node name="GroupRocks01" parent="." unique_id=159472190 instance=ExtResource("2_a0tk4")]

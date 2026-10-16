@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d3k86bl0hf2v5"]
+
+[ext_resource type="Script" uid="uid://bv84sm2lxakgc" path="res://trajectory.gd" id="1_qmsch"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_3pots"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5pks6"]
+
+[node name="Trajectory" type="Node3D" unique_id=1374291331]
+script = ExtResource("1_qmsch")
+
+[node name="arc" type="MeshInstance3D" parent="." unique_id=1251072373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0093515515, 0)
+mesh = SubResource("ImmediateMesh_3pots")
+
+[node name="landing" type="MeshInstance3D" parent="." unique_id=341819618]
+transform = Transform3D(0.5, 0, 0, 0, 0.01, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("CylinderMesh_5pks6")

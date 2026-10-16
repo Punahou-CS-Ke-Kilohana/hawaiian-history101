@@ -1,6 +1,5 @@
 extends Node
 
-
 ## Emitted when a dialogue balloon is created and dialogue starts
 signal dialogue_started(resource: DialogueResource)
 

@@ -44,11 +44,20 @@ extends CharacterBody3D
 
 @export var item_hold_point: Node3D
 
+@export_group("throw")
+@export var min_throw_force: float = 10.0
+@export var max_throw_force: float = 30.0
+@export var max_charge_time: float = 2.0
+
+var throw_charge_time: float = 0.0
+var is_charging_throw: bool = false
+
 var mouse_captured : bool = false
 var look_rotation : Vector2
 var move_speed : float = 0.0
 var freeflying : bool = false
 
+var is_in_dialogue: bool = false
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
@@ -68,7 +77,6 @@ func _ready() -> void:
 	else:
 		$CanvasLayer.visible = false
 		$CanvasLayer.offset.x = 1150
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("dialogue"):
@@ -207,9 +215,13 @@ func _on_dialogue_started(_resource: DialogueResource) -> void:
 	can_freefly = false
 	velocity = Vector3.ZERO
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	is_in_dialogue = true
+	is_charging_throw = false
+	throw_charge_time = 0.0
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	can_move = true
+	is_in_dialogue = false
 	can_jump = true
 	can_sprint = true
 	can_freefly = true
@@ -224,15 +236,22 @@ func _on_show_ui_buttons_changed(new_value: bool):
 	else:
 		$CanvasLayer.offset.x = 0
 		
-#item
+func _process(delta: float) -> void:
+	if is_charging_throw:
+		throw_charge_time += delta
+		throw_charge_time = min(throw_charge_time, max_charge_time)
+#item equipment 
 var equipped_item: Item
 var nearby_items: Array[Item] = []
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pickup"):
 		pickup_item()
-		
-	if event.is_action_pressed("throw"):
+	if event.is_action_pressed("throw") and not event.is_echo():
+		if equipped_item != null and equipped_item.has_method("throw"):
+			is_charging_throw = true
+			throw_charge_time = 0.0
+	if event.is_action_released("throw"):
 		throw_equipped_item()
 
 func equip_item(item: Item) -> void:
@@ -265,12 +284,26 @@ func pickup_item() -> void:
 
 func remove_nearby_item(item: Item) -> void:
 	nearby_items.erase(item)
-	
-func throw_equipped_item() -> void:
-	if equipped_item == null:
-		return
 
-	if equipped_item.has_method("throw"):
-		var direction := -get_viewport().get_camera_3d().global_transform.basis.z
-		equipped_item.throw(direction)
-		equipped_item = null
+#spear 
+func throw_equipped_item() -> void:
+	if is_in_dialogue:
+		is_charging_throw = false
+		throw_charge_time = 0.0
+		return
+	if equipped_item == null:
+		is_charging_throw = false
+		throw_charge_time = 0.0
+		return
+	if not equipped_item.has_method("throw"):
+		is_charging_throw = false
+		throw_charge_time = 0.0
+		return 
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	var charge_ratio: float = clampf(throw_charge_time / max_charge_time, 0.0,1)
+	var force: float = lerpf(min_throw_force, max_throw_force, charge_ratio)
+	var direction : Vector3 = -camera.global_transform.basis.z
+	equipped_item.throw(direction,force)
+	equipped_item = null
+	is_charging_throw = false
+	throw_charge_time = 0.0

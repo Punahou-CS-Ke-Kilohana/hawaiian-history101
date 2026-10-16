@@ -8,14 +8,14 @@ var has_been_thrown := false
 var has_hit := false
 
 
-func throw(direction: Vector3) -> void:
+func throw(direction: Vector3, force: float) -> void:
 	has_been_thrown = true
 	has_hit = false
 
 	# Detach from the player's hand and restore physics
 	prepare_to_throw()
 
-	linear_velocity = direction.normalized() * throw_force
+	linear_velocity = direction.normalized() * force
 
 
 func _physics_process(_delta: float) -> void:
@@ -28,11 +28,10 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Player"):
+		return
 	print("body entered")
 	if not has_been_thrown or has_hit:
-		return
-		
-	if body.is_in_group("Player"):
 		return
 	has_hit = true
 
@@ -42,8 +41,14 @@ func _on_body_entered(body: Node3D) -> void:
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	freeze = true
+	var old_parent := get_parent()
+	var saved_transform := global_transform
 
+	old_parent.remove_child(self)
+	body.add_child(self)
+	global_transform = saved_transform
 
+##pick up
 func _on_pickuparea_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):
 		body.add_nearby_item(self)

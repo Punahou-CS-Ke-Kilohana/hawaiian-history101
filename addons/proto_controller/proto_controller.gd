@@ -98,7 +98,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			disable_freefly()
 
 func _physics_process(delta: float) -> void:
-	print("Dialogue lock: ", dialogue_lock)
 	if dialogue_lock:
 		velocity = Vector3.ZERO
 		move_and_slide()

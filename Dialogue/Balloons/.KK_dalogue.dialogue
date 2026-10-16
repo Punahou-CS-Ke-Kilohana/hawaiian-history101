@@ -12,7 +12,11 @@ King Kamehameha: John, you say? I have never heard of you...Are you from this is
 - No => KK_response
 
 ~ KK_response
-King Kamehameha: Okay. Well, follow me!
+King Kamehameha: Okay. Well, follow me! => Chant
+
+
+~ Chant
+Chant: [wait=1.5] You hear a mysterious chant coming from deeper in the forest. You should keep moving forward.
 	
 	
 => END

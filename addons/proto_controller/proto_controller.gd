@@ -40,7 +40,7 @@ extends CharacterBody3D
 @export_group("General Actions") ##talk, attack,ect
 
 @export_group("inventory")
-@export var inventory : String = "inventory" ##make this call inventory script 
+var inventory: Array[Item] = []
 
 @export var item_hold_point: Node3D
 
@@ -268,21 +268,25 @@ func equip_item(item: Item) -> void:
 	if item_hold_point == null:
 		print("ERROR: item_hold_point is NULL!")
 		return
-
-	print("B. Hand point: ", item_hold_point.get_path())
-
+	if not inventory.has(item):
+		inventory.append(item)
+	if equipped_item != null and equipped_item != item:
+		var previous_item := equipped_item
+		previous_item.prepare_to_throw()
 	equipped_item = item
-
-	print("C. Calling equip_to")
 	item.equip_to(item_hold_point)
-	print("D. equip_to finished")
-	print("E. Item parent: ", item.get_parent().get_path())
 
 func add_nearby_item(item: Item) -> void:
 	if not nearby_items.has(item):
 		nearby_items.append(item)
 
 func pickup_item() -> void:
+	if equipped_item != null and is_instance_valid(equipped_item):
+		print("Already holding a spear!")
+		return
+
+	nearby_items = nearby_items.filter(func(item): return is_instance_valid(item))
+
 	if nearby_items.is_empty():
 		print("No nearby items!")
 		return

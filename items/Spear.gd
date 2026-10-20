@@ -30,9 +30,10 @@ func _physics_process(_delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):
 		return
-	print("body entered")
+
 	if not has_been_thrown or has_hit:
 		return
+
 	has_hit = true
 
 	if body.has_method("take_damage"):
@@ -41,12 +42,12 @@ func _on_body_entered(body: Node3D) -> void:
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	freeze = true
-	var old_parent := get_parent()
-	var saved_transform := global_transform
 
-	old_parent.remove_child(self)
-	body.add_child(self)
-	global_transform = saved_transform
+	if body is StaticBody3D:
+		freeze = true
+	else:
+		# Keep physics enabled for moving objects.
+		freeze = false
 
 ##pick up
 func _on_pickuparea_body_entered(body: Node3D) -> void:

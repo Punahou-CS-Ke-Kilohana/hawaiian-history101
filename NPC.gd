@@ -5,8 +5,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Prevent horizontal movement
-	velocity.x = 0
-	velocity.z = 0
+		velocity.z = 0
+		velocity.y = 0
 
-	move_and_slide()
+		move_and_slide()

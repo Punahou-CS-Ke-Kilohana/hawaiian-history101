@@ -3,8 +3,8 @@ extends Node3D
 
 @export var player: CharacterBody3D
 
-var camera: Camera3D
-var throw_origin: Node3D
+@onready var camera: Camera3D = $"Head/Main Camera"
+@onready var throw_origin: Node3D = $hand
 
 @onready var arc: MeshInstance3D = $arc
 @onready var landing_marker: MeshInstance3D = $landing
@@ -21,8 +21,12 @@ func _ready() -> void:
 	arc.mesh = arc_mesh
 
 	arc_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	arc_material.albedo_color = Color.YELLOW
+	arc_material.albedo_color = Color.RED
 	arc.material_override = arc_material
+
+	arc_material.no_depth_test = false
+	arc_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	arc.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 	arc.visible = false
 	landing_marker.visible = false
@@ -31,7 +35,7 @@ func _ready() -> void:
 		push_error("Trajectory: Player reference is not assigned!")
 		return
 
-	camera = player.get_node_or_null("Main Camera") as Camera3D
+	camera = player.get_node_or_null("Head/Main Camera") as Camera3D
 	throw_origin = player.get_node_or_null("hand") as Node3D
 
 	if camera == null:
@@ -73,6 +77,7 @@ func _process(_delta: float) -> void:
 	var force: float = lerpf(min_force, max_force, ratio)
 
 	var start: Vector3 = throw_origin.global_position
+	start += Vector3.UP * 0.5
 	var velocity: Vector3 = -camera.global_transform.basis.z * force
 
 	print("Drawing trajectory at: ", start)

@@ -9,8 +9,8 @@
 [ext_resource type="Resource" uid="uid://p5xv1tqynsgp" path="res://Dialogue/Balloons/villager.dialogue" id="5_imku0"]
 [ext_resource type="PackedScene" uid="uid://brjbkvxu6afyy" path="res://items/Spear.tscn" id="9_4arys"]
 [ext_resource type="PackedScene" uid="uid://br70rkcktxt1e" path="res://Day-Night-Cycle.tscn" id="10_6iypd"]
-[ext_resource type="PackedScene" uid="uid://d3k86bl0hf2v5" path="res://trajectory.tscn" id="10_trajectory"]
 [ext_resource type="Script" uid="uid://cm8270rmbrj3l" path="res://EnterAreaDialogue.gd" id="10_tereu"]
+[ext_resource type="PackedScene" uid="uid://d3k86bl0hf2v5" path="res://trajectory.tscn" id="10_trajectory"]
 [ext_resource type="Resource" uid="uid://dufafm7e12klt" path="res://Dialogue/Balloons/RandomArea.dialogue" id="11_cdqbm"]
 [ext_resource type="Resource" uid="uid://dkhwjj0mh045a" path="res://Dialogue/Balloons/ChantArea.dialogue" id="12_cdqbm"]
 
@@ -116,14 +116,14 @@ up_direction = Vector3(0.9950372, 0.099503726, 0)
 [node name="Actionable" parent="Villager" unique_id=1799998906 instance=ExtResource("3_jka67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88982964, 1.5688682, 0.54001343)
 
-[node name="Actionable" parent="Villager" unique_id=1799998906 instance=ExtResource("3_jka67")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88982964, 1.5688682, 0.54001343)
-dialogue_resource = ExtResource("5_imku0")
-balloon_scene = ExtResource("3_wc5p8")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Villager/Actionable" unique_id=1136717083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7621422, -0.84059966, -1.0625048)
 shape = SubResource("SphereShape3D_twre2")
+
+[node name="Actionable2" parent="Villager" unique_id=1273763160 instance=ExtResource("3_jka67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88982964, 1.5688682, 0.54001343)
+dialogue_resource = ExtResource("5_imku0")
+balloon_scene = ExtResource("3_wc5p8")
 
 [node name="GroupRocks01" parent="." unique_id=159472190 instance=ExtResource("2_a0tk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.900373, 1.5688682, 5.492096)
@@ -136,8 +136,15 @@ transform = Transform3D(1, 0, 0, 0, -0.99999994, -8.742277e-08, 0, 8.742277e-08,
 [node name="Spear" parent="." unique_id=871536686 instance=ExtResource("9_4arys")]
 transform = Transform3D(-0.23484899, 0.061229955, -0.059973665, 0, 0.17493498, 0.17859942, 0.08570851, 0.16777557, -0.16433322, -1.2001553, 1.6232221, -4.7490215)
 
-[node name="Trajectory" parent="." unique_id=1374291331 instance=ExtResource("10_trajectory")]
+[node name="Spear2" parent="." unique_id=1671056940 instance=ExtResource("9_4arys")]
+transform = Transform3D(-0.23484899, 0.061229955, -0.059973665, 0, 0.17493498, 0.17859942, 0.08570851, 0.16777557, -0.16433322, -1.2001553, 1.6232221, -4.7490215)
+
+[node name="Spear3" parent="." unique_id=2053837963 instance=ExtResource("9_4arys")]
+transform = Transform3D(-0.23484899, 0.061229955, -0.059973665, 0, 0.17493498, 0.17859942, 0.08570851, 0.16777557, -0.16433322, -1.2001553, 1.6232221, -4.7490215)
+
+[node name="Trajectory" parent="." unique_id=1374291331 node_paths=PackedStringArray("player") instance=ExtResource("10_trajectory")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1075609, 2.3032036)
+player = NodePath("../ProtoController")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=567413887]
 

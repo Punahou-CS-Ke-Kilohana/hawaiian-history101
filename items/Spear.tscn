@@ -8,7 +8,7 @@ friction = 0.8
 [sub_resource type="BoxMesh" id="BoxMesh_5pks6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wap5w"]
-size = Vector3(1.1, 1.1, 13.3)
+size = Vector3(1, 1, 13.3)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jwhm7"]
 radius = 15.0

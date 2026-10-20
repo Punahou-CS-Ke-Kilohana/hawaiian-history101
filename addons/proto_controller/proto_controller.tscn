@@ -106,4 +106,4 @@ passby_press = true
 action = "jump"
 
 [node name="hand" type="Marker3D" parent="." unique_id=1739026649]
-transform = Transform3D(1.1492633, 0, 0, 0, 1, 0, 0, 0, 1, 0.42308664, 1.0728984, -0.0018421412)
+transform = Transform3D(1.1492633, 0, 0, 0, 1, 0, 0, 0, 1, 0.46082133, 1.0728984, -0.0018421412)

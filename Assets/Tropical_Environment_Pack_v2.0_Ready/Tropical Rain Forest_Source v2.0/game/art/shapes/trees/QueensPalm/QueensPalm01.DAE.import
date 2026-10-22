@@ -67,5 +67,10 @@ _subresources={
 "save_to_file/fallback_path": "",
 "save_to_file/path": ""
 }
+},
+"nodes": {
+"PATH:base01/start01/Collision": {
+"generate/physics": true
+}
 }
 }

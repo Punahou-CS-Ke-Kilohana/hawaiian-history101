@@ -2,18 +2,38 @@
 
 [ext_resource type="Script" uid="uid://4ny5825pgr8a" path="res://Game Management/story_mode.gd" id="1_jumcm"]
 [ext_resource type="Script" uid="uid://c33q484typh5b" path="res://Game Management/level_manager.gd" id="2_ae65c"]
-[ext_resource type="PackedScene" uid="uid://cubt32ki7h6bh" path="res://node_3d.tscn" id="3_jumcm"]
+[ext_resource type="PackedScene" uid="uid://c6rkxql831gaq" path="res://Story Levels/level_1.tscn" id="4_6kv1l"]
 [ext_resource type="PackedScene" uid="uid://bjaeq4chrthfa" path="res://UI/pause_menu.tscn" id="4_ae65c"]
+[ext_resource type="PackedScene" uid="uid://csp3nutp3yedr" path="res://Story Levels/level_2.tscn" id="4_kggi0"]
+[ext_resource type="Script" uid="uid://dc54m7yfjhv5y" path="res://Game Management/level_transition.gd" id="4_y0yg5"]
 [ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="5_ne1qx"]
+[ext_resource type="Texture2D" uid="uid://bmqgx5cvae1rv" path="res://Game Management/transition-map.png" id="6_kggi0"]
 
 [node name="StoryMode" type="Node3D" unique_id=215758469]
 script = ExtResource("1_jumcm")
 
 [node name="LevelManager" type="Node3D" parent="." unique_id=601060984]
 script = ExtResource("2_ae65c")
-levels = Array[PackedScene]([ExtResource("3_jumcm")])
+levels = Array[PackedScene]([ExtResource("4_6kv1l"), ExtResource("4_kggi0")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1350475435]
+[node name="LevelTransition" type="Node3D" parent="." unique_id=599096126]
+script = ExtResource("4_y0yg5")
+map_camera_height = 500.0
+map_hold_duration = 4.0
+loading_image = ExtResource("6_kggi0")
+loading_background = Color(0, 0, 0, 0)
+
+[node name="TransitionUI" type="CanvasLayer" parent="LevelTransition" unique_id=495129353]
+
+[node name="LevelTitle" type="Label" parent="LevelTransition/TransitionUI" unique_id=359482811]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Marker" type="Control" parent="LevelTransition/TransitionUI" unique_id=990522505]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=756373311]
 anchors_preset = 15

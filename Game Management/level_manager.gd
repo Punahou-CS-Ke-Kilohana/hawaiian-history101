@@ -1,7 +1,7 @@
 extends Node
 class_name LevelManager
 
-signal level_changed(level_index: int)
+signal level_changed(level_index: int, player_location: Vector3)
 signal level_completed
 
 @export var levels: Array[PackedScene] = []
@@ -28,10 +28,12 @@ func start_level(level_index: int) -> void:
 	# Create the new level.
 	current_level_instance = levels[level_index].instantiate()
 	level_container.add_child(current_level_instance)
+	
+	var player = current_level_instance.get_node("ProtoController")
 
 	current_level = level_index
 
-	level_changed.emit(current_level)
+	level_changed.emit(current_level, player.position)
 
 
 func has_next_level() -> bool:

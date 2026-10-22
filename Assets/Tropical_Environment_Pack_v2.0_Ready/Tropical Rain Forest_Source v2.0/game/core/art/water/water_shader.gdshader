@@ -14,10 +14,10 @@ void vertex() {
 void fragment() {
 	// Called for every pixel the material is visible on.
 	
-	vec3 color = vec3(0.0,0.0,0.75);
+	vec3 color = vec3(0.1,0.1,0.75);
 	color += texture(water_noise, UV).rgb*0.25;
 	ALBEDO = color;
-	ALPHA = 0.9;
+	ALPHA = 0.75;
 }
 
 //void light() {

@@ -7,7 +7,7 @@ extends Node3D
 @onready var throw_origin: Node3D = $hand
 
 @onready var arc: MeshInstance3D = $arc
-@onready var landing_marker: MeshInstance3D = $landing
+@onready var landing_marker: Node3D = $landing
 
 var arc_mesh := ImmediateMesh.new()
 var arc_material := StandardMaterial3D.new()
@@ -119,11 +119,20 @@ func draw_trajectory(
 
 		if not hit.is_empty():
 			var hit_pos: Vector3 = hit["position"]
-			var hit_normal: Vector3 = hit["normal"]
-
-			arc_mesh.surface_add_vertex(arc.to_local(hit_pos))
+			var hit_normal: Vector3 = hit["normal"].normalized()
 
 			landing_marker.global_position = hit_pos + hit_normal * 0.02
+
+			var normal := hit_normal
+			var reference := Vector3.FORWARD
+
+			if absf(normal.dot(reference)) > 0.99:
+				reference = Vector3.RIGHT
+
+			var x_axis := reference.cross(normal).normalized()
+			var z_axis := x_axis.cross(normal).normalized()
+
+			landing_marker.global_basis = Basis(x_axis, normal, z_axis).orthonormalized()
 			landing_marker.visible = true
 			found_hit = true
 			break

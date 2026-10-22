@@ -16,7 +16,9 @@ script = ExtResource("1_qmsch")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0093515515, 0)
 mesh = SubResource("ImmediateMesh_3pots")
 
-[node name="landing" type="MeshInstance3D" parent="." unique_id=341819618]
+[node name="landing" type="Node3D" parent="." unique_id=615876053]
+
+[node name="disk" type="MeshInstance3D" parent="landing" unique_id=341819618]
 transform = Transform3D(0.75, 0, 0, 0, 0.01, 0, 0, 0, 0.75, 0, 0, 0)
 mesh = SubResource("CylinderMesh_5pks6")
 surface_material_override/0 = SubResource("StandardMaterial3D_wlxy5")

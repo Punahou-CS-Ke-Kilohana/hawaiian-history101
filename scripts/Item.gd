@@ -1,3 +1,4 @@
+
 class_name Item
 extends RigidBody3D
 
@@ -17,6 +18,10 @@ func pickup(player: Node3D) -> void:
 		return
 
 	player.remove_nearby_item(self)
+
+	if self.has_method("on_picked_up"):
+		self.call("on_picked_up")
+
 	player.equip_item(self)
 
 func equip_to(hand: Node3D) -> void:
@@ -34,7 +39,7 @@ func equip_to(hand: Node3D) -> void:
 	scale = held_scale
 
 	visible = true
-	
+
 func prepare_to_throw() -> void:
 	reparent(get_tree().current_scene, true)
 

@@ -32,8 +32,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_ucva2")
 
-[node name="Collider" type="CollisionShape3D" parent="." unique_id=2050674318]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=2050674318 groups=["Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8754717, 0)
 shape = SubResource("CapsuleShape3D_iof21")
 
 [node name="Head" type="Node3D" parent="." unique_id=1974001437]

@@ -13,11 +13,16 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
+	print("Body detected: ", body.name)
+	print("Body groups: ", body.get_groups())
+	print("Parent: ", body.get_parent().name if body.get_parent() else "None")
+	
+	if not body.is_in_group("Player"):
+		return
+	
 	if triggered:
 		return
 
-	if not body.is_in_group("Player"):
-		return
 
 	triggered = true
 

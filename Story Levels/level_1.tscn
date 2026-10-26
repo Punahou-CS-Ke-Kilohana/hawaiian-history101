@@ -4,8 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_w0ckv"]
 [ext_resource type="Material" uid="uid://btm6ptrnke1xj" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/water_shader.tres" id="2_f5lsm"]
 [ext_resource type="PackedScene" uid="uid://q5y2pgj3kg3a" path="res://Story Levels/Islands/o'ahu.tscn" id="4_7lj2j"]
+[ext_resource type="Script" uid="uid://cm8270rmbrj3l" path="res://EnterAreaDialogue.gd" id="7_pl3mh"]
+[ext_resource type="Resource" uid="uid://dkhwjj0mh045a" path="res://Dialogue/Balloons/ChantArea.dialogue" id="8_hiukg"]
+[ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="9_806wk"]
 [ext_resource type="Texture2D" uid="uid://c2kq8k0ttat7k" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Beach110.jpg" id="9_ksg7w"]
 [ext_resource type="PackedScene" uid="uid://br70rkcktxt1e" path="res://Day-Night-Cycle.tscn" id="9_pl3mh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v1jij"]
+size = Vector3(2.815, 1, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wap5w"]
 subdivide_width = 30
@@ -43,6 +49,16 @@ _data = {
 [node name="Level 1" type="Node3D" unique_id=214548992]
 script = ExtResource("1_hiukg")
 
+[node name="ChantTrigger" type="Area3D" parent="." unique_id=1966328340]
+transform = Transform3D(-148.00331, 0, 201.48206, 0, 250, 0, -201.48206, 0, -148.00331, -368.52673, 6.5292206, -109.37311)
+script = ExtResource("7_pl3mh")
+dialogue_resource = ExtResource("8_hiukg")
+balloon_scene = ExtResource("9_806wk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChantTrigger" unique_id=642640276]
+transform = Transform3D(1, 0, 0, 0, 0.9999842, 0, 0, 0, 1, -0.7224412, 0.508, 0.49829388)
+shape = SubResource("BoxShape3D_v1jij")
+
 [node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_w0ckv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -298.3507, 11.848258, 35.652378)
 
@@ -54,6 +70,7 @@ material_override = ExtResource("2_f5lsm")
 mesh = SubResource("PlaneMesh_wap5w")
 
 [node name="O\'ahu" parent="Environment" unique_id=1236307564 instance=ExtResource("4_7lj2j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08892822, 0, 0.06617832)
 
 [node name="GodotSky" type="Node3D" parent="Environment" unique_id=596003771]
 
@@ -67,4 +84,3 @@ mesh = SubResource("PlaneMesh_5pks6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2103243186]
 libraries/ = SubResource("AnimationLibrary_ksg7w")
-autoplay = &"test"

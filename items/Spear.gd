@@ -6,6 +6,8 @@ extends Item ## middle click to pick up
 var has_been_thrown := false
 var has_hit := false
 
+# The body currently supporting this spear.
+var supporting_body: Node3D = null
 # True only when this spear has hit a static world object.
 var resting_on_world := false
 var is_falling_after_support := false
@@ -18,28 +20,25 @@ func throw(direction: Vector3, force: float) -> void:
 	has_hit = false
 	resting_on_world = false
 	supporting_spear = null
-
+	supporting_body = null
+	is_falling_after_support = false
 	# Detach from the player's hand and restore physics.
 	prepare_to_throw()
-
-	# Reset support state after preparing the spear.
-	resting_on_world = false
-	supporting_spear = null
-
 	linear_velocity = direction.normalized() * force
 
 
 func _physics_process(_delta: float) -> void:
-	# Check whether the exact spear supporting this one
-	# still exists and remains supported.
-	if freeze and not resting_on_world and supporting_spear != null:
-		if not is_instance_valid(supporting_spear):
-			fall_again()
-		elif not supporting_spear.has_stable_support():
-			fall_again()
+	if freeze and has_hit:
+		if is_instance_valid(supporting_spear):
+			if not supporting_spear.has_method("has_stable_support"):
+				fall_again()
+			elif not supporting_spear.has_stable_support():
+				fall_again()
 
-	# Rotate the spear to follow its movement.
-# Only rotate while the spear is actually moving through the air.
+		elif resting_on_world:
+			if not is_instance_valid(supporting_body):
+				fall_again()
+
 	if has_been_thrown and not has_hit and not is_falling_after_support:
 		if linear_velocity.length() > 0.1:
 			look_at(global_position + linear_velocity, Vector3.UP)
@@ -50,6 +49,7 @@ func on_picked_up() -> void:
 	supporting_spear = null
 	has_hit = false
 	has_been_thrown = false
+	is_falling_after_support = false
 	freeze = true
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
@@ -65,7 +65,7 @@ func has_stable_support(visited: Dictionary = {}) -> bool:
 
 	# This spear has directly hit the world.
 	if resting_on_world:
-		return true
+		return is_instance_valid(supporting_body)
 
 	# Otherwise, its support must be another supported spear.
 	if is_instance_valid(supporting_spear):
@@ -82,75 +82,42 @@ func fall_again() -> void:
 	has_hit = false
 	resting_on_world = false
 	supporting_spear = null
+	supporting_body = null
 
+	# Allow the spear to rotate naturally as it falls.
 	is_falling_after_support = true
+
+	# Give it a small downward movement so it separates
+	# from the spear or surface that was supporting it.
+	linear_velocity = Vector3.DOWN * 0.5
 	angular_velocity = Vector3.ZERO
-
-	# Tilt the spear so its tip points downward as it falls.
-	var down_direction := Vector3.DOWN
-	var current_forward := -global_transform.basis.z
-
-	var target_basis := Basis.looking_at(down_direction, Vector3.FORWARD)
-	var current_basis := global_transform.basis.orthonormalized()
-
-	# Only adjust orientation once, instead of every physics frame.
-	global_transform.basis = target_basis
-
-
-
-func _on_body_entered(body: Node3D) -> void:
-	# Ignore the player.
-	if body.is_in_group("Player"):
-		return
-
-	# Ignore collisions if this spear hasn't been thrown
-	# or has already settled.
-	if not has_been_thrown or has_hit:
-		return
-	# CASE 1: This spear hit another spear.
-	if body.is_in_group("Spear") and body is RigidBody3D:
-		var other := body as RigidBody3D
-
-		# Do not stick to a spear that is floating or moving
-		# without stable support.
-		if not other.has_method("has_stable_support"):
-			return
-
-		if not other.has_stable_support():
-			return
-
-		# Track the exact spear providing support.
-		supporting_spear = other
-		resting_on_world = false
-		has_hit = true
-
-		linear_velocity = Vector3.ZERO
-		angular_velocity = Vector3.ZERO
-		freeze = true
-		return
-
-	# CASE 2: This spear hit the world.
-	if body is StaticBody3D:
-		resting_on_world = true
-		supporting_spear = null
-		has_hit = true
-
-		linear_velocity = Vector3.ZERO
-		angular_velocity = Vector3.ZERO
-		freeze = true
-		return
-
-	# CASE 3: This spear hit an NPC or another object.
-	if body.has_method("take_damage"):
-		body.take_damage(damage)
-
-	has_hit = true
-	resting_on_world = false
-	supporting_spear = null
-
+func settle_spear() -> void:
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	freeze = true
+	sleeping = true
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if body == self or body.is_in_group("Player"):
+		return
+
+	if not has_been_thrown or has_hit:
+		return
+
+	# Let the tip detector handle valid spear-on-spear hits.
+	if body.is_in_group("Spear"):
+		return
+
+	# Backup: stop on a world surface if the tip missed it.
+	if body is StaticBody3D or body is AnimatableBody3D:
+		print("MAIN BODY HIT WORLD: ", body.name)
+
+		supporting_body = body
+		supporting_spear = null
+		resting_on_world = true
+		has_hit = true
+		settle_spear()
 
 
 func _on_pickuparea_body_entered(body: Node3D) -> void:
@@ -161,3 +128,50 @@ func _on_pickuparea_body_entered(body: Node3D) -> void:
 func _on_pickuparea_body_exited(body: Node3D) -> void:
 	if body.is_in_group("Player"):
 		body.remove_nearby_item(self)
+
+
+func _on_tip_body_entered(body: Node3D) -> void:
+	print("TIP HIT: ", body.name)
+	# Ignore the player.
+	if body == self or body.is_in_group("Player"):
+		return
+
+	if not has_been_thrown or has_hit:
+		return
+
+	# Only stick to a spear that already has stable support.
+	if body.is_in_group("Spear") and body is RigidBody3D:
+		supporting_spear = body as RigidBody3D
+		supporting_body = null
+		resting_on_world = false
+		#if not body.has_method("has_stable_support"):
+			#return
+#
+		#if not body.has_stable_support():
+			#return
+		#has_hit = true
+#
+		#settle_spear()
+		#return
+
+	# Stick to world surfaces.
+	elif body is StaticBody3D or body is AnimatableBody3D:
+		print("YO")
+		supporting_body = body
+		supporting_spear = null
+		resting_on_world = true
+		#has_hit = true
+		#settle_spear()
+		#return
+
+	# Damage NPCs without treating them as stable support.
+	else:
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+		else:
+			return
+		supporting_body = null
+		supporting_spear = null
+		resting_on_world = false
+	has_hit = true
+	settle_spear()

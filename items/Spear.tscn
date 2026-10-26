@@ -13,14 +13,20 @@ size = Vector3(1, 1, 13.3)
 [sub_resource type="SphereShape3D" id="SphereShape3D_jwhm7"]
 radius = 15.0
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1uy7c"]
+radius = 0.49601746
+height = 0.9920349
+
 [node name="Spear" type="RigidBody3D" unique_id=871536686 groups=["Spear"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_1uy7c")
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 4
+angular_damp = 1.0
 script = ExtResource("1_1uy7c")
-held_scale = Vector3(0.1, 0.1, 0.25)
+held_scale = Vector3(0.15, 0.15, 0.25)
 held_position = Vector3(0, 0.5, 0)
 held_rotation = Vector3(0.5, 0, 0)
 
@@ -39,6 +45,13 @@ shape = SubResource("SphereShape3D_jwhm7")
 
 [node name="SupportRay" type="RayCast3D" parent="." unique_id=18211464]
 
+[node name="tip" type="Area3D" parent="." unique_id=748843637]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tip" unique_id=1651411145]
+transform = Transform3D(1.3, 0, 0, 0, 0.0012008216, 1.2999994, 0, -1.2999994, 0.0012008216, 0, -0.05554765, -6.383101)
+shape = SubResource("CapsuleShape3D_1uy7c")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Pickuparea" to="." method="_on_pickuparea_body_entered"]
 [connection signal="body_exited" from="Pickuparea" to="." method="_on_pickuparea_body_exited"]
+[connection signal="body_entered" from="tip" to="." method="_on_tip_body_entered"]

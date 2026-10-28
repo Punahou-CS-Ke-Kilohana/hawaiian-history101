@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cvds1g81ewkek"]
+
+[ext_resource type="Script" uid="uid://eoaoqowgxlsr" path="res://Makahiki games/'ulu_maika.gd" id="1_1wd60"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3pots"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5pks6"]
+height = 0.2
+radius = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w6h3k"]
+radius = 4.521
+
+[node name="\'uluMaika" type="RigidBody3D" unique_id=312593304]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+continuous_cd = true
+linear_damp = 0.1
+angular_damp = 0.5
+script = ExtResource("1_1wd60")
+held_rotation = Vector3(0, 0, 89.8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=12062523]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_3pots")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1552959081]
+shape = SubResource("CylinderShape3D_5pks6")
+
+[node name="Pickuparea" type="Area3D" parent="." unique_id=1236281189]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickuparea" unique_id=137008224]
+shape = SubResource("SphereShape3D_w6h3k")
+
+[connection signal="body_entered" from="Pickuparea" to="." method="_on_pickuparea_body_entered"]
+[connection signal="body_exited" from="Pickuparea" to="." method="_on_pickuparea_body_exited"]

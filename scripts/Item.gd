@@ -47,3 +47,32 @@ func prepare_to_throw() -> void:
 	collision_mask = original_collision_mask
 
 	freeze = false
+	
+
+@export_category("Ground Movement")
+@export_enum("Disk", "Spear") var ground_behavior: int = 0
+
+@export var disk_spin_speed: float = 30.0
+@export var spear_slide_speed_multiplier: float = 1.0
+
+
+func roll(direction: Vector3, force: float) -> void:
+	reparent(get_tree().current_scene, true)
+
+	freeze = false
+	sleeping = false
+
+	# Keep the movement parallel to the ground.
+	direction.y = 0.0
+	direction = direction.normalized()
+
+	linear_velocity = direction * force
+
+	if ground_behavior == 0:
+		# Disk: spin around its horizontal rolling axis.
+		var roll_axis := Vector3.UP.cross(direction).normalized()
+		angular_velocity = roll_axis * disk_spin_speed
+	else:
+		# Spear: slide forward without deliberately spinning.
+		linear_velocity = direction * force * spear_slide_speed_multiplier
+		angular_velocity = Vector3.ZERO

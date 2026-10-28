@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d3k86bl0hf2v5" path="res://trajectory.tscn" id="10_trajectory"]
 [ext_resource type="Resource" uid="uid://dufafm7e12klt" path="res://Dialogue/Balloons/RandomArea.dialogue" id="11_cdqbm"]
 [ext_resource type="Resource" uid="uid://dkhwjj0mh045a" path="res://Dialogue/Balloons/ChantArea.dialogue" id="12_cdqbm"]
+[ext_resource type="PackedScene" uid="uid://cvds1g81ewkek" path="res://Makahiki games/'Ulu Maika.tscn" id="13_imku0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3pots"]
 
@@ -97,6 +98,24 @@ mesh = SubResource("BoxMesh_3pots")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D" unique_id=1036704941]
 shape = SubResource("BoxShape3D_noarx")
 
+[node name="Block2" type="MeshInstance3D" parent="." unique_id=636530235]
+transform = Transform3D(0.834, 0, 0, 0, 0.93, 0, 0, 0, 2.705, 0.07470417, 0.9069154, 33.454823)
+mesh = SubResource("BoxMesh_3pots")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Block2" unique_id=160764459]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block2/StaticBody3D" unique_id=841041861]
+shape = SubResource("BoxShape3D_noarx")
+
+[node name="Block3" type="MeshInstance3D" parent="." unique_id=1175366369]
+transform = Transform3D(0.834, 0, 0, 0, 0.93, 0, 0, 0, 2.705, -2.378643, 0.9069154, 33.454823)
+mesh = SubResource("BoxMesh_3pots")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Block3" unique_id=111209205]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block3/StaticBody3D" unique_id=205273823]
+shape = SubResource("BoxShape3D_noarx")
+
 [node name="King Kameha" parent="." unique_id=407646401 instance=ExtResource("1_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.966581, 0.44022584, 0)
 collision_layer = 2
@@ -163,3 +182,6 @@ balloon_scene = ExtResource("3_wc5p8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area Triggers/ChantTrigger" unique_id=881726457]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4638128, 1.3803734, 13.689432)
 shape = SubResource("BoxShape3D_pip2g")
+
+[node name="\'uluMaika" parent="." unique_id=312593304 instance=ExtResource("13_imku0")]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1.1757653, 0)

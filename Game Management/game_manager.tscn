@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://ds7oow4o03s34" path="res://Game Management/game_manager.gd" id="1_70yv6"]
 [ext_resource type="PackedScene" uid="uid://casv0q0qe8pv1" path="res://Game Management/main_menu.tscn" id="2_cp38q"]
 [ext_resource type="PackedScene" uid="uid://ceu1a80jl5xv7" path="res://Game Management/story_mode.tscn" id="2_smx3j"]
+[ext_resource type="PackedScene" uid="uid://cubt32ki7h6bh" path="res://node_3d.tscn" id="4_cp38q"]
 
 [node name="GameManager" type="Node3D" unique_id=1216726570]
 script = ExtResource("1_70yv6")
 home_scene = ExtResource("2_cp38q")
 story_scene = ExtResource("2_smx3j")
+test_scene = ExtResource("4_cp38q")

@@ -49,8 +49,14 @@ var inventory: Array[Item] = []
 @export var max_throw_force: float = 30.0
 @export var max_charge_time: float = 2.0
 
+@export var min_roll_force: float = 10.0
+@export var max_roll_force: float = 30.0
+
 var throw_charge_time: float = 0.0
 var is_charging_throw: bool = false
+
+var roll_charge_time: float = 0.0
+var is_charging_roll: bool = false
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
@@ -261,6 +267,14 @@ func _input(event: InputEvent) -> void:
 			throw_charge_time = 0.0
 	if event.is_action_released("throw"):
 		throw_equipped_item()
+		
+	if event.is_action_pressed("roll") and not event.is_echo():
+		if equipped_item != null and equipped_item.has_method("roll"):
+			is_charging_roll = true
+			roll_charge_time = 0.0
+
+	if event.is_action_released("roll"):
+		roll_equipped_item()
 
 func equip_item(item: Item) -> void:
 	print("A. equip_item started")
@@ -319,3 +333,35 @@ func throw_equipped_item() -> void:
 	equipped_item = null
 	is_charging_throw = false
 	throw_charge_time = 0.0
+	
+
+func roll_equipped_item() -> void:
+	if is_in_dialogue or equipped_item == null:
+		is_charging_roll = false
+		roll_charge_time = 0.0
+		return
+
+	if not equipped_item.has_method("roll"):
+		is_charging_roll = false
+		roll_charge_time = 0.0
+		return
+
+	var camera := get_viewport().get_camera_3d()
+	if camera == null:
+		return
+
+	var charge_ratio := clampf(
+		roll_charge_time / max_charge_time, 0.0, 1.0
+	)
+	var force := lerpf(min_roll_force, max_roll_force, charge_ratio)
+
+	var direction := -camera.global_transform.basis.z
+	direction.y = 0.0
+	direction = direction.normalized()
+
+	equipped_item.roll(direction, force)
+
+	equipped_item = null
+	is_charging_roll = false
+	roll_charge_time = 0.0
+	

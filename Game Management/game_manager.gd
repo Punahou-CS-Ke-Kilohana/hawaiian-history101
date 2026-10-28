@@ -4,13 +4,15 @@ class_name GameManager
 enum GameMode {
 	HOME,
 	STORY,
-	MULTIPLAYER
+	MULTIPLAYER,
+	TEST
 }
 
 @export_category("Scenes")
 @export var home_scene: PackedScene
 @export var story_scene: PackedScene
 @export var multiplayer_scene: PackedScene
+@export var test_scene: PackedScene
 
 @onready var mode_container: Node = self
 
@@ -38,6 +40,8 @@ func change_to_story() -> void:
 func change_to_multiplayer() -> void:
 	change_mode(GameMode.MULTIPLAYER)
 
+func change_to_test() -> void:
+	change_mode(GameMode.TEST)
 
 func change_mode(new_mode: GameMode) -> void:
 	if current_mode == new_mode and current_scene != null:
@@ -81,11 +85,17 @@ func _get_scene_for_mode(mode: GameMode) -> PackedScene:
 
 		GameMode.MULTIPLAYER:
 			return multiplayer_scene
+			
+		GameMode.TEST:
+			return test_scene
 
 		_:
 			return null
 
-
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_F6:
+			change_to_test()
 # ============================================================
 # Utility
 # ============================================================

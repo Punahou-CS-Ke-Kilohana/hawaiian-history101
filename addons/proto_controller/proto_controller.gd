@@ -50,7 +50,7 @@ var inventory: Array[Item] = []
 @export var max_charge_time: float = 2.0
 
 @export var min_roll_force: float = 10.0
-@export var max_roll_force: float = 30.0
+@export var max_roll_force: float = 90.0
 
 var throw_charge_time: float = 0.0
 var is_charging_throw: bool = false
@@ -116,13 +116,36 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		move_and_slide()
 		return
-	
-	# Gravity
-	if has_gravity:
-		if not is_on_floor():
-			velocity += get_gravity() * delta
 
-	# Completely stop player-controlled movement during dialogue
+	if has_gravity and not is_on_floor():
+		velocity += get_gravity() * delta
+
+	if slide_cooldown_timer > 0:
+		slide_cooldown_timer -= delta
+
+	# Player sliding
+	if is_sliding:
+		slide_timer -= delta
+
+		velocity.x = move_toward(
+			velocity.x,
+			0.0,
+			slide_friction * delta
+		)
+
+		velocity.z = move_toward(
+			velocity.z,
+			0.0,
+			slide_friction * delta
+		)
+
+		if slide_timer <= 0 or Vector2(velocity.x, velocity.z).length() < 1.0:
+			is_sliding = false
+
+		move_and_slide()
+		return
+
+	# Normal movement disabled
 	if not can_move:
 		velocity.x = 0
 		velocity.z = 0
@@ -262,19 +285,25 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pickup"):
 		pickup_item()
 	if event.is_action_pressed("throw") and not event.is_echo():
-		if equipped_item != null and equipped_item.has_method("throw"):
-			is_charging_throw = true
-			throw_charge_time = 0.0
-	if event.is_action_released("throw"):
-		throw_equipped_item()
-		
-	if event.is_action_pressed("roll") and not event.is_echo():
-		if equipped_item != null and equipped_item.has_method("roll"):
-			is_charging_roll = true
-			roll_charge_time = 0.0
+		if equipped_item != null:
+			if equipped_item.has_method("throw"):
+				is_charging_throw = true
+				throw_charge_time = 0.0
+			elif equipped_item.has_method("slide"):
+				is_charging_roll = true
+				roll_charge_time = 0.0
+			elif equipped_item.has_method("roll"):
+				is_charging_roll = true
+				roll_charge_time = 0.0
 
-	if event.is_action_released("roll"):
-		roll_equipped_item()
+	if event.is_action_released("throw"):
+		if equipped_item != null:
+			if equipped_item.has_method("throw"):
+				throw_equipped_item()
+			elif equipped_item.has_method("slide"):
+				slide_equipped_item()
+			elif equipped_item.has_method("roll"):
+				roll_equipped_item()
 
 func equip_item(item: Item) -> void:
 	print("A. equip_item started")
@@ -365,3 +394,63 @@ func roll_equipped_item() -> void:
 	is_charging_roll = false
 	roll_charge_time = 0.0
 	
+@export_group("Slide")
+@export var can_slide: bool = true
+@export var slide_speed: float = 40.0
+@export var slide_duration: float = 4.7
+@export var slide_cooldown: float = 1.5
+@export var slide_friction: float = 20.0
+
+var is_sliding: bool = false
+var slide_timer: float = 0.0
+var slide_cooldown_timer: float = 0.0
+var slide_direction: Vector3 = Vector3.ZERO
+
+func slide_equipped_item() -> void:
+	if is_in_dialogue or equipped_item == null:
+		is_charging_roll = false
+		roll_charge_time = 0.0
+		return
+
+	if not equipped_item.has_method("slide"):
+		return
+
+	var camera := get_viewport().get_camera_3d()
+	if camera == null:
+		return
+
+	var charge_ratio := clampf(
+		roll_charge_time / max_charge_time, 0.0, 1.0
+	)
+
+	var force := lerpf(min_roll_force, max_roll_force, charge_ratio)
+
+	var direction := -camera.global_transform.basis.z
+	direction.y = 0.0
+	direction = direction.normalized()
+
+	equipped_item.slide(direction, force)
+
+	equipped_item = null
+	is_charging_roll = false
+	roll_charge_time = 0.0
+func start_slide() -> void:
+	if not can_slide or is_sliding:
+		return
+
+	if not is_on_floor() or slide_cooldown_timer > 0:
+		return
+
+	slide_direction = Vector3(velocity.x, 0, velocity.z).normalized()
+
+	if slide_direction == Vector3.ZERO:
+		slide_direction = -global_transform.basis.z
+		slide_direction.y = 0
+		slide_direction = slide_direction.normalized()
+
+	is_sliding = true
+	slide_timer = slide_duration
+	slide_cooldown_timer = slide_cooldown
+
+	velocity.x = slide_direction.x * slide_speed
+	velocity.z = slide_direction.z * slide_speed

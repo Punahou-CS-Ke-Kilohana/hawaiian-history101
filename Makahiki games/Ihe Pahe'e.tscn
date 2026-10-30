@@ -1,15 +1,21 @@
 [gd_scene format=3 uid="uid://cufhx6f68oids"]
 
+[ext_resource type="Script" uid="uid://c3w0l41gjykyd" path="res://Makahiki games/ihe_pahe'e.gd" id="1_l6dfp"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_gqyw4"]
-size = Vector3(0.5, 0.5, 0.25)
+size = Vector3(0.25, 0.25, 0.35)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l6dfp"]
-size = Vector3(0.5, 0.5, 3.3)
+size = Vector3(0.555, 0.5, 3.34)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8xsbc"]
-radius = 7.814
+radius = 3.009
 
-[node name="IhePahe\'e" type="Node3D" unique_id=26192716]
+[node name="IhePahe\'e" type="RigidBody3D" unique_id=1971962749]
+continuous_cd = true
+script = ExtResource("1_l6dfp")
+ground_behavior = 1
+spear_slide_speed_multiplier = 2.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=649310293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 13.210691, 0, 0, 0)
@@ -25,3 +31,7 @@ collision_mask = 3
 shape = SubResource("SphereShape3D_8xsbc")
 
 [node name="SupportRay" type="RayCast3D" parent="." unique_id=2124139593]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Pickuparea" to="." method="_on_pickuparea_body_entered"]
+[connection signal="body_exited" from="Pickuparea" to="." method="_on_pickuparea_body_exited"]

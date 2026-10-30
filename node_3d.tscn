@@ -12,7 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://d3k86bl0hf2v5" path="res://trajectory.tscn" id="10_trajectory"]
 [ext_resource type="Resource" uid="uid://dufafm7e12klt" path="res://Dialogue/Balloons/RandomArea.dialogue" id="11_cdqbm"]
 [ext_resource type="Resource" uid="uid://dkhwjj0mh045a" path="res://Dialogue/Balloons/ChantArea.dialogue" id="12_cdqbm"]
-[ext_resource type="PackedScene" uid="uid://cvds1g81ewkek" path="res://Makahiki games/'Ulu Maika.tscn" id="13_imku0"]
+[ext_resource type="PackedScene" uid="uid://cvds1g81ewkek" path="res://Makahiki games/'Ulu Maika/'Ulu Maika.tscn" id="13_imku0"]
+[ext_resource type="PackedScene" uid="uid://dbugiu54xkv2o" path="res://Makahiki games/'Ulu Maika/UluMaikaGoal.tscn" id="14_wlxy5"]
+[ext_resource type="PackedScene" uid="uid://cufhx6f68oids" path="res://Makahiki games/Ihe Pahe'e.tscn" id="15_3v7ru"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3pots"]
 
@@ -98,24 +100,6 @@ mesh = SubResource("BoxMesh_3pots")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D" unique_id=1036704941]
 shape = SubResource("BoxShape3D_noarx")
 
-[node name="Block2" type="MeshInstance3D" parent="." unique_id=636530235]
-transform = Transform3D(0.834, 0, 0, 0, 0.93, 0, 0, 0, 2.705, 0.07470417, 0.9069154, 33.454823)
-mesh = SubResource("BoxMesh_3pots")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Block2" unique_id=160764459]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Block2/StaticBody3D" unique_id=841041861]
-shape = SubResource("BoxShape3D_noarx")
-
-[node name="Block3" type="MeshInstance3D" parent="." unique_id=1175366369]
-transform = Transform3D(0.834, 0, 0, 0, 0.93, 0, 0, 0, 2.705, -2.378643, 0.9069154, 33.454823)
-mesh = SubResource("BoxMesh_3pots")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Block3" unique_id=111209205]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Block3/StaticBody3D" unique_id=205273823]
-shape = SubResource("BoxShape3D_noarx")
-
 [node name="King Kameha" parent="." unique_id=407646401 instance=ExtResource("1_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.966581, 0.44022584, 0)
 collision_layer = 2
@@ -185,3 +169,15 @@ shape = SubResource("BoxShape3D_pip2g")
 
 [node name="\'uluMaika" parent="." unique_id=312593304 instance=ExtResource("13_imku0")]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1.1757653, 0)
+
+[node name="\'uluMaika2" parent="." unique_id=159059899 instance=ExtResource("13_imku0")]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1.1757653, 0)
+mass = 2.095
+held_scale = Vector3(1.2, 1.2, 1.2)
+
+[node name="UluMaikaGoal" parent="." unique_id=478190838 instance=ExtResource("14_wlxy5")]
+transform = Transform3D(-1.57361e-08, 0, 0.36, 0, 0.36, 0, -0.36, 0, -1.57361e-08, 0, 1.1271628, 37.864277)
+
+[node name="\'uluMaika3" parent="." unique_id=1500983543 instance=ExtResource("13_imku0")]
+
+[node name="IhePahe\'e" parent="." unique_id=1971962749 groups=["scoring_objects"] instance=ExtResource("15_3v7ru")]

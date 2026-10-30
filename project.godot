@@ -38,6 +38,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 Player=""
 Spear=""
+scoring_objects=""
 
 [input]
 

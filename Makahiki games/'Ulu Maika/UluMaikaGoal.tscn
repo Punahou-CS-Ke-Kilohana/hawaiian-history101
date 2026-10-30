@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dbugiu54xkv2o"]
+
+[ext_resource type="Script" uid="uid://cmwyexv4egd8g" path="res://Makahiki games/'Ulu Maika/UlumaikaGame.gd" id="1_gc64d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3pots"]
+size = Vector3(1, 4.69, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5pks6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pots"]
+size = Vector3(1, 4.8, 4.085)
+
+[node name="Goal" type="Node3D" unique_id=478190838]
+script = ExtResource("1_gc64d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=414458298]
+mesh = SubResource("BoxMesh_3pots")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=1028551155]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1956269408]
+shape = SubResource("BoxShape3D_5pks6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=792986735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8352454)
+mesh = SubResource("BoxMesh_3pots")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D/MeshInstance3D" unique_id=1995495938]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/MeshInstance3D/StaticBody3D" unique_id=1820692606]
+shape = SubResource("BoxShape3D_5pks6")
+
+[node name="Middle" type="Area3D" parent="." unique_id=1945406863]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Middle" unique_id=123436540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9281561)
+shape = SubResource("BoxShape3D_3pots")
+
+[connection signal="body_entered" from="Middle" to="." method="_on_middle_body_entered"]

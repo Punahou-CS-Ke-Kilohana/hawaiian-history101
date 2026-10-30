@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://bqbreyu6keo0p"]
-
-[ext_resource type="PackedScene" uid="uid://cdf1ucrvb6nbf" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/usable/source/Tree 1 and 2.tscn" id="1_fxm1n"]
-
-[node name="Tree 1 and 2" unique_id=456143631 instance=ExtResource("1_fxm1n")]

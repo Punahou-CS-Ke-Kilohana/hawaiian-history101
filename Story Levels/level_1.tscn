@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_w0ckv"]
 [ext_resource type="Material" uid="uid://btm6ptrnke1xj" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/water_shader.tres" id="2_f5lsm"]
 [ext_resource type="PackedScene" uid="uid://q5y2pgj3kg3a" path="res://Story Levels/Islands/o'ahu.tscn" id="4_7lj2j"]
-[ext_resource type="Script" uid="uid://l25kq3dkjb3c" path="res://directionarrow.gd" id="6_hiukg"]
 [ext_resource type="Script" uid="uid://cm8270rmbrj3l" path="res://EnterAreaDialogue.gd" id="7_pl3mh"]
 [ext_resource type="Resource" uid="uid://dkhwjj0mh045a" path="res://Dialogue/Balloons/ChantArea.dialogue" id="8_hiukg"]
 [ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="9_806wk"]
@@ -13,8 +12,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v1jij"]
 size = Vector3(2.815, 1, 1)
-
-[sub_resource type="PrismMesh" id="PrismMesh_ksg7w"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wap5w"]
 subdivide_width = 30
@@ -64,16 +61,6 @@ shape = SubResource("BoxShape3D_v1jij")
 
 [node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_w0ckv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -298.3507, 11.848258, 35.652378)
-
-[node name="DirectionArrow" type="Node3D" parent="ProtoController" unique_id=1137070520 node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-script = ExtResource("6_hiukg")
-target = NodePath("../../Environment/Water")
-arrow_height = 2.5
-
-[node name="ArrowMesh" type="MeshInstance3D" parent="ProtoController/DirectionArrow" unique_id=189744565]
-transform = Transform3D(0.71, 0, 0, 0, 8.466665e-09, 0.095, 0, -0.71, 1.1328637e-09, 0, -0.063, -1.255)
-mesh = SubResource("PrismMesh_ksg7w")
 
 [node name="Environment" type="Node3D" parent="." unique_id=1656217452]
 

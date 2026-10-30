@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chquirbgda2wt"
-path="res://.godot/imported/my_PalmLeaf_final_SPEC.png-69e2b8ee739f8eecfa02b4ac1416ae4e.ctex"
+uid="uid://bg6pwm85xva2a"
+path="res://.godot/imported/JungleTrunk.jpg-dbcccf202c25d792dc4d5d6775a1d6ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/Palms/my_PalmLeaf_final_SPEC.png"
-dest_files=["res://.godot/imported/my_PalmLeaf_final_SPEC.png-69e2b8ee739f8eecfa02b4ac1416ae4e.ctex"]
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/unusable/CiabaTree_01/JungleTrunk.jpg"
+dest_files=["res://.godot/imported/JungleTrunk.jpg-dbcccf202c25d792dc4d5d6775a1d6ea.ctex"]
 
 [params]
 

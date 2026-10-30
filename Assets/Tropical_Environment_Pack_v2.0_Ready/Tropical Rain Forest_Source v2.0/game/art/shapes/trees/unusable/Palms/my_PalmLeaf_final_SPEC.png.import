@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkxvcpbnuuhdm"
-path="res://.godot/imported/FishtailFrond.png-519cc29e5762d456ed84c5755f5add77.ctex"
+uid="uid://chquirbgda2wt"
+path="res://.godot/imported/my_PalmLeaf_final_SPEC.png-5f68e1017b81bd74900fc05dd48fef83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/CopalTree/FishtailFrond.png"
-dest_files=["res://.godot/imported/FishtailFrond.png-519cc29e5762d456ed84c5755f5add77.ctex"]
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/unusable/Palms/my_PalmLeaf_final_SPEC.png"
+dest_files=["res://.godot/imported/my_PalmLeaf_final_SPEC.png-5f68e1017b81bd74900fc05dd48fef83.ctex"]
 
 [params]
 

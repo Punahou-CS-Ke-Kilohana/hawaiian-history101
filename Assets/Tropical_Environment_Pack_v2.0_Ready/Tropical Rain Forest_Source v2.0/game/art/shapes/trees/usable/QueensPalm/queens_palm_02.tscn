@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://drff7ossnwcbw"]
+
+[ext_resource type="PackedScene" uid="uid://bpri0t7ysr4oe" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/usable/QueensPalm/QueensPalm02.tscn" id="1_b0oew"]
+
+[node name="QueensPalm02" unique_id=879823116 instance=ExtResource("1_b0oew")]
+
+[node name="QueenPalm128" parent="base01/start01" parent_id_path=PackedInt32Array(467178134) index="1" unique_id=198972820]
+visible = false
+
+[node name="Collision" parent="base01/start01" parent_id_path=PackedInt32Array(467178134) index="2" unique_id=676111244]
+mesh = null

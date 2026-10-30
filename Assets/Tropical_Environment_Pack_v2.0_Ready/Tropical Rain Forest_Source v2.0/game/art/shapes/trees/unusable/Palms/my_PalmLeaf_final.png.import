@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daj7jl03mwcx1"
-path="res://.godot/imported/largeFiscus.png-687a99c211b0c8b129d1d7f1685fa5cb.ctex"
+uid="uid://kmobs26mv5d0"
+path="res://.godot/imported/my_PalmLeaf_final.png-e1d97204c2edaa494edf5777e5f2186d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/CiabaTree_01/largeFiscus.png"
-dest_files=["res://.godot/imported/largeFiscus.png-687a99c211b0c8b129d1d7f1685fa5cb.ctex"]
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/unusable/Palms/my_PalmLeaf_final.png"
+dest_files=["res://.godot/imported/my_PalmLeaf_final.png-e1d97204c2edaa494edf5777e5f2186d.ctex"]
 
 [params]
 

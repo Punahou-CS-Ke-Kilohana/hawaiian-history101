@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b3me1apbr2ndb"
-path="res://.godot/imported/QueensPalm01.DAE-18cb6a9b798880efa969b5983e74c0a5.scn"
+uid="uid://bpri0t7ysr4oe"
+path="res://.godot/imported/QueensPalm02.DAE-8572afece55a6c6d881e77ee172db890.scn"
 
 [deps]
 
-source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/QueensPalm/QueensPalm01.DAE"
-dest_files=["res://.godot/imported/QueensPalm01.DAE-18cb6a9b798880efa969b5983e74c0a5.scn"]
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/QueensPalm/QueensPalm02.DAE"
+dest_files=["res://.godot/imported/QueensPalm02.DAE-8572afece55a6c6d881e77ee172db890.scn"]
 
 [params]
 

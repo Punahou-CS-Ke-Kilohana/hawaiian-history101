@@ -635,6 +635,143 @@ var inland_minimum_clearance: float = 0.5:
 		inland_minimum_clearance = max(value, 0.0)
 		_request_generate()
 
+
+
+# =====================================================================
+# VEGETATION & DECORATIONS
+# =====================================================================
+
+@export_category("Vegetation & Decorations")
+
+## Master switch for all procedural decorations.
+@export var decorations_enabled: bool = true:
+	set(value):
+		decorations_enabled = value
+		_request_generate()
+
+
+## Each array accepts multiple PackedScene resources.
+## The generator randomly selects a scene from the relevant array.
+
+@export_group("Beach Objects")
+@export var beach_tree_scenes: Array[PackedScene] = []
+@export var beach_rock_scenes: Array[PackedScene] = []
+@export var beach_grass_scenes: Array[PackedScene] = []
+
+@export_group("Dirt / Lowland Objects")
+@export var dirt_tree_scenes: Array[PackedScene] = []
+@export var dirt_rock_scenes: Array[PackedScene] = []
+@export var dirt_grass_scenes: Array[PackedScene] = []
+
+@export_group("Grassland Objects")
+@export var grassland_tree_scenes: Array[PackedScene] = []
+@export var grassland_rock_scenes: Array[PackedScene] = []
+@export var grassland_grass_scenes: Array[PackedScene] = []
+
+@export_group("Mountain Objects")
+@export var mountain_tree_scenes: Array[PackedScene] = []
+@export var mountain_rock_scenes: Array[PackedScene] = []
+@export var mountain_grass_scenes: Array[PackedScene] = []
+
+@export_group("Summit Objects")
+@export var summit_tree_scenes: Array[PackedScene] = []
+@export var summit_rock_scenes: Array[PackedScene] = []
+@export var summit_grass_scenes: Array[PackedScene] = []
+
+
+# ---------------------------------------------------------------------
+# DENSITY
+#
+# Approximate number of objects per 1,000 square world units
+# of the island's estimated surface footprint.
+# ---------------------------------------------------------------------
+
+@export_group("Beach Density")
+@export_range(0.0, 2.0, 0.1)
+var beach_tree_density: float = 0.5
+@export_range(0.0, 2.0, 0.1)
+var beach_rock_density: float = 5.0
+@export_range(0.0, 2.0, 0.1)
+var beach_grass_density: float = 2.0
+
+@export_group("Dirt / Lowland Density")
+@export_range(0.0, 2.0, 0.1)
+var dirt_tree_density: float = 1.5
+@export_range(0.0, 2.0, 0.1)
+var dirt_rock_density: float = 2.0
+@export_range(0.0, 2.0, 0.1)
+var dirt_grass_density: float = 4.0
+
+@export_group("Grassland Density")
+@export_range(0.0, 2.0, 0.1)
+var grassland_tree_density: float = 4.0
+@export_range(0.0, 2.0, 0.1)
+var grassland_rock_density: float = 1.5
+@export_range(0.0, 2.0, 0.1)
+var grassland_grass_density: float = 8.0
+
+@export_group("Mountain Density")
+@export_range(0.0, 2.0, 0.1)
+var mountain_tree_density: float = 1.0
+@export_range(0.0, 2.0, 0.1)
+var mountain_rock_density: float = 6.0
+@export_range(0.0, 2.0, 0.1)
+var mountain_grass_density: float = 2.0
+
+@export_group("Summit Density")
+@export_range(0.0, 2.0, 0.1)
+var summit_tree_density: float = 0.0
+@export_range(0.0, 2.0, 0.1)
+var summit_rock_density: float = 4.0
+@export_range(0.0, 2.0, 0.1)
+var summit_grass_density: float = 0.5
+
+
+# ---------------------------------------------------------------------
+# PLACEMENT RULES
+# ---------------------------------------------------------------------
+
+@export_group("Decoration Placement")
+
+## Randomly rotate objects around the vertical axis.
+@export var randomize_decoration_rotation: bool = true
+
+## Random scale range applied to each instance.
+@export_range(0.1, 3.0, 0.05)
+var decoration_min_scale: float = 0.8
+
+@export_range(0.1, 3.0, 0.05)
+var decoration_max_scale: float = 1.2
+
+## Maximum surface steepness accepted for trees and grass.
+## 0 = horizontal surface only; 1 = any slope.
+@export_range(0.0, 1.0, 0.05)
+var tree_max_slope: float = 0.45
+
+@export_range(0.0, 1.0, 0.05)
+var grass_max_slope: float = 0.75
+
+@export_range(0.0, 1.0, 0.05)
+var rock_max_slope: float = 0.95
+
+## Number of random placement attempts allowed per desired instance.
+## Higher values help fill small or difficult zones.
+@export_range(1, 100, 1)
+var decoration_attempts_per_instance: int = 20
+
+## Optional minimum spacing between decoration origins.
+## Set to 0 to disable spacing.
+@export_range(0.0, 30.0, 0.5)
+var decoration_min_spacing: float = 2.0
+
+## Align objects to the terrain normal.
+## Usually leave disabled for trees and upright grass.
+@export var align_decorations_to_surface: bool = false
+
+## Vertical offset above the sampled terrain height.
+@export var decoration_height_offset: float = 0.0
+
+
 # =====================================================================
 # SHORELINE / FOAM
 # =====================================================================
@@ -836,6 +973,12 @@ var generate_queued: bool = false
 var generating: bool = false
 
 
+var decorations_root: Node3D
+var decoration_rng: RandomNumberGenerator
+var decoration_positions: Array[Vector3] = []
+
+
+
 # =====================================================================
 # READY
 # =====================================================================
@@ -930,6 +1073,8 @@ func generate() -> void:
 	_generate_chunks()
 
 	_generate_collision()
+	
+	_generate_decorations()
 
 	_update_chunk_lods()
 
@@ -2722,6 +2867,386 @@ func _update_material_parameters() -> void:
 			"rock_texture",
 			rock_texture
 		)
+
+
+
+
+# =====================================================================
+# DECORATION GENERATION
+# =====================================================================
+
+enum DecorationZone {
+	BEACH,
+	DIRT,
+	GRASSLAND,
+	MOUNTAIN,
+	SUMMIT
+}
+
+
+func _clear_decorations() -> void:
+	if decorations_root != null and is_instance_valid(decorations_root):
+		decorations_root.queue_free()
+
+	decorations_root = null
+	decoration_positions.clear()
+
+
+func _generate_decorations() -> void:
+	_clear_decorations()
+
+	if not decorations_enabled:
+		return
+
+	if heights.is_empty() or height_normals.is_empty():
+		return
+
+	decoration_rng = RandomNumberGenerator.new()
+	decoration_rng.seed = seed + 9000
+
+	decorations_root = Node3D.new()
+	decorations_root.name = "Decorations"
+	add_child(decorations_root)
+
+	if Engine.is_editor_hint():
+		decorations_root.owner = get_tree().edited_scene_root
+
+	var zone_names := [
+		"Beach",
+		"Dirt",
+		"Grassland",
+		"Mountains",
+		"Summits"
+	]
+
+	for zone_name in zone_names:
+		var zone_root := Node3D.new()
+		zone_root.name = zone_name
+		decorations_root.add_child(zone_root)
+
+		if Engine.is_editor_hint():
+			zone_root.owner = get_tree().edited_scene_root
+
+	# Each entry: zone, scenes, density, maximum slope.
+	var groups: Array[Dictionary] = [
+		{"zone": DecorationZone.BEACH, "scenes": beach_tree_scenes,
+			"density": beach_tree_density, "slope": tree_max_slope},
+		{"zone": DecorationZone.BEACH, "scenes": beach_rock_scenes,
+			"density": beach_rock_density, "slope": rock_max_slope},
+		{"zone": DecorationZone.BEACH, "scenes": beach_grass_scenes,
+			"density": beach_grass_density, "slope": grass_max_slope},
+
+		{"zone": DecorationZone.DIRT, "scenes": dirt_tree_scenes,
+			"density": dirt_tree_density, "slope": tree_max_slope},
+		{"zone": DecorationZone.DIRT, "scenes": dirt_rock_scenes,
+			"density": dirt_rock_density, "slope": rock_max_slope},
+		{"zone": DecorationZone.DIRT, "scenes": dirt_grass_scenes,
+			"density": dirt_grass_density, "slope": grass_max_slope},
+
+		{"zone": DecorationZone.GRASSLAND, "scenes": grassland_tree_scenes,
+			"density": grassland_tree_density, "slope": tree_max_slope},
+		{"zone": DecorationZone.GRASSLAND, "scenes": grassland_rock_scenes,
+			"density": grassland_rock_density, "slope": rock_max_slope},
+		{"zone": DecorationZone.GRASSLAND, "scenes": grassland_grass_scenes,
+			"density": grassland_grass_density, "slope": grass_max_slope},
+
+		{"zone": DecorationZone.MOUNTAIN, "scenes": mountain_tree_scenes,
+			"density": mountain_tree_density, "slope": tree_max_slope},
+		{"zone": DecorationZone.MOUNTAIN, "scenes": mountain_rock_scenes,
+			"density": mountain_rock_density, "slope": rock_max_slope},
+		{"zone": DecorationZone.MOUNTAIN, "scenes": mountain_grass_scenes,
+			"density": mountain_grass_density, "slope": grass_max_slope},
+
+		{"zone": DecorationZone.SUMMIT, "scenes": summit_tree_scenes,
+			"density": summit_tree_density, "slope": tree_max_slope},
+		{"zone": DecorationZone.SUMMIT, "scenes": summit_rock_scenes,
+			"density": summit_rock_density, "slope": rock_max_slope},
+		{"zone": DecorationZone.SUMMIT, "scenes": summit_grass_scenes,
+			"density": summit_grass_density, "slope": grass_max_slope}
+	]
+
+	for group in groups:
+		var scenes: Array = group["scenes"]
+
+		if scenes.is_empty():
+			continue
+
+		var density: float = group["density"]
+		if density <= 0.0:
+			continue
+
+		var zone: int = group["zone"]
+		var slope_limit: float = group["slope"]
+
+		var parent := decorations_root.get_node(
+			zone_names[zone]
+		) as Node3D
+
+		_scatter_decoration_group(
+			parent,
+			scenes,
+			density,
+			zone,
+			slope_limit
+		)
+
+
+# =====================================================================
+# SCATTER A GROUP
+# =====================================================================
+
+func _scatter_decoration_group(
+	parent: Node3D,
+	scenes: Array,
+	density: float,
+	zone: int,
+	slope_limit: float
+) -> void:
+	var half_x: float = world_size * 0.5 * island_width
+	var half_z: float = world_size * 0.5 * island_length
+
+	# Approximate elliptical island footprint.
+	var estimated_area: float = PI * half_x * half_z
+
+	var target_count: int = int(round(
+		estimated_area * density / 1000.0
+	))
+
+	if target_count <= 0:
+		return
+
+	var attempts: int = target_count * decoration_attempts_per_instance
+	var placed: int = 0
+
+	for attempt in range(attempts):
+		if placed >= target_count:
+			break
+
+		var x: float = decoration_rng.randf_range(-half_x, half_x)
+		var z: float = decoration_rng.randf_range(-half_z, half_z)
+
+		var surface: Dictionary = _sample_decoration_surface(x, z)
+
+		if surface.is_empty():
+			continue
+
+		var height: float = surface["height"]
+		var normal: Vector3 = surface["normal"]
+
+		if _get_decoration_zone(x, z, height, normal) != zone:
+			continue
+
+		var slope: float = 1.0 - normal.y
+		if slope > slope_limit:
+			continue
+
+		var position := Vector3(x, height, z)
+
+		if not _has_decoration_spacing(position):
+			continue
+
+		var scene: PackedScene = scenes[
+			decoration_rng.randi_range(0, scenes.size() - 1)
+		]
+
+		if scene == null:
+			continue
+
+		var instance := scene.instantiate()
+
+		if not instance is Node3D:
+			push_warning(
+				"Decoration scene root must inherit Node3D: "
+				+ scene.resource_path
+			)
+			instance.free()
+			continue
+
+		var object := instance as Node3D
+		parent.add_child(object)
+
+		if Engine.is_editor_hint():
+			object.owner = get_tree().edited_scene_root
+
+		object.position = Vector3(
+			x,
+			height + decoration_height_offset,
+			z
+		)
+
+		if randomize_decoration_rotation:
+			object.rotation.y = decoration_rng.randf_range(
+				0.0, TAU
+			)
+
+		var scale_value: float = decoration_rng.randf_range(
+			min(decoration_min_scale, decoration_max_scale),
+			max(decoration_min_scale, decoration_max_scale)
+		)
+
+		object.scale = Vector3.ONE * scale_value
+
+		if align_decorations_to_surface:
+			_align_decoration_to_normal(object, normal)
+
+		decoration_positions.append(position)
+		placed += 1
+
+	if placed < target_count:
+		print(
+			"Decoration placement: placed ",
+			placed, " of ", target_count,
+			" objects for zone ", zone,
+			". Try reducing density or minimum spacing."
+		)
+
+
+# =====================================================================
+# SAMPLE THE EXISTING HEIGHTMAP
+# =====================================================================
+
+
+func _sample_decoration_surface(
+	world_x: float,
+	world_z: float
+) -> Dictionary:
+	var half_x: float = world_size * 0.5 * island_width
+	var half_z: float = world_size * 0.5 * island_length
+
+	if abs(world_x) >= half_x or abs(world_z) >= half_z:
+		return {}
+
+	var normalized_x: float = (
+		world_x / world_size + 0.5
+	) * float(resolution - 1)
+
+	var normalized_z: float = (
+		world_z / world_size + 0.5
+	) * float(resolution - 1)
+
+	var ix: int = clampi(
+		int(round(normalized_x)), 0, resolution - 1
+	)
+	var iz: int = clampi(
+		int(round(normalized_z)), 0, resolution - 1
+	)
+
+	var index: int = iz * resolution + ix
+	var height: float = heights[index]
+	var normal: Vector3 = height_normals[index]
+
+	if height <= water_level:
+		return {}
+
+	var normalized_distance := Vector2(
+		world_x / half_x,
+		world_z / half_z
+	).length()
+
+	var coast_radius: float = _get_coast_radius(
+		world_x, world_z
+	)
+
+	if normalized_distance >= coast_radius:
+		return {}
+
+	return {
+		"height": height,
+		"normal": normal
+	}
+
+
+# =====================================================================
+# CLASSIFY TERRAIN INTO DECORATION ZONES
+# =====================================================================
+
+func _get_decoration_zone(
+	world_x: float,
+	world_z: float,
+	height: float,
+	normal: Vector3
+) -> int:
+	var half_x: float = world_size * 0.5 * island_width
+	var half_z: float = world_size * 0.5 * island_length
+
+	var distance: float = Vector2(
+		world_x / half_x,
+		world_z / half_z
+	).length()
+
+	var coast_radius: float = _get_coast_radius(world_x, world_z)
+	var distance_scale: float = min(half_x, half_z)
+
+	var beach_inner_radius: float = max(
+		coast_radius - beach_area_width / distance_scale,
+		0.0
+	)
+
+	# Beach classification uses the same approximate radial
+	# boundary as the terrain's beach profile.
+	if distance >= beach_inner_radius:
+		return DecorationZone.BEACH
+
+	if height >= summit_rock_height:
+		return DecorationZone.SUMMIT
+
+	# Steep slopes are treated as mountain terrain even at lower
+	# elevations, which allows rocks along cliffs and ridges.
+	var slope: float = 1.0 - normal.y
+
+	if height >= rock_height or slope >= rock_slope_threshold:
+		return DecorationZone.MOUNTAIN
+
+	if height < dirt_height:
+		return DecorationZone.DIRT
+
+	return DecorationZone.GRASSLAND
+
+
+# =====================================================================
+# MINIMUM SPACING
+# =====================================================================
+
+func _has_decoration_spacing(position: Vector3) -> bool:
+	if decoration_min_spacing <= 0.0:
+		return true
+
+	var minimum_distance_squared: float = (
+		decoration_min_spacing * decoration_min_spacing
+	)
+
+	for existing in decoration_positions:
+		if Vector2(
+			position.x - existing.x,
+			position.z - existing.z
+		).length_squared() < minimum_distance_squared:
+			return false
+
+	return true
+
+
+# =====================================================================
+# OPTIONAL SURFACE ALIGNMENT
+# =====================================================================
+
+func _align_decoration_to_normal(
+	object: Node3D,
+	normal: Vector3
+) -> void:
+	var up: Vector3 = normal.normalized()
+	var forward: Vector3 = Vector3.FORWARD
+
+	if abs(up.dot(forward)) > 0.98:
+		forward = Vector3.RIGHT
+
+	var right: Vector3 = forward.cross(up).normalized()
+	var corrected_forward: Vector3 = up.cross(right).normalized()
+
+	object.basis = Basis(
+		right,
+		up,
+		corrected_forward
+	).orthonormalized()
 
 
 # =====================================================================

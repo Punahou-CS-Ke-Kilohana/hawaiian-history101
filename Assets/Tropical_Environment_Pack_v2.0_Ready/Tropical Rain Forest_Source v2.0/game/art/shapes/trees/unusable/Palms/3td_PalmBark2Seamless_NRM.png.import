@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cew8ewu1d2a2p"
-path="res://.godot/imported/3td_PalmBark2Seamless_NRM.png-e5e1ecf03eadac53e8d1cd818e4578e7.ctex"
+path="res://.godot/imported/3td_PalmBark2Seamless_NRM.png-7bb5fdc97bf0e62546e07b016c585c2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/Palms/3td_PalmBark2Seamless_NRM.png"
-dest_files=["res://.godot/imported/3td_PalmBark2Seamless_NRM.png-e5e1ecf03eadac53e8d1cd818e4578e7.ctex"]
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/unusable/Palms/3td_PalmBark2Seamless_NRM.png"
+dest_files=["res://.godot/imported/3td_PalmBark2Seamless_NRM.png-7bb5fdc97bf0e62546e07b016c585c2a.ctex"]
 
 [params]
 

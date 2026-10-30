@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l5x1wkex7v1p"
-path="res://.godot/imported/3td_Palm05_Old.png-d690116227d983bf15045dea976c8434.ctex"
+uid="uid://b3spy3xl1reoo"
+path="res://.godot/imported/Palm05_SPEC.png-80e78abae19bc3abe99a11c494bc3b01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/Palms/3td_Palm05_Old.png"
-dest_files=["res://.godot/imported/3td_Palm05_Old.png-d690116227d983bf15045dea976c8434.ctex"]
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/unusable/Palms/Palm05_SPEC.png"
+dest_files=["res://.godot/imported/Palm05_SPEC.png-80e78abae19bc3abe99a11c494bc3b01.ctex"]
 
 [params]
 

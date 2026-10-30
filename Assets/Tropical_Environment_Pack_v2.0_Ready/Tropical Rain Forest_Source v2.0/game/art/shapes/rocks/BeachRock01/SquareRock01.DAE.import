@@ -46,5 +46,21 @@ _subresources={
 "use_external/fallback_path": "res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/beach_rock.tres",
 "use_external/path": "uid://c34x77s4nu1rd"
 }
+},
+"meshes": {
+"Collision": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/collision.tres",
+"save_to_file/path": "uid://bu4pq183unn4r"
+}
+},
+"nodes": {
+"PATH:base01/start01/Collision": {
+"generate/physics": true
+}
 }
 }

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bbxudgmtd4f4d"]
+
+[ext_resource type="PackedScene" uid="uid://b6kue0pxx5lwd" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/SquareRock01.tscn" id="1_b8t6d"]
+[ext_resource type="ArrayMesh" uid="uid://c724m80p4b0qr" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/collision.tres" id="2_mmupm"]
+
+[node name="SquareRock01" unique_id=2123444732 instance=ExtResource("1_b8t6d")]
+
+[node name="SquareRock256" parent="base01/start01" parent_id_path=PackedInt32Array(479567322) index="1" unique_id=951077492]
+visible = false
+
+[node name="SquareRock128" parent="base01/start01" parent_id_path=PackedInt32Array(479567322) index="2" unique_id=2077460393]
+visible = false
+
+[node name="Collision" parent="base01/start01" parent_id_path=PackedInt32Array(479567322) index="3" unique_id=1631885880]
+mesh = ExtResource("2_mmupm")

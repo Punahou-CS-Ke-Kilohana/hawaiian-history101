@@ -21,7 +21,7 @@ uv1_scale = Vector3(64, 64, 64)
 script = ExtResource("1_7nt0o")
 
 [node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_xi3o7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.12927, 30.615898, 110.1232)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.95564, 30.615898, 221.58429)
 
 [node name="Environment" type="Node3D" parent="." unique_id=58842026]
 

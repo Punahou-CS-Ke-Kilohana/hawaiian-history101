@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://csp3nutp3yedr" path="res://Story Levels/level_2.tscn" id="4_kggi0"]
 [ext_resource type="Script" uid="uid://dc54m7yfjhv5y" path="res://Game Management/level_transition.gd" id="4_y0yg5"]
 [ext_resource type="PackedScene" uid="uid://beonqa1i13ax3" path="res://UI/OptionsMenu.tscn" id="5_ne1qx"]
-[ext_resource type="PackedScene" uid="uid://cubt32ki7h6bh" path="res://node_3d.tscn" id="5_sjkl1"]
 [ext_resource type="Texture2D" uid="uid://bmqgx5cvae1rv" path="res://Game Management/transition-map.png" id="6_kggi0"]
 
 [node name="StoryMode" type="Node3D" unique_id=215758469]
@@ -15,7 +14,7 @@ script = ExtResource("1_jumcm")
 
 [node name="LevelManager" type="Node3D" parent="." unique_id=601060984]
 script = ExtResource("2_ae65c")
-levels = Array[PackedScene]([ExtResource("5_sjkl1"), ExtResource("4_6kv1l"), ExtResource("4_6kv1l"), ExtResource("4_kggi0")])
+levels = Array[PackedScene]([ExtResource("4_6kv1l"), ExtResource("4_6kv1l"), ExtResource("4_6kv1l"), ExtResource("4_kggi0")])
 
 [node name="LevelTransition" type="Node3D" parent="." unique_id=599096126]
 script = ExtResource("4_y0yg5")

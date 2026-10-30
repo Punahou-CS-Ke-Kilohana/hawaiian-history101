@@ -703,7 +703,7 @@ var dirt_rock_density: float = 2.0
 var dirt_grass_density: float = 4.0
 
 @export_group("Grassland Density")
-@export_range(0.0, 2.0, 0.1)
+@export_range(0.0, 100.0, 0.1)
 var grassland_tree_density: float = 4.0
 @export_range(0.0, 2.0, 0.1)
 var grassland_rock_density: float = 1.5
@@ -732,6 +732,27 @@ var summit_grass_density: float = 0.5
 # ---------------------------------------------------------------------
 
 @export_group("Decoration Placement")
+
+
+## Lowers trees slightly into the terrain to prevent floating.
+@export var tree_height_offset: float = -0.35
+
+## Additional distance from the waterline where beach trees cannot spawn.
+@export_range(0.0, 30.0, 0.5)
+var beach_tree_shoreline_buffer: float = 5.0
+
+## Prevents beach trees from spawning at the lowest part of the beach.
+## Measured as a height above the water level.
+@export_range(0.0, 20.0, 0.5)
+var beach_tree_min_height: float = 3.0
+
+## How strongly placement prefers level ground.
+## Higher values make flatter locations more desirable.
+@export_range(0.0, 1.0, 0.05)
+var decoration_flat_ground_preference: float = 0.35
+
+## Additional vertical adjustment for non-tree objects.
+@export var other_object_height_offset: float = -0.15
 
 ## Randomly rotate objects around the vertical axis.
 @export var randomize_decoration_rotation: bool = true
@@ -2995,6 +3016,7 @@ func _generate_decorations() -> void:
 # SCATTER A GROUP
 # =====================================================================
 
+
 func _scatter_decoration_group(
 	parent: Node3D,
 	scenes: Array,
@@ -3037,12 +3059,62 @@ func _scatter_decoration_group(
 			continue
 
 		var slope: float = 1.0 - normal.y
+
 		if slope > slope_limit:
 			continue
 
-		var position := Vector3(x, height, z)
+		# Beach trees must be sufficiently far above the waterline.
+		if zone == DecorationZone.BEACH:
+			if height < water_level + beach_tree_min_height:
+				continue
 
-		if not _has_decoration_spacing(position):
+			var beach_tree_clearance: float = (
+				beach_area_width *
+				beach_tree_shoreline_buffer /
+				max(beach_area_width, 0.001)
+			)
+
+			var coast_radius: float = _get_coast_radius(x, z)
+
+			var half_island_x: float = world_size * 0.5 * island_width
+			var half_island_z: float = world_size * 0.5 * island_length
+
+			var distance: float = Vector2(
+				x / half_island_x,
+				z / half_island_z
+			).length()
+
+			var distance_to_coast: float = (
+				coast_radius - distance
+			) * min(half_island_x, half_island_z)
+
+			if distance_to_coast < beach_tree_shoreline_buffer:
+				continue
+
+		# ---------------------------------------------------------
+		# PREFER LEVEL GROUND
+		# ---------------------------------------------------------
+
+		# Reject some sloped positions randomly, rather than only
+		# relying on the maximum slope limit.
+		var flatness: float = clamp(
+			normal.y,
+			0.0,
+			1.0
+		)
+
+		var flatness_chance: float = lerp(
+			1.0 - decoration_flat_ground_preference,
+			1.0,
+			flatness
+		)
+
+		if decoration_rng.randf() > flatness_chance:
+			continue
+
+		var _position := Vector3(x, height, z)
+
+		if not _has_decoration_spacing(_position):
 			continue
 
 		var scene: PackedScene = scenes[
@@ -3068,9 +3140,18 @@ func _scatter_decoration_group(
 		if Engine.is_editor_hint():
 			object.owner = get_tree().edited_scene_root
 
+		# ---------------------------------------------------------
+		# OBJECT HEIGHT
+		# ---------------------------------------------------------
+
+		var object_offset: float = other_object_height_offset
+
+		if "Tree" in scene.resource_path or zone == DecorationZone.BEACH:
+			object_offset = tree_height_offset
+
 		object.position = Vector3(
 			x,
-			height + decoration_height_offset,
+			height + decoration_height_offset + object_offset,
 			z
 		)
 
@@ -3089,7 +3170,7 @@ func _scatter_decoration_group(
 		if align_decorations_to_surface:
 			_align_decoration_to_normal(object, normal)
 
-		decoration_positions.append(position)
+		decoration_positions.append(_position)
 		placed += 1
 
 	if placed < target_count:
@@ -3125,15 +3206,47 @@ func _sample_decoration_surface(
 	) * float(resolution - 1)
 
 	var ix: int = clampi(
-		int(round(normalized_x)), 0, resolution - 1
-	)
-	var iz: int = clampi(
-		int(round(normalized_z)), 0, resolution - 1
+		int(floor(normalized_x)), 0, resolution - 2
 	)
 
-	var index: int = iz * resolution + ix
-	var height: float = heights[index]
-	var normal: Vector3 = height_normals[index]
+	var iz: int = clampi(
+		int(floor(normalized_z)), 0, resolution - 2
+	)
+
+	var tx: float = clamp(
+		normalized_x - float(ix), 0.0, 1.0
+	)
+
+	var tz: float = clamp(
+		normalized_z - float(iz), 0.0, 1.0
+	)
+
+	var h00: float = heights[iz * resolution + ix]
+	var h10: float = heights[iz * resolution + ix + 1]
+	var h01: float = heights[(iz + 1) * resolution + ix]
+	var h11: float = heights[(iz + 1) * resolution + ix + 1]
+
+	var height: float = lerp(
+		lerp(h00, h10, tx),
+		lerp(h01, h11, tx),
+		tz
+	)
+
+	var normal: Vector3 = (
+		height_normals[iz * resolution + ix]
+		.lerp(
+			height_normals[iz * resolution + ix + 1],
+			tx
+		)
+		.lerp(
+			height_normals[(iz + 1) * resolution + ix]
+			.lerp(
+				height_normals[(iz + 1) * resolution + ix + 1],
+				tx
+			),
+			tz
+		)
+	).normalized()
 
 	if height <= water_level:
 		return {}

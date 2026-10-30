@@ -1,8 +1,8 @@
-[gd_resource type="ArrayMesh" format=4 uid="uid://c724m80p4b0qr"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://bu4pq183unn4r"]
 
 [ext_resource type="Material" uid="uid://c34x77s4nu1rd" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/beach_rock.tres" id="1_4ay0b"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_7cj86"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_4ay0b"]
 _surfaces = [{
 "aabb": AABB(-24.05292, 0.5860204, 13.44912, 20.875166, 21.57864, 19.285229),
 "format": 34896613377,
@@ -34,4 +34,4 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_7cj86")
+shadow_mesh = SubResource("ArrayMesh_4ay0b")

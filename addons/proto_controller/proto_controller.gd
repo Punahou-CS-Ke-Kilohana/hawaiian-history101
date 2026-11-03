@@ -50,7 +50,7 @@ var inventory: Array[Item] = []
 @export var max_charge_time: float = 2.0
 
 @export var min_roll_force: float = 10.0
-@export var max_roll_force: float = 90.0
+@export var max_roll_force: float = 110.0
 
 var throw_charge_time: float = 0.0
 var is_charging_throw: bool = false

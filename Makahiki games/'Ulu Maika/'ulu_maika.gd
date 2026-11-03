@@ -12,8 +12,8 @@ func roll(direction: Vector3, force: float) -> void:
 
 	var player = get_tree().get_first_node_in_group("Player")
 
-	if player:
-		add_collision_exception_with(player)
+	#if player:
+		#add_collision_exception_with(player)
 
 	direction.y = 0.0
 	direction = direction.normalized()
@@ -21,7 +21,6 @@ func roll(direction: Vector3, force: float) -> void:
 
 	var roll_axis := Vector3.UP.cross(direction).normalized()
 	angular_velocity = roll_axis * spin_speed
-
 
 func on_picked_up() -> void:
 	has_been_rolled = false

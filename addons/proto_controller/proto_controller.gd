@@ -411,15 +411,12 @@ func slide_equipped_item() -> void:
 		is_charging_roll = false
 		roll_charge_time = 0.0
 		return
-	
-	var camera := get_viewport().get_camera_3d()
 
-	if camera != null:
-		slide_direction = -camera.global_transform.basis.z
-		slide_direction.y = 0.0
-		slide_direction = slide_direction.normalized()
-	
 	if not equipped_item.has_method("slide"):
+		return
+
+	var camera := get_viewport().get_camera_3d()
+	if camera == null:
 		return
 
 	var charge_ratio := clampf(

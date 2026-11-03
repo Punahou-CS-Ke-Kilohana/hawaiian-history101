@@ -111,7 +111,6 @@ func _on_body_entered(body: Node3D) -> void:
 
 	# Backup: stop on a world surface if the tip missed it.
 	if body is StaticBody3D or body is AnimatableBody3D:
-		print("MAIN BODY HIT WORLD: ", body.name)
 
 		supporting_body = body
 		supporting_spear = null
@@ -131,7 +130,6 @@ func _on_pickuparea_body_exited(body: Node3D) -> void:
 
 
 func _on_tip_body_entered(body: Node3D) -> void:
-	print("TIP HIT: ", body.name)
 	# Ignore the player.
 	if body == self or body.is_in_group("Player"):
 		return
@@ -156,7 +154,6 @@ func _on_tip_body_entered(body: Node3D) -> void:
 
 	# Stick to world surfaces.
 	elif body is StaticBody3D or body is AnimatableBody3D:
-		print("YO")
 		supporting_body = body
 		supporting_spear = null
 		resting_on_world = true

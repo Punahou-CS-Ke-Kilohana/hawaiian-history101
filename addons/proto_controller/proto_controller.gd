@@ -322,10 +322,8 @@ func _input(event: InputEvent) -> void:
 				roll_equipped_item()
 
 func equip_item(item: Item) -> void:
-	print("A. equip_item started")
 
 	if item_hold_point == null:
-		print("ERROR: item_hold_point is NULL!")
 		return
 	if not inventory.has(item):
 		inventory.append(item)
@@ -341,13 +339,11 @@ func add_nearby_item(item: Item) -> void:
 
 func pickup_item() -> void:
 	if equipped_item != null and is_instance_valid(equipped_item):
-		print("Already holding a spear!")
 		return
 
 	nearby_items = nearby_items.filter(func(item): return is_instance_valid(item))
 
 	if nearby_items.is_empty():
-		print("No nearby items!")
 		return
 
 	var item: Item = nearby_items[0]

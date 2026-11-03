@@ -1,6 +1,9 @@
 extends Item
 class_name pahehe
 
+@export_group("slide")
+@export var  spear_slide_speed_multiplier: int = 3
+
 func slide(direction: Vector3, force: float) -> void:
 	prepare_to_throw()
 

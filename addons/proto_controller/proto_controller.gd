@@ -49,14 +49,30 @@ var inventory: Array[Item] = []
 @export var max_throw_force: float = 30.0
 @export var max_charge_time: float = 2.0
 
-@export var min_roll_force: float = 10.0
-@export var max_roll_force: float = 110.0
-
 var throw_charge_time: float = 0.0
 var is_charging_throw: bool = false
 
+@export_group("roll")
+@export var min_roll_force: float = 10.0
+@export var max_roll_force: float = 110.0
 var roll_charge_time: float = 0.0
 var is_charging_roll: bool = false
+
+@export_group("slide")
+@export var min_slide_force: float = 10.0
+@export var max_slide_force: float = 110.0
+@export var can_slide: bool = true
+var slide_charge_time: float = 0.0
+@export var slide_speed: float = 180.0
+@export var slide_duration: float = 4.7
+@export var slide_cooldown: float = 1.5
+@export var slide_friction: float = 4.0
+
+var is_sliding: bool = false
+var slide_timer: float = 0.0
+var slide_cooldown_timer: float = 0.0
+var slide_direction: Vector3 = Vector3.ZERO
+
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
@@ -394,22 +410,10 @@ func roll_equipped_item() -> void:
 	is_charging_roll = false
 	roll_charge_time = 0.0
 	
-@export_group("Slide")
-@export var can_slide: bool = true
-@export var slide_speed: float = 40.0
-@export var slide_duration: float = 4.7
-@export var slide_cooldown: float = 1.5
-@export var slide_friction: float = 20.0
-
-var is_sliding: bool = false
-var slide_timer: float = 0.0
-var slide_cooldown_timer: float = 0.0
-var slide_direction: Vector3 = Vector3.ZERO
-
 func slide_equipped_item() -> void:
 	if is_in_dialogue or equipped_item == null:
 		is_charging_roll = false
-		roll_charge_time = 0.0
+		slide_charge_time = 0.0
 		return
 
 	if not equipped_item.has_method("slide"):
@@ -420,10 +424,10 @@ func slide_equipped_item() -> void:
 		return
 
 	var charge_ratio := clampf(
-		roll_charge_time / max_charge_time, 0.0, 1.0
+		slide_charge_time / max_charge_time, 0.0, 1.0
 	)
 
-	var force := lerpf(min_roll_force, max_roll_force, charge_ratio)
+	var force := lerpf(min_slide_force, max_slide_force, charge_ratio)
 
 	var direction := -camera.global_transform.basis.z
 	direction.y = 0.0
@@ -433,7 +437,7 @@ func slide_equipped_item() -> void:
 
 	equipped_item = null
 	is_charging_roll = false
-	roll_charge_time = 0.0
+	slide_charge_time = 0.0
 func start_slide() -> void:
 	if not can_slide or is_sliding:
 		return

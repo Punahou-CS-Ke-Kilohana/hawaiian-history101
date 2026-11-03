@@ -5,6 +5,16 @@ extends RigidBody3D
 @export var held_position: Vector3 = Vector3.ZERO
 @export var held_rotation: Vector3 = Vector3.ZERO
 
+#@export_category("Ground Movement")
+#@export_enum("Disk", "Spear") var ground_behavior: int = 0
+#
+#@export var disk_spin_speed: float = 30.0
+#
+#@export_category("Spear Sliding")
+#@export var spear_slide_speed_multiplier: float = 5
+#@export var spear_slide_friction: float = 0
+#@export var minimum_slide_speed: float = 0.5
+
 var original_collision_layer: int
 var original_collision_mask: int
 
@@ -48,13 +58,3 @@ func prepare_to_throw() -> void:
 	freeze = false
 	sleeping = false
 	
-
-@export_category("Ground Movement")
-@export_enum("Disk", "Spear") var ground_behavior: int = 0
-
-@export var disk_spin_speed: float = 30.0
-
-@export_category("Spear Sliding")
-@export var spear_slide_speed_multiplier: float = 2.3
-@export var spear_slide_friction: float = 0.5
-@export var minimum_slide_speed: float = 0.5

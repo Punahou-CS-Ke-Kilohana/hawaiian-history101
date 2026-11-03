@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://drg1fcx6gesox"
-path="res://.godot/imported/GroupRocks01.DAE-f1e81eb4499f1f3fc571e4fa5f2a6357.scn"
+uid="uid://d2fogmkgx7684"
+path="res://.godot/imported/JungleOverhang.DAE-5e5c306191f6b629513ebff55a663c69.scn"
 
 [deps]
 
-source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/GroupRocks01.DAE"
-dest_files=["res://.godot/imported/GroupRocks01.DAE-f1e81eb4499f1f3fc571e4fa5f2a6357.scn"]
+source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/Stones/JungleOverhang.DAE"
+dest_files=["res://.godot/imported/JungleOverhang.DAE-5e5c306191f6b629513ebff55a663c69.scn"]
 
 [params]
 
@@ -41,9 +41,9 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"MossyStones": {
+"JungleOverhang": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/rock_material.tres",
+"use_external/fallback_path": "res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/Stones/rock_material.tres",
 "use_external/path": "uid://c4lhk1s6lstm1"
 }
 }

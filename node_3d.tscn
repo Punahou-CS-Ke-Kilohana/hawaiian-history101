@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cubt32ki7h6bh"]
 
 [ext_resource type="PackedScene" uid="uid://ftf8kt51x4l1" path="res://NPC.tscn" id="1_i5arm"]
-[ext_resource type="PackedScene" uid="uid://drg1fcx6gesox" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/Stones/GroupRocks01.DAE" id="2_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://drg1fcx6gesox" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/Stones/GroupRocks01.DAE" id="2_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_noarx"]
 [ext_resource type="PackedScene" uid="uid://vvfy8aomh8rm" path="res://UI/actionable.tscn" id="3_jka67"]
 [ext_resource type="Resource" uid="uid://by71uk22gsro2" path="res://Dialogue/Balloons/.KK_dalogue.dialogue" id="3_jsk3o"]

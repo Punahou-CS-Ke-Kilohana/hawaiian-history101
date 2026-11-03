@@ -1,6 +1,6 @@
-[gd_resource type="ArrayMesh" format=4 uid="uid://bu4pq183unn4r"]
+[gd_resource type="ArrayMesh" format=4 uid="uid://c724m80p4b0qr"]
 
-[ext_resource type="Material" uid="uid://c34x77s4nu1rd" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/beach_rock.tres" id="1_4ay0b"]
+[ext_resource type="Material" uid="uid://c34x77s4nu1rd" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/BeachRock01/beach_rock.tres" id="1_4ay0b"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7cj86"]
 _surfaces = [{

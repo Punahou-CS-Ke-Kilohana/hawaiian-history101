@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbxudgmtd4f4d"]
 
-[ext_resource type="PackedScene" uid="uid://b6kue0pxx5lwd" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/SquareRock01.tscn" id="1_b8t6d"]
-[ext_resource type="ArrayMesh" uid="uid://c724m80p4b0qr" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/BeachRock01/collision.tres" id="2_mmupm"]
+[ext_resource type="PackedScene" uid="uid://b6kue0pxx5lwd" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/BeachRock01/SquareRock01.tscn" id="1_b8t6d"]
+[ext_resource type="ArrayMesh" uid="uid://c724m80p4b0qr" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/BeachRock01/collision.tres" id="2_mmupm"]
 
 [node name="SquareRock01" unique_id=2123444732 instance=ExtResource("1_b8t6d")]
 

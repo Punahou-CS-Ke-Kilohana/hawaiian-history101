@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bt3suq30urlsr"]
+
+[ext_resource type="PackedScene" uid="uid://c7ebrmj4jolbk" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/Stones/GroupRocks01.tscn" id="1_dsgdm"]
+
+[node name="GroupRocks01" unique_id=181088514 instance=ExtResource("1_dsgdm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="base01" parent="." index="0" unique_id=326039803]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="detail512" parent="base01" index="0" unique_id=1565230649]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.75884765, 0, 2.6965137)
+
+[node name="detail256" parent="base01" index="1" unique_id=1341398954]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.0916212, 0, 4.2393413)
+
+[node name="start01" parent="base01" index="2" unique_id=323061799]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="GroupRock512" parent="base01/start01" index="0" unique_id=1880787424]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.90686, -1.900633, -3.090944)
+
+[node name="GroupRock256" parent="base01/start01" index="1" unique_id=1639609959]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.90686, -1.900633, -3.090944)
+
+[node name="Collision" parent="base01/start01" index="2" unique_id=777128777]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.90686, -1.900633, -3.090944)
+
+[node name="StaticBody3D" parent="base01/start01/Collision" index="0" unique_id=1306163115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="detail128" parent="base01" index="3" unique_id=1649326360]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.75884765, 0, 2.6965137)

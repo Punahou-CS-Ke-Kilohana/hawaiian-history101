@@ -17,6 +17,10 @@
 [ext_resource type="Script" uid="uid://l25kq3dkjb3c" path="res://directionarrow.gd" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cvds1g81ewkek" path="res://Makahiki games/'Ulu Maika/'Ulu Maika.tscn" id="15_3v7ru"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wlxy5"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 0.34901962, 1)
+
 [sub_resource type="PrismMesh" id="PrismMesh_3pots"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3pots"]
@@ -62,7 +66,8 @@ target = NodePath("../../King Kameha")
 arrow_height = 2.5
 
 [node name="ArrowMesh" type="MeshInstance3D" parent="ProtoController/DirectionArrow" unique_id=708910322]
-transform = Transform3D(0.71, 0, 0, 0, 8.466665e-09, 0.095, 0, -0.71, 1.1328637e-09, 0, -0.063, -1.255)
+transform = Transform3D(0.71, 0, 0, 0, 8.466665e-09, 0.095, 0, -0.71, 1.1328637e-09, 0, -1.460897, -1.255)
+material_overlay = SubResource("StandardMaterial3D_wlxy5")
 mesh = SubResource("PrismMesh_3pots")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=263565698]

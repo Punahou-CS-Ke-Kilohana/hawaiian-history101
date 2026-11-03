@@ -6,12 +6,12 @@
 size = Vector3(0.25, 0.25, 0.35)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l6dfp"]
-size = Vector3(0.555, 0.5, 3.34)
+size = Vector3(0.24, 0.255, 4.625)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8xsbc"]
 radius = 3.009
 
-[node name="IhePahe\'e" type="RigidBody3D" unique_id=1971962749]
+[node name="IhePahe\'e" type="RigidBody3D" unique_id=1971962749 groups=["scoring_objects"]]
 continuous_cd = true
 script = ExtResource("1_l6dfp")
 ground_behavior = 1

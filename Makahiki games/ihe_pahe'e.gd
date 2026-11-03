@@ -1,6 +1,20 @@
 extends Item
 class_name pahehe
 
+func slide(direction: Vector3, force: float) -> void:
+	prepare_to_throw()
+
+	direction.y = 0.0
+	direction = direction.normalized()
+
+	freeze = false
+	sleeping = false
+
+	lock_rotation = true
+
+	linear_velocity = direction * force * spear_slide_speed_multiplier
+	angular_velocity = Vector3.ZERO
+	
 func on_picked_up() -> void:
 	var player = get_tree().get_first_node_in_group("Player")
 

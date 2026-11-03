@@ -55,40 +55,6 @@ func prepare_to_throw() -> void:
 @export var disk_spin_speed: float = 30.0
 
 @export_category("Spear Sliding")
-@export var spear_slide_speed_multiplier: float = 1.5
+@export var spear_slide_speed_multiplier: float = 2.3
 @export var spear_slide_friction: float = 0.5
 @export var minimum_slide_speed: float = 0.5
-
-
-func roll(direction: Vector3, force: float) -> void:
-	reparent(get_tree().current_scene, true)
-
-	freeze = false
-	sleeping = false
-
-	direction.y = 0.0
-	direction = direction.normalized()
-
-	linear_velocity = direction * force
-
-	if ground_behavior == 0:
-		# Disk rolling
-		var roll_axis := Vector3.UP.cross(direction).normalized()
-		angular_velocity = roll_axis * disk_spin_speed
-
-func slide(direction: Vector3, force: float) -> void:
-	prepare_to_throw()
-
-	var player = get_tree().get_first_node_in_group("Player")
-
-	if player:
-		add_collision_exception_with(player)
-
-	direction.y = 0.0
-	direction = direction.normalized()
-
-	freeze = false
-	sleeping = false
-
-	linear_velocity = direction * force * spear_slide_speed_multiplier
-	angular_velocity = Vector3.ZERO

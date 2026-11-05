@@ -62,7 +62,6 @@ func _process(_delta: float) -> void:
 		landing_marker.visible = false
 		return
 
-	print("Charging detected!")
 
 	if camera == null or throw_origin == null:
 		print("ERROR: Camera or throw origin is missing!")
@@ -79,8 +78,6 @@ func _process(_delta: float) -> void:
 	var start: Vector3 = throw_origin.global_position
 	start += Vector3.UP * 0.5
 	var velocity: Vector3 = -camera.global_transform.basis.z * force
-
-	print("Drawing trajectory at: ", start)
 
 	draw_trajectory(start, velocity, item)
 

@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cufhx6f68oids" path="res://Makahiki games/Ihe Pahe'e.tscn" id="13_imku0"]
 [ext_resource type="Script" uid="uid://l25kq3dkjb3c" path="res://directionarrow.gd" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cvds1g81ewkek" path="res://Makahiki games/'Ulu Maika/'Ulu Maika.tscn" id="15_3v7ru"]
+[ext_resource type="PackedScene" uid="uid://dbugiu54xkv2o" path="res://Makahiki games/'Ulu Maika/UluMaikaGoal.tscn" id="17_tuemg"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_3pots"]
 
@@ -48,6 +49,9 @@ size = Vector3(5.398926, 1.6079102, 4.0457764)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pip2g"]
 size = Vector3(3.5395508, 1.9658203, 1.8652344)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cs3hf"]
+size = Vector3(500, 1, 500)
 
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
@@ -111,24 +115,6 @@ mesh = SubResource("BoxMesh_3pots")
 [node name="StaticBody3D" type="StaticBody3D" parent="Block" unique_id=1723049145]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D" unique_id=1036704941]
-shape = SubResource("BoxShape3D_noarx")
-
-[node name="Block2" type="MeshInstance3D" parent="." unique_id=636530235]
-transform = Transform3D(0.834, 0, 0, 0, 0.93, 0, 0, 0, 2.705, 0.07470417, 0.9069154, 33.454823)
-mesh = SubResource("BoxMesh_3pots")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Block2" unique_id=160764459]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Block2/StaticBody3D" unique_id=841041861]
-shape = SubResource("BoxShape3D_noarx")
-
-[node name="Block3" type="MeshInstance3D" parent="." unique_id=1175366369]
-transform = Transform3D(0.834, 0, 0, 0, 0.93, 0, 0, 0, 2.705, -2.378643, 0.9069154, 33.454823)
-mesh = SubResource("BoxMesh_3pots")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Block3" unique_id=111209205]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Block3/StaticBody3D" unique_id=205273823]
 shape = SubResource("BoxShape3D_noarx")
 
 [node name="King Kameha" parent="." unique_id=407646401 instance=ExtResource("1_i5arm")]
@@ -209,3 +195,14 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0
 
 [node name="IhePahe\'e" parent="Area Triggers" unique_id=1971962749 instance=ExtResource("13_imku0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2351383, 0)
+
+[node name="Goal" parent="." unique_id=478190838 instance=ExtResource("17_tuemg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 36.49945)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=423658724]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=182961070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35.79895, 0)
+shape = SubResource("BoxShape3D_cs3hf")
+
+[connection signal="body_entered" from="Area3D" to="ProtoController" method="_on_area_3d_body_entered"]

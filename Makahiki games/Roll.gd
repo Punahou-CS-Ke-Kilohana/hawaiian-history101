@@ -7,7 +7,7 @@ var has_been_rolled := false
 func roll(direction: Vector3, force: float) -> void:
 	has_been_rolled = true
 	# Detach from the player's hand and restore physics.
-	prepare_to_roll()
+	#prepare_to_roll()
 	linear_velocity = direction.normalized() * force
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

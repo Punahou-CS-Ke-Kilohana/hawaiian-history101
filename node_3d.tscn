@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="2_noarx"]
 [ext_resource type="PackedScene" uid="uid://vvfy8aomh8rm" path="res://UI/actionable.tscn" id="3_jka67"]
 [ext_resource type="Resource" uid="uid://by71uk22gsro2" path="res://Dialogue/Balloons/.KK_dalogue.dialogue" id="3_jsk3o"]
+[ext_resource type="FontFile" uid="uid://biunoei28mcle" path="res://Assets/UI/Atkinson-Hyperlegible-Bold-102.ttf" id="3_tuemg"]
 [ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="3_wc5p8"]
 [ext_resource type="Resource" uid="uid://p5xv1tqynsgp" path="res://Dialogue/Balloons/villager.dialogue" id="7_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://brjbkvxu6afyy" path="res://items/Spear.tscn" id="9_4arys"]
@@ -19,6 +20,22 @@
 [ext_resource type="PackedScene" uid="uid://dbugiu54xkv2o" path="res://Makahiki games/'Ulu Maika/UluMaikaGoal.tscn" id="17_tuemg"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_3pots"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3pots"]
+bg_color = Color(0.09411765, 0.13725491, 0.1764706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7254902, 0.58431375, 0.29411766, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 16.0
+expand_margin_top = 16.0
+expand_margin_right = 16.0
+expand_margin_bottom = 16.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3pots"]
 
@@ -68,6 +85,50 @@ arrow_height = 2.5
 [node name="ArrowMesh" type="MeshInstance3D" parent="ProtoController/DirectionArrow" unique_id=708910322]
 transform = Transform3D(0.71, 0, 0, 0, 8.466665e-09, 0.095, 0, -0.71, 1.1328637e-09, 0, -0.063, -1.255)
 mesh = SubResource("PrismMesh_3pots")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ProtoController/DirectionArrow" unique_id=267711562]
+
+[node name="Control" type="Control" parent="ProtoController/DirectionArrow/CanvasLayer" unique_id=342166614]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1156.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="ArrivalPanel" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control" unique_id=271525883]
+visible = false
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 646.0
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_3pots")
+text = "Destination Reached!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel" unique_id=1413676811]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Checkmark" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel/HBoxContainer" unique_id=1360940267]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7254902, 0.58431375, 0.29411766, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel/HBoxContainer" unique_id=1959738683]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel/HBoxContainer/VBoxContainer" unique_id=1524025968]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7254902, 0.58431375, 0.29411766, 1)
+theme_override_fonts/font = ExtResource("3_tuemg")
+theme_override_font_sizes/font_size = 14
+
+[node name="DestinationLabel" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel/HBoxContainer/VBoxContainer" unique_id=1701788455]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tuemg")
+theme_override_font_sizes/font_size = 22
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=263565698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71471, 1, 1.4162202)

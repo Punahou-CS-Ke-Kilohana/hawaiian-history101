@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://q5y2pgj3kg3a"]
 
 [ext_resource type="Script" uid="uid://cqwwaesm7ypji" path="res://Terrain/IslandTerrain.gd" id="1_6we7n"]
-[ext_resource type="PackedScene" uid="uid://drff7ossnwcbw" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/usable/QueensPalm/queens_palm_02.tscn" id="2_csjbp"]
+[ext_resource type="PackedScene" uid="uid://b3me1apbr2ndb" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/usable/QueensPalm/QueensPalm01.DAE" id="2_csjbp"]
 [ext_resource type="PackedScene" uid="uid://iowndepourlg" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/trees/usable/source/grassland tree.tscn" id="2_mdvcs"]
 [ext_resource type="Texture2D" uid="uid://c2kq8k0ttat7k" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Beach110.jpg" id="2_urdrg"]
 [ext_resource type="Texture2D" uid="uid://baj703c7y65n6" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/grassland.png" id="3_mdvcs"]

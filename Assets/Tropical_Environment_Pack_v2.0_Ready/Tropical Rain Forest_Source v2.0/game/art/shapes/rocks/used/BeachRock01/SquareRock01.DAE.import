@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://de4pvql75mblr"
-valid=false
+path="res://.godot/imported/SquareRock01.DAE-c3f5b5217edf0691647c10172eb9c18e.scn"
 
 [deps]
 
 source_file="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/BeachRock01/SquareRock01.DAE"
+dest_files=["res://.godot/imported/SquareRock01.DAE-c3f5b5217edf0691647c10172eb9c18e.scn"]
 
 [params]
 

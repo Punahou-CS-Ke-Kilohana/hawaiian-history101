@@ -15,7 +15,14 @@ var arc_material := StandardMaterial3D.new()
 @export var max_time: float = 3.0
 @export var step: float = 0.05
 @export var gravity: float = 9.8
+var dialogue_lock: bool = false
 
+func _on_dialogue_started() -> void:
+	dialogue_lock = true
+	hide_trajectory()
+
+func _on_dialogue_ended() -> void:
+	dialogue_lock = false
 
 func _ready() -> void:
 	arc.mesh = arc_mesh
@@ -49,6 +56,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if player == null:
 		return
+		
+	if dialogue_lock:
+		arc.visible = false
+		landing_marker.visible = false
+		return
 
 	var item = player.get("equipped_item")
 
@@ -61,7 +73,6 @@ func _process(_delta: float) -> void:
 		arc.visible = false
 		landing_marker.visible = false
 		return
-
 
 	if camera == null or throw_origin == null:
 		print("ERROR: Camera or throw origin is missing!")

@@ -45,3 +45,6 @@ func _on_body_entered(body: Node3D) -> void:
 
 	if body.is_in_group("Player"):
 		return
+		
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	body.global_position = Vector3(0, 2, 0)

@@ -6,9 +6,10 @@
 size = Vector3(1, 4.69, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5pks6"]
+size = Vector3(1, 4.685, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3pots"]
-size = Vector3(1, 4.8, 4.085)
+size = Vector3(0.855, 4.8, 4.05)
 
 [node name="Goal" type="Node3D" unique_id=478190838]
 script = ExtResource("1_gc64d")

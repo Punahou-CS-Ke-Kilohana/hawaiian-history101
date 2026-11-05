@@ -42,3 +42,9 @@ func _on_pickuparea_body_exited(body: Node3D) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body == self or body.is_in_group("Player"):
 		return
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("scoring_objects") and body != self:
+		print("Teleporting: ", body.name)
+		body.global_position = Vector3(0, 2, 0)

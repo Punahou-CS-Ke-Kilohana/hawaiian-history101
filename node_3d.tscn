@@ -206,3 +206,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35.79895, 0)
 shape = SubResource("BoxShape3D_cs3hf")
 
 [connection signal="body_entered" from="Area3D" to="ProtoController" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Area3D" to="Area Triggers/\'uluMaika" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Area3D" to="Area Triggers/IhePahe\'e" method="_on_area_3d_body_entered"]

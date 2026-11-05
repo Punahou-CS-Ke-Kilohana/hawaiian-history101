@@ -727,6 +727,7 @@ var summit_rock_density: float = 4.0
 var summit_grass_density: float = 0.5
 
 
+
 # ---------------------------------------------------------------------
 # PLACEMENT RULES
 # ---------------------------------------------------------------------
@@ -744,7 +745,6 @@ var decoration_min_scale: float = 0.8
 var decoration_max_scale: float = 1.2
 
 ## Maximum surface steepness accepted for trees and grass.
-## 0 = horizontal surface only; 1 = any slope.
 @export_range(0.0, 1.0, 0.05)
 var tree_max_slope: float = 0.45
 
@@ -754,22 +754,51 @@ var grass_max_slope: float = 0.75
 @export_range(0.0, 1.0, 0.05)
 var rock_max_slope: float = 0.95
 
-## Number of random placement attempts allowed per desired instance.
-## Higher values help fill small or difficult zones.
+
+## Number of random placement attempts per desired instance.
 @export_range(1, 100, 1)
 var decoration_attempts_per_instance: int = 20
 
-## Optional minimum spacing between decoration origins.
-## Set to 0 to disable spacing.
+## Minimum spacing between decoration origins.
 @export_range(0.0, 30.0, 0.5)
 var decoration_min_spacing: float = 2.0
 
-## Align objects to the terrain normal.
-## Usually leave disabled for trees and upright grass.
-@export var align_decorations_to_surface: bool = false
+## Minimum terrain height at which decorations can spawn.
+## Decorations below this Y height will be rejected.
+@export var decoration_minimum_spawn_height: float = 2.5
+
+
+# ---------------------------------------------------------------------
+# SURFACE ALIGNMENT
+# ---------------------------------------------------------------------
+
+## Align rocks and grass to the terrain normal.
+## Trees are always kept upright.
+@export var align_decorations_to_surface: bool = true
+
+## Whether rocks should follow the terrain slope.
+@export var align_rocks_to_surface: bool = true
+
+## Whether grass should follow the terrain slope.
+@export var align_grass_to_surface: bool = true
 
 ## Vertical offset above the sampled terrain height.
 @export var decoration_height_offset: float = 0.0
+
+
+# ---------------------------------------------------------------------
+# ROCK BURIAL
+# ---------------------------------------------------------------------
+
+## How far rocks are pushed into the terrain.
+## Negative values bury the rocks.
+@export_range(0.0, 5.0, 0.05)
+var rock_burial_depth: float = 0.5
+
+## Additional burial variation to make rocks look more natural.
+@export_range(0.0, 2.0, 0.05)
+var rock_burial_randomness: float = 0.2
+
 
 
 # =====================================================================
@@ -2238,6 +2267,70 @@ func _generate_chunks() -> void:
 			)
 
 
+
+# =====================================================================
+# CHUNK STREAMING INTERFACE
+# =====================================================================
+
+## Called by ChunkManager when a chunk needs to be loaded or unloaded.
+func set_chunk_loaded(
+	chunk_x: int,
+	chunk_z: int,
+	loaded: bool
+) -> void:
+
+	if chunk_x < 0 or chunk_x >= chunks_per_axis:
+		return
+
+	if chunk_z < 0 or chunk_z >= chunks_per_axis:
+		return
+
+	var index: int = (
+		chunk_z * chunks_per_axis +
+		chunk_x
+	)
+
+	if index < 0 or index >= chunk_records.size():
+		return
+
+	var record: Dictionary = chunk_records[index]
+
+	var chunk: MeshInstance3D = record["node"]
+
+	if not is_instance_valid(chunk):
+		return
+
+	# ---------------------------------------------------------------
+	# LOAD
+	# ---------------------------------------------------------------
+
+	if loaded:
+
+		chunk.visible = true
+
+		return
+
+	# ---------------------------------------------------------------
+	# UNLOAD
+	# ---------------------------------------------------------------
+
+	chunk.visible = false
+
+	# Remove the currently displayed mesh.
+	chunk.mesh = null
+
+	# Discard cached LOD meshes to release their references.
+	var meshes: Array = record["meshes"]
+
+	meshes.fill(null)
+
+	record["meshes"] = meshes
+	record["lod"] = -1
+
+	chunk_records[index] = record
+
+
+
 # =====================================================================
 # CREATE CHUNK
 # =====================================================================
@@ -2929,40 +3022,41 @@ func _generate_decorations() -> void:
 
 	# Each entry: zone, scenes, density, maximum slope.
 	var groups: Array[Dictionary] = [
-		{"zone": DecorationZone.BEACH, "scenes": beach_tree_scenes,
+		{"zone": DecorationZone.BEACH, "type": "tree", "scenes": beach_tree_scenes,
 			"density": beach_tree_density, "slope": tree_max_slope},
-		{"zone": DecorationZone.BEACH, "scenes": beach_rock_scenes,
+		{"zone": DecorationZone.BEACH, "type": "rock",
+			"scenes": beach_rock_scenes,
 			"density": beach_rock_density, "slope": rock_max_slope},
-		{"zone": DecorationZone.BEACH, "scenes": beach_grass_scenes,
+		{"zone": DecorationZone.BEACH, "type": "grass", "scenes": beach_grass_scenes,
 			"density": beach_grass_density, "slope": grass_max_slope},
 
-		{"zone": DecorationZone.DIRT, "scenes": dirt_tree_scenes,
+		{"zone": DecorationZone.DIRT, "type": "tree", "scenes": dirt_tree_scenes,
 			"density": dirt_tree_density, "slope": tree_max_slope},
-		{"zone": DecorationZone.DIRT, "scenes": dirt_rock_scenes,
+		{"zone": DecorationZone.DIRT, "type": "rock", "scenes": dirt_rock_scenes,
 			"density": dirt_rock_density, "slope": rock_max_slope},
 		{"zone": DecorationZone.DIRT, "scenes": dirt_grass_scenes,
-			"density": dirt_grass_density, "slope": grass_max_slope},
+			"density": dirt_grass_density, "type": "grass", "slope": grass_max_slope},
 
-		{"zone": DecorationZone.GRASSLAND, "scenes": grassland_tree_scenes,
+		{"zone": DecorationZone.GRASSLAND, "type": "tree", "scenes": grassland_tree_scenes,
 			"density": grassland_tree_density, "slope": tree_max_slope},
-		{"zone": DecorationZone.GRASSLAND, "scenes": grassland_rock_scenes,
+		{"zone": DecorationZone.GRASSLAND, "type": "rock", "scenes": grassland_rock_scenes,
 			"density": grassland_rock_density, "slope": rock_max_slope},
 		{"zone": DecorationZone.GRASSLAND, "scenes": grassland_grass_scenes,
-			"density": grassland_grass_density, "slope": grass_max_slope},
+			"density": grassland_grass_density, "type": "grass", "slope": grass_max_slope},
 
-		{"zone": DecorationZone.MOUNTAIN, "scenes": mountain_tree_scenes,
+		{"zone": DecorationZone.MOUNTAIN, "type": "tree", "scenes": mountain_tree_scenes,
 			"density": mountain_tree_density, "slope": tree_max_slope},
-		{"zone": DecorationZone.MOUNTAIN, "scenes": mountain_rock_scenes,
+		{"zone": DecorationZone.MOUNTAIN, "type": "rock", "scenes": mountain_rock_scenes,
 			"density": mountain_rock_density, "slope": rock_max_slope},
 		{"zone": DecorationZone.MOUNTAIN, "scenes": mountain_grass_scenes,
-			"density": mountain_grass_density, "slope": grass_max_slope},
+			"density": mountain_grass_density, "type": "grass", "slope": grass_max_slope},
 
-		{"zone": DecorationZone.SUMMIT, "scenes": summit_tree_scenes,
+		{"zone": DecorationZone.SUMMIT, "type": "tree", "scenes": summit_tree_scenes,
 			"density": summit_tree_density, "slope": tree_max_slope},
-		{"zone": DecorationZone.SUMMIT, "scenes": summit_rock_scenes,
+		{"zone": DecorationZone.SUMMIT, "type": "rock", "scenes": summit_rock_scenes,
 			"density": summit_rock_density, "slope": rock_max_slope},
 		{"zone": DecorationZone.SUMMIT, "scenes": summit_grass_scenes,
-			"density": summit_grass_density, "slope": grass_max_slope}
+			"density": summit_grass_density, "type": "grass", "slope": grass_max_slope}
 	]
 
 	for group in groups:
@@ -2981,13 +3075,16 @@ func _generate_decorations() -> void:
 		var parent := decorations_root.get_node(
 			zone_names[zone]
 		) as Node3D
+		
+		var object_type: String = group["type"]
 
 		_scatter_decoration_group(
 			parent,
 			scenes,
 			density,
 			zone,
-			slope_limit
+			slope_limit,
+			object_type
 		)
 
 
@@ -3000,8 +3097,10 @@ func _scatter_decoration_group(
 	scenes: Array,
 	density: float,
 	zone: int,
-	slope_limit: float
+	slope_limit: float,
+	object_type: String
 ) -> void:
+
 	var half_x: float = world_size * 0.5 * island_width
 	var half_z: float = world_size * 0.5 * island_length
 
@@ -3015,38 +3114,69 @@ func _scatter_decoration_group(
 	if target_count <= 0:
 		return
 
-	var attempts: int = target_count * decoration_attempts_per_instance
+	var attempts: int = (
+		target_count * decoration_attempts_per_instance
+	)
+
 	var placed: int = 0
 
 	for attempt in range(attempts):
+
 		if placed >= target_count:
 			break
 
-		var x: float = decoration_rng.randf_range(-half_x, half_x)
-		var z: float = decoration_rng.randf_range(-half_z, half_z)
+		var x: float = decoration_rng.randf_range(
+			-half_x,
+			half_x
+		)
 
-		var surface: Dictionary = _sample_decoration_surface(x, z)
+		var z: float = decoration_rng.randf_range(
+			-half_z,
+			half_z
+		)
+
+		var surface: Dictionary = _sample_decoration_surface(
+			x,
+			z
+		)
 
 		if surface.is_empty():
 			continue
 
 		var height: float = surface["height"]
 		var normal: Vector3 = surface["normal"]
+		
+		# Do not spawn decorations below the minimum height.
+		if height < decoration_minimum_spawn_height:
+			continue
 
-		if _get_decoration_zone(x, z, height, normal) != zone:
+		if _get_decoration_zone(
+			x,
+			z,
+			height,
+			normal
+		) != zone:
 			continue
 
 		var slope: float = 1.0 - normal.y
+
 		if slope > slope_limit:
 			continue
 
-		var position := Vector3(x, height, z)
+		var position := Vector3(
+			x,
+			height,
+			z
+		)
 
 		if not _has_decoration_spacing(position):
 			continue
 
 		var scene: PackedScene = scenes[
-			decoration_rng.randi_range(0, scenes.size() - 1)
+			decoration_rng.randi_range(
+				0,
+				scenes.size() - 1
+			)
 		]
 
 		if scene == null:
@@ -3055,29 +3185,25 @@ func _scatter_decoration_group(
 		var instance := scene.instantiate()
 
 		if not instance is Node3D:
+
 			push_warning(
-				"Decoration scene root must inherit Node3D: "
+			    "Decoration scene root must inherit Node3D: "
 				+ scene.resource_path
 			)
+
 			instance.free()
 			continue
 
 		var object := instance as Node3D
+
 		parent.add_child(object)
 
 		if Engine.is_editor_hint():
 			object.owner = get_tree().edited_scene_root
 
-		object.position = Vector3(
-			x,
-			height + decoration_height_offset,
-			z
-		)
-
-		if randomize_decoration_rotation:
-			object.rotation.y = decoration_rng.randf_range(
-				0.0, TAU
-			)
+		# ---------------------------------------------------------
+		# RANDOM SCALE
+		# ---------------------------------------------------------
 
 		var scale_value: float = decoration_rng.randf_range(
 			min(decoration_min_scale, decoration_max_scale),
@@ -3086,20 +3212,88 @@ func _scatter_decoration_group(
 
 		object.scale = Vector3.ONE * scale_value
 
-		if align_decorations_to_surface:
-			_align_decoration_to_normal(object, normal)
+		# ---------------------------------------------------------
+		# IDENTIFY OBJECT TYPE
+		# ---------------------------------------------------------
+
+		var is_rock: bool = object_type == "rock"
+		var is_grass: bool = object_type == "grass"
+
+		# ---------------------------------------------------------
+		# ROCK BURIAL
+		# ---------------------------------------------------------
+
+		var burial: float = 0.0
+
+		if is_rock:
+
+			burial = (
+				rock_burial_depth
+				+ decoration_rng.randf_range(
+					-rock_burial_randomness,
+					rock_burial_randomness
+				)
+			)
+
+		# ---------------------------------------------------------
+		# POSITION
+		# ---------------------------------------------------------
+
+		object.position = Vector3(
+			x,
+			height + decoration_height_offset - burial,
+			z
+		)
+
+		# ---------------------------------------------------------
+		# ROTATION
+		# ---------------------------------------------------------
+
+		# Random rotation around the local surface normal.
+		var random_angle: float = 0.0
+
+		if randomize_decoration_rotation:
+			random_angle = decoration_rng.randf_range(
+				0.0,
+				TAU
+			)
+
+		var should_align: bool = false
+
+		if is_rock:
+			should_align = align_rocks_to_surface
+
+		elif is_grass:
+			should_align = align_grass_to_surface
+
+		elif not is_rock and not is_grass:
+			should_align = false
+
+		if align_decorations_to_surface and should_align:
+
+			_align_decoration_to_normal(
+				object,
+				normal,
+				random_angle
+			)
+
+		else:
+
+			# Trees remain upright.
+			object.rotation.y = random_angle
 
 		decoration_positions.append(position)
+
 		placed += 1
 
 	if placed < target_count:
+
 		print(
 			"Decoration placement: placed ",
 			placed, " of ", target_count,
 			" objects for zone ", zone,
-			". Try reducing density or minimum spacing."
+		    ". Try reducing density or minimum spacing."
 		)
-
 
 # =====================================================================
 # SAMPLE THE EXISTING HEIGHTMAP
@@ -3228,26 +3422,42 @@ func _has_decoration_spacing(position: Vector3) -> bool:
 # =====================================================================
 # OPTIONAL SURFACE ALIGNMENT
 # =====================================================================
-
 func _align_decoration_to_normal(
 	object: Node3D,
-	normal: Vector3
+	normal: Vector3,
+	random_angle: float = 0.0
 ) -> void:
+
 	var up: Vector3 = normal.normalized()
+
+	# Establish a reference direction on the terrain surface.
 	var forward: Vector3 = Vector3.FORWARD
 
 	if abs(up.dot(forward)) > 0.98:
 		forward = Vector3.RIGHT
 
 	var right: Vector3 = forward.cross(up).normalized()
-	var corrected_forward: Vector3 = up.cross(right).normalized()
 
-	object.basis = Basis(
+	var corrected_forward: Vector3 = (
+		up.cross(right).normalized()
+	)
+
+	# Build a surface-aligned basis.
+	var surface_basis := Basis(
 		right,
 		up,
 		corrected_forward
 	).orthonormalized()
 
+	# Randomly rotate around the surface normal.
+	var random_basis := Basis(
+		up,
+		random_angle
+	)
+
+	object.basis = (
+		random_basis * surface_basis
+	).orthonormalized()
 
 # =====================================================================
 # LOD
@@ -3285,6 +3495,10 @@ func _update_chunk_lods() -> void:
 
 
 		if not is_instance_valid(chunk):
+			continue
+			
+		# Do not generate LOD meshes for unloaded chunks.
+		if not chunk.visible:
 			continue
 
 

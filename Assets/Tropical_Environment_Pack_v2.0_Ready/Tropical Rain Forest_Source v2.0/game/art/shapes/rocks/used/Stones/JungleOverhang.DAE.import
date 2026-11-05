@@ -46,5 +46,10 @@ _subresources={
 "use_external/fallback_path": "res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/rocks/used/Stones/rock_material.tres",
 "use_external/path": "uid://c4lhk1s6lstm1"
 }
+},
+"nodes": {
+"PATH:base01/start01/Collision": {
+"generate/physics": true
+}
 }
 }

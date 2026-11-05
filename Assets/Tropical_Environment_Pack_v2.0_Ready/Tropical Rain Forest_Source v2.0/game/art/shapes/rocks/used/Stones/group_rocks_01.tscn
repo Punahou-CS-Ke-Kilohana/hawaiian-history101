@@ -19,6 +19,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="GroupRock512" parent="base01/start01" index="0" unique_id=1880787424]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.90686, -1.900633, -3.090944)
+visible = false
 
 [node name="GroupRock256" parent="base01/start01" index="1" unique_id=1639609959]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.90686, -1.900633, -3.090944)

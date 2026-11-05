@@ -5,7 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://dwhd6letxv41k" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/Plants/BirdsNest/birdnest01_NRM.dds" id="3_aecyw"]
 
 [resource]
-transparency = 1
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 cull_mode = 2
 albedo_texture = ExtResource("1_tn74n")
 metallic = 1.0

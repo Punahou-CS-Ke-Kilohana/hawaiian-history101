@@ -1,6 +1,5 @@
 extends Control
 @onready var options = $"../../OptionsMenu"
-
 func pause():
 	GlobalSettings.show_ui_buttons = false
 	get_tree().paused = true

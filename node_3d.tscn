@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://l25kq3dkjb3c" path="res://directionarrow.gd" id="14_wlxy5"]
 [ext_resource type="PackedScene" uid="uid://cvds1g81ewkek" path="res://Makahiki games/'Ulu Maika/'Ulu Maika.tscn" id="15_3v7ru"]
 [ext_resource type="PackedScene" uid="uid://dbugiu54xkv2o" path="res://Makahiki games/'Ulu Maika/UluMaikaGoal.tscn" id="17_tuemg"]
+[ext_resource type="PackedScene" uid="uid://djfjqnpb4ltia" path="res://Makahiki games/Makahikigamearea.tscn" id="19_ealrb"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_3pots"]
 
@@ -69,6 +70,8 @@ size = Vector3(3.5395508, 1.9658203, 1.8652344)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cs3hf"]
 size = Vector3(500, 1, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsnrv"]
 
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
@@ -266,6 +269,21 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35.79895, 0)
 shape = SubResource("BoxShape3D_cs3hf")
 
+[node name="Makahikigamearea" parent="." unique_id=1481788063 instance=ExtResource("19_ealrb")]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0.4018488, 2.140305, 27.895184)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1414601199]
+
+[node name="Area3D2" type="Area3D" parent="." unique_id=1686506170]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2" unique_id=1014590410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8977747, 6.876549)
+shape = SubResource("BoxShape3D_jsnrv")
+debug_color = Color(0.95107216, 1.347661e-06, 0.56789273, 0.41960785)
+
 [connection signal="body_entered" from="Area3D" to="ProtoController" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="Area3D" to="Area Triggers/\'uluMaika" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="Area3D" to="Area Triggers/IhePahe\'e" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Makahikigamearea" to="ProtoController" method="_on_makahikigamearea_body_entered"]
+[connection signal="body_exited" from="Makahikigamearea" to="ProtoController" method="_on_makahikigamearea_body_exited"]
+[connection signal="body_entered" from="Area3D2" to="ProtoController" method="_on_area_3d_2_body_entered"]

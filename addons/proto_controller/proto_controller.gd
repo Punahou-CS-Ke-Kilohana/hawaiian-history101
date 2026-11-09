@@ -90,10 +90,12 @@ func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
-	
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	
+	gamescore = gamescore_scene.instantiate()
+	get_tree().current_scene.add_child(gamescore)
+	gamescore.hide()
 	# For loading the touch control buttons in menus
 	if DisplayServer.is_touchscreen_available():
 		GlobalSettings.show_ui_buttons_changed.connect(_on_show_ui_buttons_changed)
@@ -458,6 +460,16 @@ func start_slide() -> void:
 #func _on_rigid_body_3d_2_body_entered(body: Node3D) -> void:
 	#global_position = Vector3(0, 2, 0)
 
-
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	body.global_position = Vector3(0, 2, 0)
+
+var gamescore_scene = preload("res://UI/gamescore.tscn")
+var gamescore
+
+func _on_makahikigamearea_body_entered(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		gamescore.show_score()
+
+func _on_makahikigamearea_body_exited(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		gamescore.hide_score()

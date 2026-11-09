@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://djfjqnpb4ltia"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pots"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3pots"]
+
+[node name="Makahikigamearea" type="Area3D" unique_id=1870462624]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=954284097]
+shape = SubResource("BoxShape3D_3pots")
+debug_color = Color(0.95107216, 1.347661e-06, 0.56789273, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1322537481]
+visible = false
+mesh = SubResource("BoxMesh_3pots")

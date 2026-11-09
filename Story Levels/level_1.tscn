@@ -5,6 +5,7 @@
 [ext_resource type="Material" uid="uid://btm6ptrnke1xj" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/core/art/water/water_shader.tres" id="2_f5lsm"]
 [ext_resource type="PackedScene" uid="uid://q5y2pgj3kg3a" path="res://Story Levels/Islands/o'ahu.tscn" id="4_7lj2j"]
 [ext_resource type="Script" uid="uid://l25kq3dkjb3c" path="res://directionarrow.gd" id="6_hiukg"]
+[ext_resource type="FontFile" uid="uid://biunoei28mcle" path="res://Assets/UI/Atkinson-Hyperlegible-Bold-102.ttf" id="7_ksg7w"]
 [ext_resource type="Script" uid="uid://cm8270rmbrj3l" path="res://EnterAreaDialogue.gd" id="7_pl3mh"]
 [ext_resource type="Resource" uid="uid://dkhwjj0mh045a" path="res://Dialogue/Balloons/ChantArea.dialogue" id="8_hiukg"]
 [ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="9_806wk"]
@@ -15,6 +16,22 @@
 size = Vector3(2.815, 1, 1)
 
 [sub_resource type="PrismMesh" id="PrismMesh_hiukg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_806wk"]
+bg_color = Color(0.09411765, 0.13725491, 0.1764706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7254902, 0.58431375, 0.29411766, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 16.0
+expand_margin_top = 16.0
+expand_margin_right = 16.0
+expand_margin_bottom = 16.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wap5w"]
 subdivide_width = 30
@@ -84,15 +101,40 @@ offset_right = 1156.0
 offset_bottom = 648.0
 mouse_filter = 2
 
-[node name="ArrivalLabel" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control" unique_id=1603314021]
+[node name="ArrivalPanel" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control" unique_id=858817447]
 visible = false
 layout_mode = 0
 offset_right = 1153.0
 offset_bottom = 646.0
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_806wk")
 text = "Destination Reached!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel" unique_id=1581726929]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Checkmark" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel/HBoxContainer" unique_id=139788209]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7254902, 0.58431375, 0.29411766, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel/HBoxContainer" unique_id=476525885]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel/HBoxContainer/VBoxContainer" unique_id=819704863]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7254902, 0.58431375, 0.29411766, 1)
+theme_override_fonts/font = ExtResource("7_ksg7w")
+theme_override_font_sizes/font_size = 14
+
+[node name="DestinationLabel" type="Label" parent="ProtoController/DirectionArrow/CanvasLayer/Control/ArrivalPanel/HBoxContainer/VBoxContainer" unique_id=785254149]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ksg7w")
+theme_override_font_sizes/font_size = 22
 
 [node name="Environment" type="Node3D" parent="." unique_id=1656217452]
 
@@ -116,6 +158,7 @@ mesh = SubResource("PlaneMesh_5pks6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2103243186]
 libraries/ = SubResource("AnimationLibrary_ksg7w")
+autoplay = &"test"
 
 [node name="ArrowTest" type="Node3D" parent="." unique_id=1532323091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -298.3507, 14.097048, 13.265537)

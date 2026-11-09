@@ -7,6 +7,13 @@ extends Node3D
 @export var arrival_distance: float = 3.0
 @export var halfway_arrival_distance: float = 6.0
 
+
+@export var can_move : bool = true
+@export var can_jump : bool = true
+
+@onready var player = get_parent()
+
+
 @onready var arrow_mesh: MeshInstance3D = $ArrowMesh
 @onready var arrival_panel = $CanvasLayer/Control/ArrivalPanel
 
@@ -65,11 +72,15 @@ func _process(delta):
 	else:
 		arrow_material.albedo_color = Color.YELLOW
 	
-	if distance <= arrival_distance and not has_arrived:
+	if distance <= arrival_distance and not notification_shown:
 		show_arrival_notification()
+		notification_shown = true
 		
 func show_arrival_notification():
-	notification_shown = true
+	
+	player.can_move = false
+	player.can_jump = false
+	
 	arrival_panel.visible = true
 
 	arrival_panel.modulate.a = 0.0
@@ -93,3 +104,10 @@ func show_arrival_notification():
 	)
 	await fade.finished
 	arrival_panel.visible = false
+	
+	player.can_move = true
+	player.can_jump = true
+	
+		
+		
+		

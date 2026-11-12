@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bdok5t0s1i3d3"]
+
+[ext_resource type="Texture2D" uid="uid://ddps8s8kvcegn" path="res://Assets/Houses + Hale/source/model/textures/Atlas_albedo.jpg" id="1_rrvis"]
+[ext_resource type="Texture2D" uid="uid://dbljomshr2l4n" path="res://Assets/Houses + Hale/source/model/textures/Atlas_metallic.jpg" id="2_a4ae5"]
+[ext_resource type="Texture2D" uid="uid://m81nmtsxhbj8" path="res://Assets/Houses + Hale/source/model/textures/Atlas_normal.png" id="3_prj6c"]
+[ext_resource type="Texture2D" uid="uid://6ppmygbm6akp" path="res://Assets/Houses + Hale/source/model/textures/Atlas_roughness.jpg" id="4_ms1l2"]
+
+[resource]
+cull_mode = 2
+albedo_texture = ExtResource("1_rrvis")
+metallic = 1.0
+metallic_texture = ExtResource("2_a4ae5")
+roughness_texture = ExtResource("4_ms1l2")
+normal_enabled = true
+normal_texture = ExtResource("3_prj6c")

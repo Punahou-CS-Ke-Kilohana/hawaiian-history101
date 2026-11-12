@@ -34,6 +34,8 @@ expand_margin_right = 16.0
 expand_margin_bottom = 16.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wap5w"]
+subdivide_width = 30
+subdivide_depth = 30
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hiukg"]
 albedo_texture = ExtResource("9_ksg7w")
@@ -78,12 +80,12 @@ transform = Transform3D(1, 0, 0, 0, 0.9999842, 0, 0, 0, 1, -0.7224412, 0.508, 0.
 shape = SubResource("BoxShape3D_v1jij")
 
 [node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_w0ckv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -214.4383, 57.05048, -208.07483)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.74033, 20.316957, 79.67494)
 
 [node name="DirectionArrow" type="Node3D" parent="ProtoController" unique_id=1670372266 node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.912415, -43.20222, 243.7272)
 script = ExtResource("6_hiukg")
-target = NodePath("../../ArrowTest")
+target = NodePath("../../Village Location")
 arrow_height = 2.5
 
 [node name="ArrowMesh" type="MeshInstance3D" parent="ProtoController/DirectionArrow" unique_id=1802100810]
@@ -156,7 +158,9 @@ mesh = SubResource("PlaneMesh_5pks6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2103243186]
 libraries/ = SubResource("AnimationLibrary_ksg7w")
-autoplay = &"test"
 
 [node name="ArrowTest" type="Node3D" parent="." unique_id=1532323091]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -298.3507, 14.097048, 13.265537)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -116.66016, 14.097048, -361.26743)
+
+[node name="Village Location" type="Node3D" parent="." unique_id=1563310896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.450363, 31.239883, -27.365097)

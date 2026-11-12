@@ -78,10 +78,10 @@ transform = Transform3D(1, 0, 0, 0, 0.9999842, 0, 0, 0, 1, -0.7224412, 0.508, 0.
 shape = SubResource("BoxShape3D_v1jij")
 
 [node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_w0ckv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -346.0552, 57.05048, -222.37018)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -214.4383, 57.05048, -208.07483)
 
 [node name="DirectionArrow" type="Node3D" parent="ProtoController" unique_id=1670372266 node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.7045, -43.20222, 258.02258)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.912415, -43.20222, 243.7272)
 script = ExtResource("6_hiukg")
 target = NodePath("../../ArrowTest")
 arrow_height = 2.5

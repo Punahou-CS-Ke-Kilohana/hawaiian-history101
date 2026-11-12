@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dc6m6hgo5pmi2" path="res://UI/gamescore.gd" id="1_bx8xt"]
 
-[node name="Gamescore" type="Control" unique_id=1422814301]
+[node name="Gamescore" type="Control" unique_id=846940480]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -11,12 +11,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+mouse_behavior_recursive = 2
 script = ExtResource("1_bx8xt")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1467929363]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="score" type="Label" parent="ColorRect" unique_id=13476406]

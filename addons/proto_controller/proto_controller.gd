@@ -92,10 +92,14 @@ func _ready() -> void:
 	look_rotation.x = head.rotation.x
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-	
 	gamescore = gamescore_scene.instantiate()
 	get_tree().current_scene.add_child(gamescore)
 	gamescore.hide()
+
+	print("Position: ", gamescore.position)
+	print("Size: ", gamescore.size)
+	print("Visible: ", gamescore.visible)
+	print("Visible in tree: ", gamescore.is_visible_in_tree())
 	# For loading the touch control buttons in menus
 	if DisplayServer.is_touchscreen_available():
 		GlobalSettings.show_ui_buttons_changed.connect(_on_show_ui_buttons_changed)

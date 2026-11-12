@@ -76,7 +76,7 @@ size = Vector3(500, 1, 500)
 [node name="Node3D" type="Node3D" unique_id=568439726]
 
 [node name="ProtoController" parent="." unique_id=101856760 instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.5548705, 1.372)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.5548705, 2.82446)
 collision_mask = 3
 
 [node name="DirectionArrow" type="Node3D" parent="ProtoController" unique_id=1740315183 node_paths=PackedStringArray("target")]

@@ -719,11 +719,11 @@ var mountain_rock_density: float = 6.0
 var mountain_grass_density: float = 2.0
 
 @export_group("Summit Density")
-@export_range(0.0, 2.0, 0.1)
+@export_range(0.0, 10.0, 0.1)
 var summit_tree_density: float = 0.0
-@export_range(0.0, 2.0, 0.1)
+@export_range(0.0, 10.0, 0.1)
 var summit_rock_density: float = 4.0
-@export_range(0.0, 2.0, 0.1)
+@export_range(0.0, 10.0, 0.1)
 var summit_grass_density: float = 0.5
 
 

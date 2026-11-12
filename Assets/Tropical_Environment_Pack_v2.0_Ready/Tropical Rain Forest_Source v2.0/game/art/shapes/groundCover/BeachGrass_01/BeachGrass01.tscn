@@ -1,0 +1,52 @@
+[gd_scene format=4 uid="uid://boxsn1aro2pol"]
+
+[ext_resource type="Material" uid="uid://iyfmbsharcen" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/shapes/groundCover/BeachGrass_01/beachgrass.tres" id="1_rwy8g"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_h64md"]
+_surfaces = [{
+"aabb": AABB(-0.13347903, 6.5948e-05, -0.12824456, 0.258479, 0.25503334, 0.2621526),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAQAAAAMABAACAAEAAgAEAAUABgAHAAgABwAGAAkACgAIAAcACAAKAAsADAANAA4ADQAMAA8AEAAOAA0ADgAQABEAEgATABQAEwASABUAFgAUABMAFAAWABcA"),
+"name": "BeachGrass01",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("4zEXChQWAACBs+f1TG8AADWEAAA6fQAAMGH//yYIAAAOqP//EPIAAMF4Fwr//wAAZQgXCnetAAAyhOf1jEwAADKEAAA4fQAAZQj+/8t8AAD///7/y3wAAP//Fwp3rQAABdoXCqoxAACZm+f13MAAADSEAAAAlgAAavH//4VcAABlF///OtAAAAAAFwpfpQAALxUXCuEbAACrrOf1a0gAADWEAABMZAAApT3+/wAAAAB5y/7/HMgAAAKjFwr94wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rjco6"]
+resource_name = "BeachGrassOne200"
+_surfaces = [{
+"aabb": AABB(-0.13347903, 6.5948e-05, -0.12824456, 0.258479, 0.25503334, 0.2621526),
+"attribute_data": PackedByteArray("/////wAA///d/t7//38AAE1X9f//f////////wAAAAAH/gj///8AAP7+/////////////wAA///d/t7//38AAE1X9f//f////////wAAAAAH/gj///8AAP7+/////////////wAA///d/t7//38AAE1X9f//f////////wAAAAAH/gj///8AAP7+/////////////wAA///d/t7//38AAE1X9f//f////////wAAAAAH/gj///8AAP7+////////"),
+"format": 34896613407,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAQAAAAMABAACAAEAAgAEAAUABgAHAAgABwAGAAkACgAIAAcACAAKAAsADAANAA4ADQAMAA8AEAAOAA0ADgAQABEAEgATABQAEwASABUAFgAUABMAFAAWABcA"),
+"material": ExtResource("1_rwy8g"),
+"name": "BeachGrass01",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("4zEXChQWmlqBs+f1TG9HSzWEAAA6fUdLMGH//yYImloOqP//EPLVO8F4Fwr//9U7ZQgXCnetY24yhOf1jEzSdzKEAAA4fdJ3ZQj+/8t8Y27///7/y3xjbv//Fwp3rWNuBdoXCqoxjCOZm+f13MADFDSEAAAAlgMUavH//4VcjCNlF///OtB5BAAAFwpfpXkELxUXCuEbIGerrOf1a0gRWDWEAABMZBFYpT3+/wAAIGd5y/7/HMi3SAKjFwr947dIEY9h4P+Nkef/jZHnEY9h4EqNTuxKjU7sAKn2MP7//3/+//9/AKn2MPaw/db2sP3Ws4CR8uGCqvHhgqrxs4CR8tSE2/DUhNvwqJeB1RyT6+Ick+viqJeB1YSQkeqEkJHq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_h64md")
+
+[node name="BeachGrass01" type="Node3D" unique_id=59414151]
+
+[node name="Base01" type="Node3D" parent="." unique_id=186438866]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.004080876, 0, -0.00045343064)
+
+[node name="Start01" type="Node3D" parent="Base01" unique_id=98677901]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="BeachGrassOne200" type="MeshInstance3D" parent="Base01/Start01" unique_id=376299244]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0046993936, 0, 0.0076553207)
+mesh = SubResource("ArrayMesh_rjco6")
+
+[node name="detail200" type="Node3D" parent="Base01" unique_id=832333617]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1651115224]

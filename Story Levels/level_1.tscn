@@ -34,8 +34,6 @@ expand_margin_right = 16.0
 expand_margin_bottom = 16.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wap5w"]
-subdivide_width = 30
-subdivide_depth = 30
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hiukg"]
 albedo_texture = ExtResource("9_ksg7w")
@@ -80,10 +78,10 @@ transform = Transform3D(1, 0, 0, 0, 0.9999842, 0, 0, 0, 1, -0.7224412, 0.508, 0.
 shape = SubResource("BoxShape3D_v1jij")
 
 [node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_w0ckv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -298.3507, 11.848258, 35.652378)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -346.0552, 57.05048, -222.37018)
 
 [node name="DirectionArrow" type="Node3D" parent="ProtoController" unique_id=1670372266 node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.7045, -43.20222, 258.02258)
 script = ExtResource("6_hiukg")
 target = NodePath("../../ArrowTest")
 arrow_height = 2.5
@@ -139,7 +137,7 @@ theme_override_font_sizes/font_size = 22
 [node name="Environment" type="Node3D" parent="." unique_id=1656217452]
 
 [node name="Water" type="MeshInstance3D" parent="Environment" unique_id=1081678288]
-transform = Transform3D(-500, 0, -7.5497905e-05, 0, 2, 0, 7.5497905e-05, 0, -500, 0, 8.5, 0)
+transform = Transform3D(-750, 0, -0.00011324685, 0, 1.5, 0, 0.00011324685, 0, -750, 0, 8.5, 0)
 material_override = ExtResource("2_f5lsm")
 mesh = SubResource("PlaneMesh_wap5w")
 

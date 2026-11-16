@@ -23,6 +23,7 @@ func _on_dialogue_started() -> void:
 
 func _on_dialogue_ended() -> void:
 	dialogue_lock = false
+	show_trajectory()
 
 func _ready() -> void:
 	arc.mesh = arc_mesh
@@ -50,8 +51,6 @@ func _ready() -> void:
 
 	if throw_origin == null:
 		push_error("Trajectory: Could not find hand under Player.")
-
-
 
 func _process(_delta: float) -> void:
 	if player == null:
@@ -157,3 +156,7 @@ func draw_trajectory(
 func hide_trajectory() -> void:
 	arc.visible = false
 	landing_marker.visible = false
+
+func show_trajectory() -> void:
+	arc.visible = true
+	landing_marker.visible = true

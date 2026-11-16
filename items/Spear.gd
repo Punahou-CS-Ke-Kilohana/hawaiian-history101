@@ -26,7 +26,32 @@ func throw(direction: Vector3, force: float) -> void:
 	prepare_to_throw()
 	linear_velocity = direction.normalized() * force
 
+func _process(_delta: float) -> void:
+	# Only update while equipped in the player's hand.
+	if not freeze:
+		return
 
+	var hand := get_parent() as Node3D
+	if hand == null:
+		return
+
+	# Make sure this is the player's hand.
+	if hand.name != "hand":
+		return
+
+	var camera := get_viewport().get_camera_3d()
+	if camera == null:
+		return
+
+	# Camera rotation relative to the hand.
+	var camera_rotation: Quaternion = (
+		hand.global_transform.basis.inverse()
+		* camera.global_transform.basis
+	).get_rotation_quaternion()
+
+	# Apply camera rotation plus your held rotation offset.
+	rotation = camera_rotation.get_euler()
+	
 func _physics_process(_delta: float) -> void:
 	if freeze and has_hit:
 		if is_instance_valid(supporting_spear):

@@ -86,6 +86,9 @@ var is_in_dialogue: bool = false
 @onready var collider: CollisionShape3D = $Collider
 @onready var actionable_finder: Area3D = $Direction/ActionableFinder
 
+var gamescore_scene = preload("res://UI/gamescore.tscn")
+var gamescore: Control
+
 func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
@@ -466,9 +469,6 @@ func start_slide() -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	body.global_position = Vector3(0, 2, 0)
-
-var gamescore_scene = preload("res://UI/gamescore.tscn")
-var gamescore
 
 func _on_makahikigamearea_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbugiu54xkv2o"]
 
-[ext_resource type="Script" uid="uid://cmwyexv4egd8g" path="res://Makahiki games/'Ulu Maika/UlumaikaGame.gd" id="1_gc64d"]
+[ext_resource type="Script" uid="uid://cmwyexv4egd8g" path="res://Makahiki games/'Ulu Maika/Gamemanager.gd" id="1_gc64d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3pots"]
 size = Vector3(1, 4.69, 1)

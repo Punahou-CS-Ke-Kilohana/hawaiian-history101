@@ -5,6 +5,12 @@ extends CharacterBody3D
 @export var has_gravity : bool = true
 @export var can_jump : bool = true
 @export var can_sprint : bool = false
+@export var sprint_length: float = 5.0
+@export var sprint_cooldown: float = 2.0
+
+var sprint_timer: float = 0.0
+var sprint_cooldown_timer: float = 0.0
+var sprint_available: bool = true
 @export var can_freefly : bool = false
 
 @export_group("Speeds")
@@ -176,9 +182,23 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed(input_jump) and is_on_floor():
 			velocity.y = jump_velocity
 
+# Sprint cooldown
+	if sprint_cooldown_timer > 0.0:
+		sprint_cooldown_timer -= delta
+
+		if sprint_cooldown_timer <= 0.0:
+			sprint_cooldown_timer = 0.0
+			sprint_available = true
+
 	# Sprint
-	if can_sprint and Input.is_action_pressed(input_sprint):
+	if can_sprint and Input.is_action_pressed(input_sprint) and sprint_available:
 		move_speed = sprint_speed
+		sprint_timer += delta
+
+		if sprint_timer >= sprint_length:
+			sprint_timer = 0.0
+			sprint_available = false
+			sprint_cooldown_timer = sprint_cooldown
 	else:
 		move_speed = base_speed
 

@@ -35,7 +35,7 @@ anchor_bottom = 0.5
 offset_left = -219.5
 offset_top = -128.5
 offset_right = 219.5
-offset_bottom = 128.5
+offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -96,6 +96,51 @@ popup/item_0/text = "Full Screen"
 popup/item_0/id = 0
 popup/item_1/text = "Windowed"
 popup/item_1/id = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel2/ScrollContainer/VBoxContainer" unique_id=1545242267]
+layout_mode = 2
+
+[node name="Keybinds" type="Label" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=349135365]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+text = "Keybinds"
+
+[node name="moveforward" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1189397656]
+layout_mode = 2
+text = "Forward: W"
+
+[node name="movebackward" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1545507073]
+layout_mode = 2
+text = "Backward: S"
+
+[node name="left" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1076187406]
+layout_mode = 2
+text = "Left: A"
+
+[node name="right" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=982261495]
+layout_mode = 2
+text = "Right: D"
+
+[node name="jump" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=938844367]
+layout_mode = 2
+text = "Jump: Space"
+
+[node name="sprint" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1060410443]
+layout_mode = 2
+text = "Sprint: Tab"
+
+[node name="hold" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=696493494]
+layout_mode = 2
+text = "Hold: Middle Click"
+
+[node name="throw" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1631854882]
+layout_mode = 2
+text = "Throw/Roll/Slide: Right Click"
+
+[node name="talktonpc" type="Button" parent="Panel2/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1411906811]
+layout_mode = 2
+text = "Talk To NPCs: Left Click"
 
 [node name="Label" type="Label" parent="Panel2" unique_id=319527166]
 layout_mode = 1

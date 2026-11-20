@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://csn17iurueb8u"
+uid="uid://hesefi2yxtb3"
 path="res://.godot/imported/model.dae-231e25d7bcd5df5e60a21e8768474c76.scn"
 
 [deps]
@@ -44,6 +44,29 @@ _subresources={
 "use_external/enabled": true,
 "use_external/fallback_path": "res://Assets/Houses + Hale/source/model/textures/hale-materials.tres",
 "use_external/path": "uid://bdok5t0s1i3d3"
+}
+},
+"nodes": {
+"PATH:076": {
+"generate/physics": true
+},
+"PATH:078": {
+"generate/physics": true
+},
+"PATH:079": {
+"generate/physics": true
+},
+"PATH:080": {
+"generate/physics": true
+},
+"PATH:081": {
+"generate/physics": true
+},
+"PATH:082": {
+"generate/physics": true
+},
+"PATH:083": {
+"generate/physics": true
 }
 }
 }

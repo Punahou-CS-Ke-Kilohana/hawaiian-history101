@@ -45,5 +45,82 @@ _subresources={
 "use_external/fallback_path": "res://Assets/Houses + Hale/source/model/textures/hale-materials.tres",
 "use_external/path": "uid://bdok5t0s1i3d3"
 }
+},
+"nodes": {
+"PATH:066": {
+"generate/physics": true
+},
+"PATH:067": {
+"generate/physics": true
+},
+"PATH:068": {
+"generate/physics": true
+},
+"PATH:069": {
+"generate/physics": true
+},
+"PATH:070": {
+"generate/physics": true
+},
+"PATH:071": {
+"generate/physics": true
+},
+"PATH:072": {
+"generate/physics": true
+},
+"PATH:073": {
+"generate/physics": true
+},
+"PATH:074": {
+"generate/physics": true
+},
+"PATH:075": {
+"generate/physics": true
+},
+"PATH:076": {
+"generate/physics": true
+},
+"PATH:077": {
+"generate/physics": true
+},
+"PATH:078": {
+"generate/physics": true
+},
+"PATH:079": {
+"generate/physics": true
+},
+"PATH:080": {
+"generate/physics": true
+},
+"PATH:081": {
+"generate/physics": true
+},
+"PATH:082": {
+"generate/physics": true
+},
+"PATH:083": {
+"generate/physics": true
+},
+"PATH:084": {
+"generate/physics": true
+},
+"PATH:085": {
+"generate/physics": true
+},
+"PATH:21_1": {
+"generate/physics": true
+},
+"PATH:21_2": {
+"generate/physics": true
+},
+"PATH:21_3": {
+"generate/physics": true
+},
+"PATH:22": {
+"generate/physics": true
+},
+"PATH:23": {
+"generate/physics": true
+}
 }
 }

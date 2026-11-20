@@ -11,9 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cpb8px75dpsxn" path="res://Dialogue/Balloons/balloon.tscn" id="9_806wk"]
 [ext_resource type="Texture2D" uid="uid://c2kq8k0ttat7k" path="res://Assets/Tropical_Environment_Pack_v2.0_Ready/Tropical Rain Forest_Source v2.0/game/art/terrains/Tropic/Beach110.jpg" id="9_ksg7w"]
 [ext_resource type="PackedScene" uid="uid://br70rkcktxt1e" path="res://Day-Night-Cycle.tscn" id="9_pl3mh"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_v1jij"]
-size = Vector3(2.815, 1, 1)
+[ext_resource type="Script" uid="uid://2g5it6ntbi02" path="res://Story Levels/faint-lvl1.gd" id="12_806wk"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_hiukg"]
 
@@ -66,24 +64,20 @@ _data = {
 &"test": SubResource("Animation_3v7ru")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_v1jij"]
+size = Vector3(2.815, 1, 0.34472656)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ak7rw"]
+size = Vector3(0.33654785, 1, 0.3043213)
+
 [node name="Level 1" type="Node3D" unique_id=214548992]
 script = ExtResource("1_hiukg")
 
-[node name="ChantTrigger" type="Area3D" parent="." unique_id=1966328340]
-transform = Transform3D(-148.00331, 0, 201.48206, 0, 250, 0, -201.48206, 0, -148.00331, -368.52673, 6.5292206, -109.37311)
-script = ExtResource("7_pl3mh")
-dialogue_resource = ExtResource("8_hiukg")
-balloon_scene = ExtResource("9_806wk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ChantTrigger" unique_id=642640276]
-transform = Transform3D(1, 0, 0, 0, 0.9999842, 0, 0, 0, 1, -0.7224412, 0.508, 0.49829388)
-shape = SubResource("BoxShape3D_v1jij")
-
 [node name="ProtoController" parent="." unique_id=709718729 instance=ExtResource("1_w0ckv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.74033, 20.316957, 79.67494)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -167.76901, 17.261688, -348.74448)
 
 [node name="DirectionArrow" type="Node3D" parent="ProtoController" unique_id=1670372266 node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.912415, -43.20222, 243.7272)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 257.59692, -40.14695, 672.1464)
 script = ExtResource("6_hiukg")
 target = NodePath("../../Village Location")
 arrow_height = 2.5
@@ -159,8 +153,30 @@ mesh = SubResource("PlaneMesh_5pks6")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2103243186]
 libraries/ = SubResource("AnimationLibrary_ksg7w")
 
+[node name="ChantTrigger" type="Area3D" parent="." unique_id=1966328340]
+transform = Transform3D(-148.00331, 0, 201.48206, 0, 250, 0, -201.48206, 0, -148.00331, -368.52673, 6.5292206, -109.37311)
+script = ExtResource("7_pl3mh")
+dialogue_resource = ExtResource("8_hiukg")
+balloon_scene = ExtResource("9_806wk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChantTrigger" unique_id=642640276]
+transform = Transform3D(-0.011357814, 0, -0.9999355, 0, 0.9999784, 0, 0.9999355, 0, -0.011357814, -0.45056558, 0.508, 1.0242586)
+shape = SubResource("BoxShape3D_v1jij")
+debug_color = Color(0.95755726, 0, 0.5292989, 1)
+
 [node name="ArrowTest" type="Node3D" parent="." unique_id=1532323091]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -116.66016, 14.097048, -361.26743)
 
 [node name="Village Location" type="Node3D" parent="." unique_id=1563310896]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.450363, 31.239883, -27.365097)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.00903, 31.239883, -27.365097)
+
+[node name="FaintTrigger" type="Area3D" parent="." unique_id=351373690]
+transform = Transform3D(-148.00331, 0, 201.48206, 0, 250, 0, -201.48206, 0, -148.00331, -368.52673, 6.5292206, -109.37311)
+script = ExtResource("12_806wk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FaintTrigger" unique_id=1738780728]
+transform = Transform3D(-0.011357814, 0, -0.9999355, 0, 0.99996424, 0, 0.9999355, 0, -0.011357814, -1.2906603, 0.23587307, 1.3604153)
+shape = SubResource("BoxShape3D_ak7rw")
+debug_color = Color(0.9607843, 0, 0.5137255, 1)
+
+[connection signal="body_entered" from="FaintTrigger" to="FaintTrigger" method="_on_body_entered"]

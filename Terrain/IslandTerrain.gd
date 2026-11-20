@@ -308,6 +308,79 @@ var erosion_valley_strength: float = 0.20:
 
 
 # =====================================================================
+# VILLAGE
+# =====================================================================
+
+@export_category("Village")
+
+@export var village_enabled: bool = true:
+	set(value):
+		village_enabled = value
+		_request_generate()
+
+
+## Center of the village in world-space X/Z coordinates.
+@export var village_center: Vector2 = Vector2(65.0, 35.0):
+	set(value):
+		village_center = value
+		_request_generate()
+
+
+## Radius of the relatively flat village area.
+@export_range(10.0, 150.0, 1.0)
+var village_radius: float = 35.0:
+	set(value):
+		village_radius = value
+		_request_generate()
+
+
+## Width of the transition between the village and surrounding terrain.
+## Larger values create a more gradual transition.
+@export_range(2.0, 60.0, 1.0)
+var village_transition_width: float = 20.0:
+	set(value):
+		village_transition_width = value
+		_request_generate()
+
+
+## Amount of remaining height variation inside the village.
+## 0 = completely flat.
+## 0.1 = slightly natural variation.
+@export_range(0.0, 1.0, 0.01)
+var village_roughness: float = 0.06:
+	set(value):
+		village_roughness = value
+		_request_generate()
+
+
+## Controls how strongly the village flattens the terrain.
+@export_range(0.0, 1.0, 0.01)
+var village_flatten_strength: float = 0.95:
+	set(value):
+		village_flatten_strength = value
+		_request_generate()
+
+
+## Maximum allowed slope for the village center to be considered.
+## Prevents the village from flattening mountains.
+@export_range(0.0, 1.0, 0.01)
+var village_max_slope: float = 0.25:
+	set(value):
+		village_max_slope = value
+		_request_generate()
+
+
+## Grass density multiplier inside the village.
+## 0 = no grass.
+## 0.15 = 15% of normal grass density.
+@export_range(0.0, 1.0, 0.01)
+var village_grass_density_multiplier: float = 0.15:
+	set(value):
+		village_grass_density_multiplier = value
+		_request_generate()
+
+
+# =====================================================================
 # HAWAIIAN MOUNTAINS
 # =====================================================================
 
@@ -981,6 +1054,7 @@ var world_z_values: PackedFloat32Array
 var terrain_noise: FastNoiseLite
 var coastline_noise: FastNoiseLite
 var detail_noise: FastNoiseLite
+var village_noise: FastNoiseLite
 
 var erosion_noise: FastNoiseLite
 
@@ -1174,6 +1248,18 @@ func _create_noise_generators() -> void:
 	erosion_noise.domain_warp_amplitude = erosion_warp_strength
 	erosion_noise.domain_warp_frequency = erosion_warp_frequency
 	erosion_noise.domain_warp_fractal_octaves = 2
+	
+	# ---------------------------------------------------------------
+	# Village surface variation
+	# ---------------------------------------------------------------
+
+	village_noise = FastNoiseLite.new()
+
+	village_noise.seed = seed + 800
+	village_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	village_noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+	village_noise.fractal_octaves = 2
+	village_noise.frequency = 0.025
 
 
 	# ===============================================================
@@ -1561,6 +1647,23 @@ func _calculate_height(
 	world_z: float
 ) -> float:
 
+	var original_height := _calculate_base_height(
+		world_x,
+		world_z
+	)
+
+	return _apply_village_height(
+		world_x,
+		world_z,
+		original_height
+	)
+
+
+func _calculate_base_height(
+	world_x: float,
+	world_z: float
+) -> float:
+
 	var half_size: float = world_size * 0.5
 
 	var half_x: float = max(
@@ -1786,6 +1889,146 @@ func _calculate_height(
 		interior_height,
 		inland_blend
 	)
+	
+
+# =====================================================================
+# VILLAGE TERRAIN
+# =====================================================================
+
+## Returns the influence of the village at a given world position.
+##
+## 1 = village center
+## 0 = outside village transition
+##
+## The smooth falloff prevents visible circular terrain edges.
+
+func _get_village_influence(
+	world_x: float,
+	world_z: float
+) -> float:
+
+	if not village_enabled:
+		return 0.0
+
+	var distance := Vector2(
+		world_x - village_center.x,
+		world_z - village_center.y
+	).length()
+
+	var inner_radius := village_radius
+
+	var outer_radius := (
+		village_radius +
+		village_transition_width
+	)
+
+	if distance >= outer_radius:
+		return 0.0
+
+	if distance <= inner_radius:
+		return 1.0
+
+	var blend := 1.0 - smoothstep(
+		inner_radius,
+		outer_radius,
+		distance
+	)
+
+	# Smooth the transition further.
+	return blend * blend * (3.0 - 2.0 * blend)
+
+
+## Determines whether the village is allowed at this location.
+##
+## The village is restricted to grassland and relatively flat terrain.
+
+func _is_valid_village_location(
+	world_x: float,
+	world_z: float,
+	height: float
+) -> bool:
+
+	var half_x: float = world_size * 0.5 * island_width
+	var half_z: float = world_size * 0.5 * island_length
+
+	var distance: float = Vector2(
+		world_x / half_x,
+		world_z / half_z
+	).length()
+
+	var coast_radius: float = _get_coast_radius(
+		world_x,
+		world_z
+	)
+
+	var distance_scale: float = min(half_x, half_z)
+
+	var beach_inner_radius: float = max(
+		coast_radius - beach_area_width / distance_scale,
+		0.0
+	)
+
+	if distance >= beach_inner_radius:
+		return false
+
+	if height < dirt_height:
+		return false
+
+	if height >= rock_height:
+		return false
+
+	return true
+
+
+## Applies the village flattening to a terrain height.
+
+func _apply_village_height(
+	world_x: float,
+	world_z: float,
+	original_height: float
+) -> float:
+
+	if not village_enabled:
+		return original_height
+
+	var influence := _get_village_influence(
+		world_x,
+		world_z
+	)
+
+	if influence <= 0.0:
+		return original_height
+
+	if not _is_valid_village_location(
+		world_x,
+		world_z,
+		original_height
+	):
+		return original_height
+
+	# Use the terrain height at the village center as the target.
+	# This avoids an arbitrary elevation change.
+	var target_height := _calculate_base_height(
+		village_center.x,
+		village_center.y
+	)
+
+	# Small residual variation for a natural-looking surface.
+	var variation := village_noise.get_noise_2d(
+		world_x,
+		world_z
+	) * village_roughness
+
+	var flattened_height := (
+		target_height + variation
+	)
+
+	return lerp(
+		original_height,
+		flattened_height,
+		influence * village_flatten_strength
+	)
+
 
 # =====================================================================
 # MOUNTAIN HEIGHT
@@ -3157,6 +3400,33 @@ func _scatter_decoration_group(
 			normal
 		) != zone:
 			continue
+			
+		# ---------------------------------------------------------
+		# VILLAGE DECORATION RULES
+		# ---------------------------------------------------------
+
+		var village_influence := _get_village_influence(
+			x,
+			z
+		)
+
+		if village_influence > 0.0:
+
+			# No trees or rocks inside the village.
+			if object_type == "tree" or object_type == "rock":
+				continue
+
+			# Only allow a reduced amount of grass.
+			if object_type == "grass":
+
+				var grass_chance = lerp(
+					1.0,
+					village_grass_density_multiplier,
+					village_influence
+				)
+
+				if decoration_rng.randf() > grass_chance:
+					continue
 
 		var slope: float = 1.0 - normal.y
 

@@ -1,3 +1,36 @@
 [gd_scene format=3 uid="uid://ckibx7k4ru8xc"]
 
-[node name="ConstantPlayerUi" type="Node2D" unique_id=1556399169]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ksg7w"]
+bg_color = Color(0.22352941, 0.90588236, 0.37254903, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 10
+
+[node name="ConstantPlayerUi" type="Control" unique_id=1092064570]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StaminaBar" type="ProgressBar" parent="." unique_id=291657792]
+layout_mode = 0
+offset_left = 995.0
+offset_top = 19.0
+offset_right = 1137.0
+offset_bottom = 46.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_ksg7w")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="." unique_id=446245914]
+layout_mode = 0
+offset_left = 1034.0
+offset_top = 20.0
+offset_right = 1098.0
+offset_bottom = 43.0
+text = "Stamina"

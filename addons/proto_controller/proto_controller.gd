@@ -5,19 +5,23 @@ extends CharacterBody3D
 @export var has_gravity : bool = true
 @export var can_jump : bool = true
 @export var can_sprint : bool = false
-@export var sprint_length: float = 5.0
-@export var sprint_cooldown: float = 2.0
+#Stamina
+@export var max_stamina: float = 100.0
+@export var stamina_drain: float = 25.0
+@export var stamina_regen: float = 5.0
+var can_sprint_again: bool = true
+var stamina: float = 100.0
+var stamina_scene = preload("res://UI/ConstantPlayerUI.tscn")
+var stamina_hud: Control
+var stamina_bar: ProgressBar
 
-var sprint_timer: float = 0.0
-var sprint_cooldown_timer: float = 0.0
-var sprint_available: bool = true
 @export var can_freefly : bool = false
 
 @export_group("Speeds")
 ## Look around rotation speed.
 ##var GlobalSettings.mouse_sensitivity
 ## Normal speed.
-@export var base_speed : float = 7.0
+@export var base_speed : float = 10.0
 ## Speed of jump.
 @export var jump_velocity : float = 4.5
 ## How fast do we run?
@@ -82,7 +86,7 @@ var slide_direction: Vector3 = Vector3.ZERO
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
-var move_speed : float = 0.0
+var move_speed : float = 10.0
 var freeflying : bool = false
 var dialogue_lock: bool = true
 
@@ -102,6 +106,20 @@ func _ready() -> void:
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	gamescore = gamescore_scene.instantiate()
+	#stamina = max_stamina
+	#stamina_bar.max_value = max_stamina
+	#stamina_bar.value = stamina
+
+	# Stamina UI
+	stamina_hud = stamina_scene.instantiate()
+	get_tree().current_scene.add_child(stamina_hud)
+
+	stamina_bar = stamina_hud.get_node("StaminaBar")
+
+	stamina = max_stamina
+	stamina_bar.max_value = max_stamina
+	stamina_bar.value = stamina
+
 	get_tree().current_scene.add_child(gamescore)
 	gamescore.hide()
 	if DisplayServer.is_touchscreen_available():
@@ -182,26 +200,11 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed(input_jump) and is_on_floor():
 			velocity.y = jump_velocity
 
-# Sprint cooldown
-	if sprint_cooldown_timer > 0.0:
-		sprint_cooldown_timer -= delta
-
-		if sprint_cooldown_timer <= 0.0:
-			sprint_cooldown_timer = 0.0
-			sprint_available = true
-
 	# Sprint
-	if can_sprint and Input.is_action_pressed(input_sprint) and sprint_available:
+	if can_sprint and Input.is_action_pressed(input_sprint) and can_sprint_again and stamina > 0.0:
 		move_speed = sprint_speed
-		sprint_timer += delta
-
-		if sprint_timer >= sprint_length:
-			sprint_timer = 0.0
-			sprint_available = false
-			sprint_cooldown_timer = sprint_cooldown
 	else:
 		move_speed = base_speed
-
 	# Movement
 	var input_dir := Input.get_vector(
 		input_left,
@@ -313,9 +316,42 @@ func _on_show_ui_buttons_changed(new_value: bool):
 		$CanvasLayer.offset.x = 0
 		
 func _process(delta: float) -> void:
+
+	if Input.is_action_pressed(input_sprint) and can_sprint and can_sprint_again:
+		stamina -= stamina_drain * delta
+	else:
+		stamina += stamina_regen * delta
+
+	stamina = clampf(stamina, 0.0, max_stamina)
+
+	if stamina <= 0.0:
+		can_sprint_again = false
+
+	if stamina >= 25.0:
+		can_sprint_again = true
+
+	stamina_bar.value = stamina
+	var fill_style = stamina_bar.get_theme_stylebox("fill").duplicate()
+
+	if stamina <= max_stamina * 0.25:
+		fill_style.bg_color = Color("#FF3333")
+	elif stamina > max_stamina * 0.25 and stamina <= max_stamina * 0.65:
+		fill_style.bg_color = Color("bad01cff")
+	else:
+		fill_style.bg_color = Color("35cd55ff")
+
+	stamina_bar.add_theme_stylebox_override("fill", fill_style)
 	if is_charging_throw:
 		throw_charge_time += delta
 		throw_charge_time = min(throw_charge_time, max_charge_time)
+	if is_charging_throw:
+		throw_charge_time += delta
+		throw_charge_time = min(throw_charge_time, max_charge_time)
+		
+	stamina_bar.value = stamina
+
+	if stamina <= max_stamina * 0.25:
+		stamina_bar.add_theme_color_override("font_color", Color.RED)
 #item equipment 
 var equipped_item: Item
 var nearby_items: Array[Item] = []
@@ -480,7 +516,6 @@ func start_slide() -> void:
 #
 #func _on_rigid_body_3d_2_body_entered(body: Node3D) -> void:
 	#global_position = Vector3(0, 2, 0)
-
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	body.global_position = Vector3(0, 2, 0)
 
@@ -491,3 +526,5 @@ func _on_makahikigamearea_body_entered(body: Node3D) -> void:
 func _on_makahikigamearea_body_exited(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		gamescore.hide_score()
+		
+		

@@ -7,8 +7,8 @@ extends CharacterBody3D
 @export var can_sprint : bool = false
 #Stamina
 @export var max_stamina: float = 100.0
-@export var stamina_drain: float = 25.0
-@export var stamina_regen: float = 5.0
+@export var stamina_drain: float = 20.0
+@export var stamina_regen: float = 7.0
 var can_sprint_again: bool = true
 var stamina: float = 100.0
 var stamina_scene = preload("res://UI/ConstantPlayerUI.tscn")
@@ -316,8 +316,14 @@ func _on_show_ui_buttons_changed(new_value: bool):
 		$CanvasLayer.offset.x = 0
 		
 func _process(delta: float) -> void:
+	var is_moving = Input.get_vector(
+		input_left,
+		input_right,
+		input_forward,
+		input_back
+	).length() > 0.1
 
-	if Input.is_action_pressed(input_sprint) and can_sprint and can_sprint_again:
+	if Input.is_action_pressed(input_sprint) and can_sprint and can_sprint_again and is_moving:
 		stamina -= stamina_drain * delta
 	else:
 		stamina += stamina_regen * delta

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://ctpfh8m6hvji5"
+path="res://.godot/imported/notyet.dialogue-0c7c7b23615f681a410ea9fa59655dcf.tres"
+
+[deps]
+
+source_file="res://notyet.dialogue"
+dest_files=["res://.godot/imported/notyet.dialogue-0c7c7b23615f681a410ea9fa59655dcf.tres"]
+
+[params]
+
+defaults=true

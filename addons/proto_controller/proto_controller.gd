@@ -11,9 +11,8 @@ extends CharacterBody3D
 @export var stamina_regen: float = 7.0
 var can_sprint_again: bool = true
 var stamina: float = 100.0
-var stamina_scene = preload("res://UI/ConstantPlayerUI.tscn")
-var stamina_hud: Control
-var stamina_bar: ProgressBar
+@onready var stamina_hud = $ConstantPlayerUi
+@onready var stamina_bar: ProgressBar = $ConstantPlayerUi/StaminaBar
 
 @export var can_freefly : bool = false
 
@@ -100,21 +99,14 @@ var gamescore_scene = preload("res://UI/gamescore.tscn")
 var gamescore: Control
 
 func _ready() -> void:
+	stamina_hud.visible = true
+	$ConstantPlayerUi/StaminaBar.visible = true
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	gamescore = gamescore_scene.instantiate()
-	#stamina = max_stamina
-	#stamina_bar.max_value = max_stamina
-	#stamina_bar.value = stamina
-
-	# Stamina UI
-	stamina_hud = stamina_scene.instantiate()
-	get_tree().current_scene.add_child(stamina_hud)
-
-	stamina_bar = stamina_hud.get_node("StaminaBar")
 
 	stamina = max_stamina
 	stamina_bar.max_value = max_stamina

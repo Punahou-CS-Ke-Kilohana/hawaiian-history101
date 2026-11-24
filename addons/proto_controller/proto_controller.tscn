@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c13vglhdqv608" path="res://Assets/UI/SettingsUI.png" id="6_h60nn"]
 [ext_resource type="Texture2D" uid="uid://qlob11napwc2" path="res://Assets/UI/Sprint Button.png" id="7_1tksx"]
 [ext_resource type="Texture2D" uid="uid://dspujt3dfe422" path="res://Assets/UI/Jump Button.png" id="8_ths8c"]
+[ext_resource type="PackedScene" uid="uid://ckibx7k4ru8xc" path="res://UI/ConstantPlayerUI.tscn" id="9_ths8c"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
 radius = 0.4
@@ -107,3 +108,5 @@ action = "jump"
 
 [node name="hand" type="Marker3D" parent="." unique_id=1739026649]
 transform = Transform3D(1.1492633, 0, 0, 0, 1, 0, 0, 0, 1, 0.5692948, 1.0728984, -0.0018421412)
+
+[node name="ConstantPlayerUi" parent="." unique_id=1092064570 instance=ExtResource("9_ths8c")]

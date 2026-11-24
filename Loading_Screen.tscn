@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://w1s5t3yncypf"]
+
+[ext_resource type="Script" uid="uid://daxj6gwixu8wj" path="res://loading_screen.gd" id="1_nisfs"]
+[ext_resource type="Texture2D" uid="uid://bnfx22nitf03g" path="res://Assets/UI/title.png" id="2_sa8ka"]
+
+[node name="LoadingScreen" type="CanvasLayer" unique_id=1307524927]
+process_mode = 3
+script = ExtResource("1_nisfs")
+
+[node name="Control" type="Control" parent="." unique_id=227312393]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="Control" unique_id=885025001]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -148.0
+offset_top = -219.0
+offset_right = 1260.0
+offset_bottom = 827.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sa8ka")
+stretch_mode = 6
+
+[node name="Title" type="Label" parent="Control" unique_id=237606026]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ProgressLabel" type="Label" parent="Control" unique_id=1932528524]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 14.0
+offset_right = 130.0
+offset_bottom = 37.0
+text = "aaa"
+
+[node name="ProgressBar" type="ProgressBar" parent="Control" unique_id=1368004502]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 40.0
+offset_right = 56.0
+offset_bottom = 67.0
+
+[node name="LoadingText" type="Label" parent="Control" unique_id=885772220]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Tiplabel" type="Label" parent="Control" unique_id=672392651]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 20.0
+offset_right = 99.0
+offset_bottom = 43.0

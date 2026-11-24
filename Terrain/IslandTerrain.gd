@@ -3838,7 +3838,67 @@ func _update_chunk_lods() -> void:
 			record["lod"] = lod
 
 			chunk_records[i] = record
+func prepare_initial_lods(camera: Camera3D) -> void:
 
+	if camera == null:
+		push_error("IslandTerrain: Camera not found.")
+		return
+
+	# Tell the terrain which camera to use.
+	lod_camera = camera
+
+	print("TERRAIN: Preparing initial LOD meshes...")
+
+	while true:
+		# Generate the next batch of required meshes.
+		_update_chunk_lods()
+
+		var all_ready := true
+
+		for i in range(chunk_records.size()):
+
+			var record := chunk_records[i]
+			var chunk: MeshInstance3D = record["node"]
+
+			if not is_instance_valid(chunk):
+				continue
+
+			# Only check chunks currently visible.
+			if not chunk.visible:
+				continue
+
+			var center: Vector3 = record["center"]
+
+			var distance := Vector2(
+				camera.global_position.x - center.x,
+				camera.global_position.z - center.z
+			).length()
+
+			var required_lod: int = clampi(
+	_get_lod_for_distance(distance),
+	0,
+	lod_levels - 1
+)
+			var meshes: Array = record["meshes"]
+
+			if meshes[required_lod] == null:
+				all_ready = false
+				break
+
+			if chunk.mesh != meshes[required_lod]:
+				all_ready = false
+				break
+
+		if all_ready:
+			break
+
+		# Let Godot process another frame before generating more.
+		await get_tree().process_frame
+
+	# Wait for the completed terrain meshes to be drawn.
+		await RenderingServer.frame_post_draw
+
+		print("TERRAIN: Initial LOD meshes ready!")
 
 # =====================================================================
 # LOD DISTANCE

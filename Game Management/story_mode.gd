@@ -6,16 +6,16 @@ class_name StoryMode
 
 
 func _ready() -> void:
+	print("3. STORY MODE READY")
+
 	level_manager.level_completed.connect(_on_level_completed)
 
-	# Load the first level.
-	level_manager.start_level(0)
+	print("4. STARTING LEVEL 0")
 
-	# Wait for the level to enter the scene tree.
-	await get_tree().process_frame
-	await get_tree().process_frame
+	await level_manager.start_level(0)
 
-	# Activate the first level's gameplay camera.
+	print("5. LEVEL 0 FINISHED LOADING")
+
 	_activate_gameplay_camera()
 
 

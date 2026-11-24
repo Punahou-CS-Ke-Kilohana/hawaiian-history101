@@ -22,10 +22,12 @@ func throw(direction: Vector3, force: float) -> void:
 	supporting_spear = null
 	supporting_body = null
 	is_falling_after_support = false
-	# Detach from the player's hand and restore physics.
+
 	prepare_to_throw()
 	linear_velocity = direction.normalized() * force
 
+	if QuestManager.current_quest_number == 1 and QuestManager.current_quest["active"]:
+		QuestManager.complete_quest()
 func _process(_delta: float) -> void:
 	# Only update while equipped in the player's hand.
 	if not freeze:

@@ -11,7 +11,7 @@ var current_quest: Dictionary = {
 }
 
 
-func give_quest(quest_number: int, title: String, description: String) -> void:
+func give_quest(quest_number: int) -> void:
 	if quest_number != current_quest_number:
 		print("Wrong quest number!")
 		return
@@ -20,9 +20,11 @@ func give_quest(quest_number: int, title: String, description: String) -> void:
 		print("A quest is already active!")
 		return
 
+	var quest = QuestDatabase.quests[quest_number - 1]
+
 	current_quest = {
-		"title": title,
-		"description": description,
+		"title": quest["title"],
+		"description": quest["description"],
 		"active": true
 	}
 
@@ -32,12 +34,14 @@ func give_quest(quest_number: int, title: String, description: String) -> void:
 func complete_quest() -> void:
 	if not current_quest["active"]:
 		return
+	
+	var quest = QuestDatabase.quests[current_quest_number - 1]
 
 	current_quest_number += 1
 
 	current_quest = {
 		"title": "",
-		"description": "No quest yet",
+		"description": quest["completion"],
 		"active": false
 	}
 

@@ -1,4 +1,3 @@
-
 extends Area3D
 
 @export var dialogue_resource: DialogueResource
@@ -11,8 +10,6 @@ extends Area3D
 @export_group("Quest Settings")
 @export var gives_quest: bool = false
 @export var quest_number: int = 1
-@export var quest_title: String = "Quest 1"
-@export_multiline var quest_description: String = "Find the missing sword."
 
 var dialogue_finished := false
 
@@ -20,10 +17,10 @@ var dialogue_finished := false
 func action() -> void:
 	if gives_quest and quest_number != QuestManager.current_quest_number:
 		DialogueManager.show_dialogue_balloon_scene(
-		balloon_scene,
-		cannot_talk,
-		dialogue_start
-	)
+			balloon_scene,
+			cannot_talk,
+			dialogue_start
+		)
 		return
 
 	if one_time_dialogue and dialogue_finished:
@@ -44,10 +41,6 @@ func action() -> void:
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	if gives_quest:
-		QuestManager.give_quest(
-			quest_number,
-			quest_title,
-			quest_description
-		)
+		QuestManager.give_quest(quest_number)
 
 	dialogue_finished = true

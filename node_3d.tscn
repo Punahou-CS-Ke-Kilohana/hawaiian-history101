@@ -196,6 +196,7 @@ dialogue_resource = ExtResource("3_jsk3o")
 cannot_talk = ExtResource("7_jsnrv")
 balloon_scene = ExtResource("3_wc5p8")
 gives_quest = true
+quest_description = "Throw a spear"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="King Kameha/Actionable" unique_id=1464418373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.722051, -0.84059966, -3.6518624)
@@ -211,11 +212,12 @@ up_direction = Vector3(0.9950372, 0.099503726, 0)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.7694674, 1.7604394, 0.95531404)
 collision_mask = 3
 dialogue_resource = ExtResource("7_wlxy5")
+cannot_talk = ExtResource("7_jsnrv")
 balloon_scene = ExtResource("3_wc5p8")
 gives_quest = true
 quest_number = 2
 quest_title = "Quest 2"
-quest_description = "Find the missing jewel."
+quest_description = "Find the missing bird."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Villager/Actionable" unique_id=1136717083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7621422, -0.84059966, -1.0625048)

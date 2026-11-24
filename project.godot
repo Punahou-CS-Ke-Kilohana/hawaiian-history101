@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 DialogueManager="*uid://c3rodes2l3gxb"
 GlobalSettings="*uid://cakepw2j34tn5"
 QuestManager="*uid://pexf0yfj5a4k"
+QuestDatabase="*uid://cgbks2ebjs4ew"
 
 [dialogue_manager]
 

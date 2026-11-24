@@ -64,3 +64,31 @@ offset_bottom = 100.0
 theme_override_font_sizes/font_size = 12
 text = "Quest"
 autowrap_mode = 3
+
+[node name="Completion" type="ColorRect" parent="." unique_id=380231831]
+visible = false
+layout_mode = 0
+offset_left = 995.0
+offset_top = 53.0
+offset_right = 1136.0
+offset_bottom = 190.0
+color = Color(0, 0.81093234, 0.07604558, 1)
+
+[node name="Quest_2" type="Label" parent="Completion" unique_id=1606993546]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 1.0
+offset_right = 107.0
+offset_bottom = 24.0
+text = "Quest"
+horizontal_alignment = 1
+
+[node name="Quest_complete" type="Label" parent="Completion" unique_id=378059825]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 28.0
+offset_right = 141.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 12
+text = "QUEST COMPLETE"
+autowrap_mode = 3
